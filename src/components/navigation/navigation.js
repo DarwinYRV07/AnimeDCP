@@ -22,13 +22,13 @@ const NavigationComponent =() =>{
               tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
     
-                if (route.name === 'Home') {
+                if (route.name === 'SignIn') {
                   iconName = focused
                     ? 'ios-information-circle'
                     : 'ios-information-circle-outline';
-                } else if (route.name === 'Settings') {
+                } else if (route.name === 'SignUp') {
                   iconName = focused ? 'ios-list-box' : 'ios-list';
-                } else if (route.name === 'Details'){
+                } else if (route.name === 'ChangePwd'){
                   iconName = focused ? 'ios-list-box' : 'ios-list';
                 }
     
