@@ -6,6 +6,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import singnInScreen from "./src/components/screen/signInScreen";
+import NavigationComponent from './src/components/navigation/navigation';
 
 const Stack = createStackNavigator();
 
@@ -13,11 +14,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <SafeAreaProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Login" component={singnInScreen}/>
-          </Stack.Navigator>
-        </NavigationContainer>
+         <NavigationComponent/>
       </SafeAreaProvider>
     </ThemeProvider>
   );

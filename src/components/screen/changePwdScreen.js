@@ -4,10 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const tab = createBottomTabNavigator();
 
-const signUpScreen = () =>{
+const changePwdScreen = () =>{
     return(
         <View style={styles.container}>
-            <Text>signUpScreen screen</Text>
+            <Text>changePwdScreen screen</Text>
         </View>
     )
 }
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
     
   });
 
-export default signUpScreen;
+export default changePwdScreen;

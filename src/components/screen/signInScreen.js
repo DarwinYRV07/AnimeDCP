@@ -5,7 +5,7 @@ import Button from "../button/Button";
 
 const { width } = Dimensions.get("screen");
 
-const singInScreen = () =>{
+const signInScreen = () =>{
     return(
         <View style={styles.container}>
             <Image source={{uri:require("../../assets/imgPrueba.jpg")}} style={styles.logo}/>
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
       },
   });
 
-export default singInScreen;
+export default signInScreen;
