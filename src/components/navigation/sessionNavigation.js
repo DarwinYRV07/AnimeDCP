@@ -17,7 +17,7 @@ const SessionNavigation= ()=> {
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator >
-            <Stack.Screen name="SignIn" component={signInScreen}/>
+            <Stack.Screen name="SignIn" component={signInScreen}  options={{headerShown:false}} />
             <Stack.Screen name="SignUp" component={signUpScreen}/>
             <Stack.Screen name="ChangePwd" component={changePwdScreen}/>
           </Stack.Navigator>

@@ -10,17 +10,17 @@ const signInScreen = ({navigation}) =>{
     return(
         <View style={styles.container}>
             <Logo/>
-            <Text style={styles.texto}>User:</Text>
+            <Text style={styles.text}>User:</Text>
             <TextInput style={styles.input} placeholder="User"/> 
-            <Text style={styles.texto}>Password:</Text>
+            <Text style={styles.text}>Password:</Text>
             <TextInput style={styles.input} placeholder="password"/> 
             <TouchableOpacity onPress={()=>{navigation.navigate("ChangePwd")}}>
-                <Text style={styles.forgotPassword}>Forgot your password?</Text>
+                <Text style={styles.text}>Forgot your password?</Text>
             </TouchableOpacity>
             <Button title="LOGIN"/>
             <SocialIcon title='Sign In' button type='facebook' style={styles.button}/> 
             <TouchableOpacity onPress={()=>{navigation.navigate("SignUp")}}>
-                <Text>Don't have account? Sign Up</Text>
+                <Text style={styles.text} >Don't have account? Sign Up</Text>
             </TouchableOpacity>         
         </View>
     );
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         margin:5,
     },
     text:{
-        color:"#22DEFA",
+        color:"white",
         marginLeft:15,
         marginTop:10,
         marginBottom:10,
