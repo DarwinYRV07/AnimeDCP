@@ -4,7 +4,7 @@ import { StyleSheet, Text, View ,Dimensions} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'; 
-import signInScreen from '../screen/SignInScreen';
+import signInScreen from '../screen/signInScreen';
 import signUpScreen from '../screen/signUpScreen';
 import changePwdScreen from '../screen/changePwdScreen';
 
