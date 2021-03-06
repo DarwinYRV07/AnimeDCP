@@ -1,8 +1,8 @@
 import React from 'react'
-import { Alert, StyleSheet, Text, View, Dimensions, TextInput,TouchableOpacity } from 'react-native';
-import { Image, Input, SocialIcon } from "react-native-elements";
-import Button from "../button/Button";
+import { StyleSheet, Text, View, Dimensions,TouchableOpacity } from 'react-native';
+
 import Logo from "../shared/Logo";
+import SignInForm from "../Forms/signInForm";
 
 const { width } = Dimensions.get("screen");
 
@@ -10,17 +10,12 @@ const signInScreen = ({navigation}) =>{
     return(
         <View style={styles.container}>
             <Logo/>
-            <Text style={styles.text}>User:</Text>
-            <TextInput style={styles.input} placeholder="User"/> 
-            <Text style={styles.text}>Password:</Text>
-            <TextInput style={styles.input} placeholder="password"/> 
+            <SignInForm/>
             <TouchableOpacity onPress={()=>{navigation.navigate("ChangePwd")}}>
-                <Text style={styles.text}>Forgot your password?</Text>
+                <Text style={styles.textPwd}>Forgot your password?</Text>
             </TouchableOpacity>
-            <Button title="LOGIN"/>
-            <SocialIcon title='Sign In' button type='facebook' style={styles.button}/> 
             <TouchableOpacity onPress={()=>{navigation.navigate("SignUp")}}>
-                <Text style={styles.text} >Don't have account? Sign Up</Text>
+                <Text style={styles.textForget} >Don't have account? Sign Up</Text>
             </TouchableOpacity>         
         </View>
     );
@@ -38,33 +33,22 @@ const styles = StyleSheet.create({
         height: 200,
         margin:5,
     },
-    text:{
-        color:"white",
-        marginLeft:15,
-        marginTop:10,
-        marginBottom:10,
-        fontSize:20,
-        textAlign:"left",
-        width:width*0.9
+    
+    textForget:{
+        color: "white",
+        fontSize:15,
+        textAlign:"center",
+        width:width*0.9,
+        marginBottom:15,
     },
-    input:{
-        backgroundColor:"#fff",
-        color:"#000",
-        textAlign:"left",
-        paddingLeft:10,
-        justifyContent:"center",
-        borderRadius:15,
-        width: width*0.9,
-        height: 40,
-        marginBottom:20
+    textPwd:{
+        color: "white",
+        fontSize:15,
+        textAlign:"right",
+        width:width*0.9,
+        marginBottom:15,
     },
-    button: {
-        alignSelf: "center",
-        padding: 15,
-        borderRadius: 30,
-        marginBottom: 10,
-        width: width * 0.8,
-      },
+    
   });
 
 export default signInScreen;
