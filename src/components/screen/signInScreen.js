@@ -1,24 +1,27 @@
 import React from 'react'
-import { Alert, StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
+import { Alert, StyleSheet, Text, View, Dimensions, TextInput,TouchableOpacity } from 'react-native';
 import { Image, Input, SocialIcon } from "react-native-elements";
 import Button from "../button/Button";
 import Logo from "../shared/Logo";
 
 const { width } = Dimensions.get("screen");
 
-const signInScreen = () =>{
+const signInScreen = ({navigation}) =>{
     return(
         <View style={styles.container}>
-            
             <Logo/>
-            <Text style={styles.text}>User:</Text>
+            <Text style={styles.texto}>User:</Text>
             <TextInput style={styles.input} placeholder="User"/> 
-            <Text style={styles.text}>Password:</Text>
+            <Text style={styles.texto}>Password:</Text>
             <TextInput style={styles.input} placeholder="password"/> 
-
+            <TouchableOpacity onPress={()=>{navigation.navigate("ChangePwd")}}>
+                <Text style={styles.forgotPassword}>Forgot your password?</Text>
+            </TouchableOpacity>
             <Button title="LOGIN"/>
-            <SocialIcon title='Sign In' button type='facebook' style={styles.button}/>
-            <Button title="Sign In"/>          
+            <SocialIcon title='Sign In' button type='facebook' style={styles.button}/> 
+            <TouchableOpacity onPress={()=>{navigation.navigate("SignUp")}}>
+                <Text>Don't have account? Sign Up</Text>
+            </TouchableOpacity>         
         </View>
     );
 };

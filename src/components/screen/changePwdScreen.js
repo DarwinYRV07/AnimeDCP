@@ -5,7 +5,7 @@ import Button from "../button/Button";
 
 const {width} = Dimensions.get("screen");
 
-const changePwdScreen = () =>{
+const changePwdScreen = ({navigation}) =>{
     return(
         <View style={styles.container}>
             <Text style={styles.title}>Change password</Text>
@@ -16,6 +16,7 @@ const changePwdScreen = () =>{
             <Text style={styles.text}>Confirm password</Text>
             <TextInput style={styles.input} placeholder="Confirm password"/>
             <Button title="SAVE"/>
+            <Button title="BACK" callback={()=>{navigation.goBack()}}/>
         </View>
     )
 }

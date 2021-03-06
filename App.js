@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import singnInScreen from "./src/components/screen/signInScreen";
 import NavigationComponent from './src/components/navigation/navigation';
+import SessionNavigation from './src/components/navigation/sessionNavigation';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <SafeAreaProvider>
-         <NavigationComponent/>
+         <SessionNavigation/>
       </SafeAreaProvider>
     </ThemeProvider>
   );

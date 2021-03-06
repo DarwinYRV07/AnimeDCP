@@ -1,5 +1,5 @@
 import React from "react"
-import {View, StyleSheet,Text,Dimensions,TextInput} from "react-native"
+import {View, StyleSheet,Text,Dimensions,TextInput,TouchableOpacity} from "react-native"
 
 import Button from "../button/Button";
 
@@ -8,7 +8,7 @@ import Button from "../button/Button";
 const { width } = Dimensions.get("screen");
 
 
-const signUpScreen = () =>{
+const signUpScreen = ({navigation}) =>{
   return(
     <View style={styles.container}>
         <Text style={styles.title}>Create Account</Text>
@@ -23,6 +23,9 @@ const signUpScreen = () =>{
         <TextInput ty style={styles.input} placeholder="Confirm Pasword"/> 
 
         <Button title="SIGN UP"/>
+        <TouchableOpacity onPress={()=>{navigation.goBack()}}>
+                <Text>You have account? Sign In</Text>
+            </TouchableOpacity>  
               
     </View>
   );
