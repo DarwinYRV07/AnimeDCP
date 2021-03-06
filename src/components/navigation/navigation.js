@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { StyleSheet, Text, View ,Dimensions} from 'react-native';
+import {Dimensions} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'; 
@@ -48,17 +48,5 @@ const NavigationComponent =() =>{
         </NavigationContainer>
       );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#252c4',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:width,
-        height:height
-      },
-
-});
 
 export default NavigationComponent;
