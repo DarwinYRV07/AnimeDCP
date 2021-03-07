@@ -1,29 +1,60 @@
-import React from "react"
-import {} from 'email-validator'
-import {View, StyleSheet,Text,Dimensions,TextInput,TouchableOpacity} from "react-native"
-
+import React,{useState} from "react"
+import {validate} from 'email-validator'
+import {View, StyleSheet,Text,Dimensions,TextInput} from "react-native"
+import {} from 'react-native-elements'
+import Logo from "../shared/Logo"
 import Button from "../button/Button";
+import {firebase} from "../../Firebase"
+
+
 
 
 
 const { width } = Dimensions.get("screen");
 
 
-const SignUpForm = ({}) =>{
+const SignUpForm = ({navigation}) =>{
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordError, setPasswordError] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState(false);
+  
+  // const handlerSignUp = ()=>{
+  //   firebase
+  //   .auth()
+  //   .createUserWithEmailAndPassword(email,password)
+  //   .then(
+  //     (Response)=>{console.log(Response);
+  //   })
+  //   .catch((error)=>console.log(error));
+  // }
+
   return(
     <View style={styles.container}>
-        <Text style={styles.title}>Create Account</Text>
-
-        <Text style={styles.texto}>User:</Text>
-        <TextInput style={styles.input} placeholder="User"/> 
+        
+        <Logo/>
+        <Text style={styles.texto}>Fullname:</Text>
+        <TextInput 
+          style={styles.input} 
+          placeholder="User"
+          /> 
         <Text style={styles.texto}>Email:</Text>
-        <TextInput style={styles.input} placeholder="Email"/> 
+        <TextInput 
+          style={styles.input} 
+          placeholder="Email"
+          /> 
         <Text style={styles.texto}>Password:</Text>
-        <TextInput style={styles.input} placeholder="password"/> 
+        <TextInput 
+        style={styles.input} 
+        placeholder="password"
+        /> 
         <Text style={styles.texto}>Confirm Password:</Text>
-        <TextInput ty style={styles.input} placeholder="Confirm Pasword"/> 
+        <TextInput 
+          style={styles.input} 
+          placeholder="Confirm Pasword"
+        /> 
 
-        <Button title="SIGN UP"/>
+        <Button title="SIGN UP" />
         
               
     </View>

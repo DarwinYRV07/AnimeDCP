@@ -15,8 +15,8 @@ export default function App() {
   return (
     <ThemeProvider>
       <SafeAreaProvider>
-         {/* <SessionNavigation/> */}
-         <NavigationComponent/>
+         <SessionNavigation/>
+         {/* <NavigationComponent/> */}
       </SafeAreaProvider>
     </ThemeProvider>
   );
