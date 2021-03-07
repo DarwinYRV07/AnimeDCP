@@ -6,28 +6,51 @@ import Logo from "../shared/Logo"
 import Button from "../button/Button";
 import {firebase} from "../../Firebase"
 
-
-
-
-
 const { width } = Dimensions.get("screen");
 
 
 const SignUpForm = ({navigation}) =>{
+    const [fullName,setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
     const [passwordError, setPasswordError] = useState(false);
-    const [confirmPassword, setConfirmPassword] = useState(false);
+    const [emailError,setEmailError] = useState(false);
+    const [fullNameError,setFullNameError] = useState(false);
+    const [confirmPasswordError,setConfirmPasswordError] = useState(false)
+
+
+  const handlerVerify = (input) =>{
+    if(input === 'fullname'){
+      if(!fullName){
+        setFullNameError(true);
+      }else
+        setFullNameError(false);
+    }else if(input ==='email'){
+        if(!email) setEmailError(true)
+        else if(validate(email)) setEmailError(true)
+        else setEmailError(false)
+    }else if(input ==='password'){
+        if(!password)setPasswordError(true)
+        else if(password.length<6)setPasswordError(true)
+        else setPasswordError(false)
+    }else if(input ==='confirmPassword'){
+        if(!confirmPasswordError) setConfirmPasswordError(true)
+        else if(confirmPasswordError !== password) setConfirmPasswordError(true)
+        else setConfirmPasswordError(false);
+    }
+  }
   
-  // const handlerSignUp = ()=>{
-  //   firebase
-  //   .auth()
-  //   .createUserWithEmailAndPassword(email,password)
-  //   .then(
-  //     (Response)=>{console.log(Response);
-  //   })
-  //   .catch((error)=>console.log(error));
-  // }
+  const handlerSignUp = ()=>{
+    firebase
+    .auth()
+    .createUserWithEmailAndPassword(email,password)
+    .then(
+      (Response)=>{console.log(Response);
+    })
+    .catch((error)=>console.log(error));
+  }
 
   return(
     <View style={styles.container}>
@@ -37,24 +60,39 @@ const SignUpForm = ({navigation}) =>{
         <TextInput 
           style={styles.input} 
           placeholder="User"
+          value={fullName}
+          onChangeText = {setFullName}
+          autoCapitalize
+          
           /> 
         <Text style={styles.texto}>Email:</Text>
         <TextInput 
           style={styles.input} 
           placeholder="Email"
+          value={email}
+          onChangeText = {setEmail}
+          autoCapitalize="none"
           /> 
         <Text style={styles.texto}>Password:</Text>
         <TextInput 
-        style={styles.input} 
-        placeholder="password"
+          style={styles.input} 
+          placeholder="password"
+          value={password}
+          onChangeText = {setPassword}
+          secureTextEntry
+          autoCapitalize="none"
         /> 
         <Text style={styles.texto}>Confirm Password:</Text>
         <TextInput 
           style={styles.input} 
           placeholder="Confirm Pasword"
+          value={confirmPassword}
+          onChangeText = {setConfirmPassword}
+          secureTextEntry
+          autoCapitalize="none"
         /> 
 
-        <Button title="SIGN UP" />
+        <Button title="SIGN UP" callback={handlerSignUp}/>
         
               
     </View>

@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import {ThemeProvider} from 'react-native-elements';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,7 +7,6 @@ import {createStackNavigator} from "@react-navigation/stack"
 import signInScreen from '../screen/signInScreen';
 import signUpScreen from '../screen/signUpScreen';
 import changePwdScreen from '../screen/changePwdScreen';
-import NavigationComponent from './navigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'; 
 import homeScreen from '../screen/homeScreen';
