@@ -1,4 +1,5 @@
 import React from "react"
+import { SocialIcon } from "react-native-elements";
 import { View, StyleSheet, Text, TextInput, Dimensions } from "react-native"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Button from "../button/Button";
