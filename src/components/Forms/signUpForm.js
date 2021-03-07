@@ -1,19 +1,29 @@
 import React from "react"
+import {} from 'email-validator'
 import {View, StyleSheet,Text,Dimensions,TextInput,TouchableOpacity} from "react-native"
-import SignUpForm from "../Forms/signUpForm";
+
+import Button from "../button/Button";
 
 
 
 const { width } = Dimensions.get("screen");
 
 
-const signUpScreen = ({navigation}) =>{
+const SignUpForm = ({}) =>{
   return(
     <View style={styles.container}>
-        <SignUpForm/>
-        <TouchableOpacity onPress={()=>{navigation.goBack()}}>
-                <Text>You have account? Sign In</Text>
-            </TouchableOpacity>  
+        <Text style={styles.title}>Create Account</Text>
+
+        <Text style={styles.texto}>User:</Text>
+        <TextInput style={styles.input} placeholder="User"/> 
+        <Text style={styles.texto}>Email:</Text>
+        <TextInput style={styles.input} placeholder="Email"/> 
+        <Text style={styles.texto}>Password:</Text>
+        <TextInput style={styles.input} placeholder="password"/> 
+        <Text style={styles.texto}>Confirm Password:</Text>
+        <TextInput ty style={styles.input} placeholder="Confirm Pasword"/> 
+
+        <Button title="SIGN UP"/>
         
               
     </View>
@@ -69,4 +79,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default signUpScreen;
+export default SignUpForm;
