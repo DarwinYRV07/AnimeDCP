@@ -20,6 +20,7 @@ const signInScreen = ({navigation, route}) =>{
             <TouchableOpacity onPress={()=>{navigation.navigate("SignUp")}}>
                 <Text style={styles.textForget} >Don't have account? Sign Up</Text>
             </TouchableOpacity>         
+            
         </View>
     );
 };

@@ -14,6 +14,7 @@ const signUpScreen = ({navigation}) =>{
         <TouchableOpacity onPress={()=>{navigation.goBack()}}>
                 <Text>You have account? Sign In</Text>
             </TouchableOpacity>  
+        
               
     </View>
   );

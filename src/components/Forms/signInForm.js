@@ -7,7 +7,7 @@ import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
 
 const { width, height } = Dimensions.get("screen");
 
-const signInForm =()=>{
+const signInForm =({navigation})=>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
@@ -61,7 +61,7 @@ const signInForm =()=>{
                 onBlur={() => {handleVerify("password");}}errorMessage={passwordError ? "Por favor ingresa tu contraseña" : null}
             />
 
-            <Button title="Login"/>
+            <Button title="Login" />
             <SocialIcon style={styles.button} title='Sign In' button type='facebook'/>
         </View>
     );

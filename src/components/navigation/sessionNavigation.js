@@ -8,6 +8,7 @@ import {createStackNavigator} from "@react-navigation/stack"
 import signInScreen from '../screen/signInScreen';
 import signUpScreen from '../screen/signUpScreen';
 import changePwdScreen from '../screen/changePwdScreen';
+import NavigationComponent from './navigation';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ const SessionNavigation= ()=> {
             <Stack.Screen name="SignIn" component={signInScreen} initialParams={{userCreated:false}} options={{headerShown:false}} />
             <Stack.Screen name="SignUp" component={signUpScreen}/>
             <Stack.Screen name="ChangePwd" component={changePwdScreen}/>
+            <Stack.Screen name="Home" component={NavigationComponent} options={{headerShown:false}}/>
           </Stack.Navigator>
          </NavigationContainer>
       </SafeAreaProvider>

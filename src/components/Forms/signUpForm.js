@@ -9,7 +9,7 @@ import Button from "../button/Button";
 const { width } = Dimensions.get("screen");
 
 
-const SignUpForm = ({navigation}) =>{
+const SignUpForm = ({}) =>{
   return(
     <View style={styles.container}>
         <Text style={styles.title}>Create Account</Text>
