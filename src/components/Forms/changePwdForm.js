@@ -1,12 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput, Dimensions } from "react-native"
+import {} from 'react-native-elements'
 import Button from "../button/Button";
+import Logo from "../shared/Logo"
 
 const {width} = Dimensions.get("screen");
 
 const changePwdForm = ({navigation}) =>{
     return(
         <View style={styles.container}>
+            <Logo/>
             <Text style={styles.title}>Change password</Text>
             <Text style={styles.text}>Current password</Text>
             <TextInput style={styles.input} placeholder="Enter current password"/>
@@ -15,7 +18,6 @@ const changePwdForm = ({navigation}) =>{
             <Text style={styles.text}>Confirm password</Text>
             <TextInput style={styles.input} placeholder="Confirm password"/>
             <Button title="SAVE"/>
-            <Button title="BACK" callback={()=>{navigation.goBack()}}/>
         </View>
     )
 }

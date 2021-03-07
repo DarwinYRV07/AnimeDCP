@@ -2,20 +2,14 @@ import React from "react"
 import { View, StyleSheet, Text, TextInput, Dimensions } from "react-native"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Button from "../button/Button";
+import ChangePwdForm from "../Forms/changePwdForm";
 
 const {width} = Dimensions.get("screen");
 
 const changePwdScreen = ({navigation}) =>{
     return(
         <View style={styles.container}>
-            <Text style={styles.title}>Change password</Text>
-            <Text style={styles.text}>Current password</Text>
-            <TextInput style={styles.input} placeholder="Enter current password"/>
-            <Text style={styles.text}>New password</Text>
-            <TextInput style={styles.input} placeholder="Enter new password"/>
-            <Text style={styles.text}>Confirm password</Text>
-            <TextInput style={styles.input} placeholder="Confirm password"/>
-            <Button title="SAVE"/>
+            <ChangePwdForm/>
             <Button title="BACK" callback={()=>{navigation.goBack()}}/>
         </View>
     )
