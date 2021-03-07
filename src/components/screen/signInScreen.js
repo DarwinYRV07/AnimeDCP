@@ -1,15 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { StyleSheet, Text, View, Dimensions,TouchableOpacity } from 'react-native';
 
 import Logo from "../shared/Logo";
+import Alert from "../shared/Alert"; 
 import SignInForm from "../Forms/signInForm";
 
 const { width } = Dimensions.get("screen");
 
-const signInScreen = ({navigation}) =>{
+const signInScreen = ({navigation, route}) =>{
+    const { userCreated } = route.params;
     return(
         <View style={styles.container}>
             <Logo/>
+            { !userCreated ?( <Alert type="success" title= "User Created!! You can now sing in :)!!"/>):null}
             <SignInForm/>
             <TouchableOpacity onPress={()=>{navigation.navigate("ChangePwd")}}>
                 <Text style={styles.textPwd}>Forgot your password?</Text>

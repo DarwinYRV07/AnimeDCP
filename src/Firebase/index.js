@@ -1,4 +1,4 @@
-import * as firebase from "firebase";
+import  firebase from "firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
 import getEnvVars from "../../enviroment";
@@ -24,6 +24,7 @@ const firebaseConfig ={
 };
 
 //Verificacion si se inicializo una app 
+console.log(firebase.app);
 if (!firebase.app.length) firebase.initializaApp(firebaseConfig);
 
 export {firebase};
