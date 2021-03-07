@@ -24,7 +24,7 @@ const firebaseConfig ={
 };
 
 //Verificacion si se inicializo una app 
-console.log(firebase.app);
-if (!firebase.apps.length) firebase.initializaApp(firebaseConfig);
+
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
 export {firebase};
