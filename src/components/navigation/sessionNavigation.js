@@ -27,12 +27,12 @@ function TabComp() {
       
                   if (route.name === 'Home') {
                     iconName = focused
-                      ? 'ios-information-circle'
-                      : 'ios-information-circle-outline';
+                      ? 'home'
+                      : 'home';
                   } else if (route.name === 'Anime') {
                     iconName = focused ? 'ios-list' : 'ios-list';
                   } else if (route.name === 'ListAnime'){
-                    iconName = focused ? 'ios-list' : 'ios-list';
+                    iconName = focused ? 'bookmarks' : 'bookmarks';
                   } 
       
                   // You can return any component that you like here!
@@ -40,8 +40,10 @@ function TabComp() {
                 },
               })}
               tabBarOptions={{
-                activeTintColor: 'tomato',
+                activeTintColor: '#22DEFA',
                 inactiveTintColor: 'gray',
+                activeBackgroundColor:'#2F353A',
+                inactiveBackgroundColor:'#2F353A',                
               }}
             >
               <Tab.Screen name="Home" component={homeScreen} />
