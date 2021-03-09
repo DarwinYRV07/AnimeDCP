@@ -3,6 +3,7 @@ import { SocialIcon } from "react-native-elements";
 import { validate } from "email-validator";
 import { firebase } from "../../firebase";
 import Button from "../button/Button";
+import Alert from "../shared/Alert"; 
 import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
 
 const { width, height } = Dimensions.get("screen");
@@ -39,14 +40,16 @@ const signInForm =({navigation})=>{
 
     return(
         <View>
+
+            {error ? <Alert title={error} type="error" /> : null}
             <Text style={styles.text}>User:</Text>
             <TextInput 
                 style={styles.input} 
                 placeholder="Email"    
                 value={email} 
-                onChange={setEmail}
+                onChangeText={setEmail}
                 autoCapitalize="none"
-               // onBlur={() => {handleVerify("email");}}errorMessage={ emailError? "Por favor ingresa tu cuenta de correo electrónico": null}
+                onBlur={() => {handleVerify("email");}}errorMessage={ emailError? "Por favor ingresa tu cuenta de correo electrónico": null}
                   
             />
 
@@ -55,13 +58,12 @@ const signInForm =({navigation})=>{
                 style={styles.input} 
                 placeholder={"Password"} 
                 value={password} 
-                onChange={setPassword}
+                onChangeText={setPassword}
                 secureTextEntry
                 autoCapitalize="none"
                 onBlur={() => {handleVerify("password");}}errorMessage={passwordError ? "Por favor ingresa tu contraseña" : null}
             />
-
-            <Button title="Login" />
+            <Button title="Login"  callback={handleSignin} />
             <SocialIcon style={styles.button} title='Sign In' button type='facebook'/>
         </View>
     );

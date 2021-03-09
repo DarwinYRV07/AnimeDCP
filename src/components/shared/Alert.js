@@ -35,8 +35,9 @@ const Alert = ({ type, title }) => {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    padding: 10,
+    marginTop:10,
+    margin: 8,
+    padding: 6,
     flexDirection: "row",
   },
   icon: {

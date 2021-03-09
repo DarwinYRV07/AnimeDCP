@@ -12,17 +12,20 @@ const signInScreen = ({navigation, route}) =>{
     return(
         <View style={styles.container}>
             <Logo/>
-            { !userCreated ?( <Alert type="success" title= "User Created!! You can now sing in :)!!"/>):null}
+            { userCreated ?( <Alert type="success" title= "User Created!! You can now sing in :)!!"/>):null}
             <SignInForm/>
+            
             <TouchableOpacity onPress={()=>{navigation.navigate("ChangePwd")}}>
                 <Text style={styles.textPwd}>Forgot your password?</Text>
             </TouchableOpacity>
+           
             <TouchableOpacity onPress={()=>{navigation.navigate("SignUp")}}>
                 <Text style={styles.textForget} >Don't have account? Sign Up</Text>
             </TouchableOpacity>    
             <TouchableOpacity onPress={()=>{navigation.navigate("BottonTabs")}}>
                 <Text> GO MENU</Text>
-            </TouchableOpacity>     
+            </TouchableOpacity>   
+              
             
         </View>
     );
@@ -55,6 +58,13 @@ const styles = StyleSheet.create({
         width:width*0.9,
         marginBottom:15,
     },
+    button: {
+        alignSelf: "center",
+        padding: 15,
+        borderRadius: 30,
+        marginBottom: 10,
+        width: width * 0.8,
+      },
     
   });
 
