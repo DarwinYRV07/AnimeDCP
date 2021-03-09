@@ -1,6 +1,6 @@
 import React from 'react' 
 import { StyleSheet, View, Text, Dimensions } from 'react-native'
-import CardV from '../cardV/CardV'
+import CardV from '../cards/cardV'
 
 const{width,height}=Dimensions.get("screen");
 
