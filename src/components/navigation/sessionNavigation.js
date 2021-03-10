@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import { StyleSheet} from 'react-native';
 import {ThemeProvider} from 'react-native-elements';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -12,6 +12,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import homeScreen from '../screen/homeScreen';
 import animeScreen from '../screen/animeScreen';
 import myListScreen from '../screen/myListScreen';
+import PersistLogin from '../../utils/persistLogin';
+import {firebase} from '../../Firebase'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,15 +55,41 @@ function TabComp() {
 
 
 const SessionNavigation= ()=> {
+  const [user, setUser] = useState();
+  const [init,setInit] = useState(true);
+
+  function onAuthStateChanged(user) {
+    setUser(user);
+    console.log(user);
+    if (init) setInit(false);
+  }
+  // Verificar si ya existen credenciales de autenticación
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    console.log(subscriber);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  
   return (
     <ThemeProvider>
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator >
-            <Stack.Screen name="SignIn" component={signInScreen} initialParams={{userCreated:false}} options={{headerShown:false}} />
-            <Stack.Screen name="SignUp" component={signUpScreen}/>
-            <Stack.Screen name="ChangePwd" component={changePwdScreen}/>
-            <Stack.Screen name="BottonTabs" component={TabComp} options={{headerShown:false}}/>
+            {user ? (
+                <>
+                  <Stack.Screen name="BottonTabs" component={TabComp} initialParams={{user: user}} options={{headerShown:false}}/>
+                  <Stack.Screen name="ChangePwd" component={changePwdScreen}/>
+                </>
+              ) : (
+                <>
+                  
+                  <Stack.Screen name="SignIn" component={signInScreen} initialParams={{userCreated:false}} options={{headerShown:false}} />
+                  <Stack.Screen name="SignUp" component={signUpScreen}/>
+                  <Stack.Screen name="BottonTabs" component={TabComp} initialParams={{user: user}} options={{headerShown:false}}/>
+                </>
+              )
+            }
           </Stack.Navigator>
          </NavigationContainer>
       </SafeAreaProvider>

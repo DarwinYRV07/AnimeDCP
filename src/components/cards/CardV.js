@@ -5,13 +5,14 @@ import {Image,Button,Icon} from 'react-native-elements'
 
 const{width,height}=Dimensions.get("screen");
 
-const CardV = () =>{
+const CardV = (url,name,id,punt,date) =>{
     return(
       <View style={styles.cardRow}>
-        <Image style={styles.portada} source={{uri: require("../../assets/imgPrueba.jpg") }}/>
+        <Image style={styles.portada} source={{uri: require(url) }}/>
         <View >
-          <Text style={styles.titulo}>SHINGEKI NO KYOJIN</Text>
-          <Text style={styles.fecha}>Publicado: 15 de abril de 2013</Text>
+          <Text style={styles.titulo}>{name}</Text>
+          <Text style={styles.fecha}>Start: {date}</Text>
+          <Text style={styles.fecha}>Puntuacion: {punt}</Text>
         </View>
         <Button
             icon={

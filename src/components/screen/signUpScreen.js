@@ -10,7 +10,7 @@ const { width } = Dimensions.get("screen");
 const signUpScreen = ({navigation}) =>{
   return(
     <View style={styles.container}>
-        <SignUpForm/>
+        <SignUpForm navigation={navigation}/>
         <TouchableOpacity onPress={()=>{navigation.goBack()}}>
                 <Text>You have account? Sign In</Text>
             </TouchableOpacity>        

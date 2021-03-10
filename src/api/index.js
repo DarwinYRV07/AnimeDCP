@@ -1,4 +1,6 @@
-export const fetchAnimeList = async () =>{
+import React from "react"
+
+const fetchAnimeList = async () =>{
     
     const endpoint = `https://api.jikan.moe/v3/top/anime/1/airing`;
     
@@ -32,3 +34,5 @@ return data;
 };
 
 ///const fetch = require("node-fetch");
+
+export default fetchAnimeList;

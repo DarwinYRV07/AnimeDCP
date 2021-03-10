@@ -28,25 +28,29 @@ const signInForm =({navigation})=>{
     }
   };
 
+  const handleLogOut=()=>{
+    firebase.auth().signOut().catch(
+      (error)=>{console.log(error)}
+    );
+    console.log("adios");
+  }
+
   const handleSignin = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        
+        console.log("logueo")
         // Obtener el Unique Identifier generado para cada usuario
         // Firebase -> Authentication
         const uid = response.user.uid;
-        console.log(response.user.email);
-        console.log(response.user.uid);
-        
-
-        navigation.navigate("BottonTabs",  { user });
+        // console.log(response.user.email);
+        // console.log(response.user.uid);
         
 
         // Obtener la colección desde Firebase
-       const usersRef = firebase.firestore().collection("users");
-        console.log(firebase.firestore().collection("users"));
+        const usersRef = firebase.firestore().collection("users");
+        //console.log(firebase.firestore().collection("users"));
 
         // Verificar que el usuario existe en Firebase authentication
         // y también está almacenado en la colección de usuarios.
@@ -63,11 +67,12 @@ const signInForm =({navigation})=>{
             // Obtener la información del usuario y enviarla a la pantalla Home
             const user = firestoreDocument.data();
             console.log("Simon");
-            navigation.navigate("BottonTabs", { user });
+            
+              navigation.navigate("BottonTabs", {user})
           });
       })
       .catch((error) => {
-        setError(error.message);
+        setError(error.code);
       });
   };
 
@@ -97,7 +102,7 @@ const signInForm =({navigation})=>{
                 onBlur={() => {handleVerify("password");}}errorMessage={passwordError ? "Please enter your password" : null}
             />
             <Button title="Login"  callback={handleSignin} />
-            <SocialIcon style={styles.button} title='Sign In' button type='facebook'/>
+            <SocialIcon onPress={handleLogOut} style={styles.button} title='Sign In' button type='facebook'/>
         </View>
     );
 };

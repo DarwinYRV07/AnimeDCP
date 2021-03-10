@@ -1,10 +1,11 @@
 import React,{useState} from "react"
 import {validate} from 'email-validator'
 import {View, StyleSheet,Text,Dimensions,TextInput} from "react-native"
-import {} from 'react-native-elements'
+import {Input} from 'react-native-elements'
 import Logo from "../shared/Logo"
 import Button from "../button/Button";
 import {firebase} from "../../Firebase"
+import Alert from "../shared/Alert"
 
 const { width } = Dimensions.get("screen");
 
@@ -19,9 +20,10 @@ const SignUpForm = ({navigation}) =>{
     const [emailError,setEmailError] = useState(false);
     const [fullNameError,setFullNameError] = useState(false);
     const [confirmPasswordError,setConfirmPasswordError] = useState(false)
+    const [error, setError] = useState("");
 
 
-  const handlerVerify = (input) =>{
+  const handleVerify = (input) =>{
     if(input === 'fullname'){
       if(!fullName){
         setFullNameError(true);
@@ -29,7 +31,7 @@ const SignUpForm = ({navigation}) =>{
         setFullNameError(false);
     }else if(input ==='email'){
         if(!email) setEmailError(true)
-        else if(validate(email)) setEmailError(true)
+        else if(!validate(email)) setEmailError(true)
         else setEmailError(false)
     }else if(input ==='password'){
         if(!password)setPasswordError(true)
@@ -42,54 +44,101 @@ const SignUpForm = ({navigation}) =>{
     }
   }
   
-  const handlerSignUp = ()=>{
-    firebase
-    .auth()
-    .createUserWithEmailAndPassword(email,password)
-    .then(
-      (Response)=>{console.log(Response);
-    })
-    .catch((error)=>console.log(error));
+  const handlerSignUp = async ()=>{
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email,password)
+      .then(
+        (Response)=>{
+          console.log(Response.user);
+          const uid =  Response.user.uid;
+          const data = {
+            id:uid,
+            email,
+            fullName,
+          }
+
+          const usersRef = firebase.firestore().collection("users");
+          console.log(usersRef);
+          usersRef
+          .doc(uid)
+          .set(data)
+          .then(() => {
+            
+          })
+          .catch((error) => {
+            console.log(error);
+            setError(error.message);
+          });
+      })
+      .catch((error)=>console.log(error));
   }
 
   return(
     <View style={styles.container}>
         
         <Logo/>
+        {error ? <Alert type="error" title={error} /> : null}
         <Text style={styles.texto}>Fullname:</Text>
-        <TextInput 
+        <Input 
           style={styles.input} 
           placeholder="User"
           value={fullName}
           onChangeText = {setFullName}
-          autoCapitalize
-          
+          onBlur={() => {
+            handleVerify("fullname");
+          }}
+          errorMessage={
+            fullNameError ? "Por favor ingresa tu nombre completo" : ""
+          }
           /> 
         <Text style={styles.texto}>Email:</Text>
-        <TextInput 
+        <Input 
           style={styles.input} 
           placeholder="Email"
           value={email}
           onChangeText = {setEmail}
+          onBlur={() => {
+            handleVerify("email");
+          }}
           autoCapitalize="none"
-          /> 
+          errorMessage={
+          emailError ? "Por favor ingresa una dirección de correo válida" : ""
+          }
+          />
         <Text style={styles.texto}>Password:</Text>
-        <TextInput 
+        <Input 
           style={styles.input} 
           placeholder="password"
           value={password}
           onChangeText = {setPassword}
           secureTextEntry
           autoCapitalize="none"
+          onBlur={() => {
+            handleVerify("password");
+          }}
+          errorMessage={
+          passwordError
+            ? "Por favor ingresa una contraseña de mínimo 6 caracteres"
+            : ""
+          }
         /> 
         <Text style={styles.texto}>Confirm Password:</Text>
-        <TextInput 
+        <Input 
           style={styles.input} 
           placeholder="Confirm Pasword"
           value={confirmPassword}
           onChangeText = {setConfirmPassword}
           secureTextEntry
           autoCapitalize="none"
+          onBlur={() => {
+          handleVerify("confirmPassword");
+          }}
+          errorMessage={
+          confirmPasswordError
+            ? "Por favor reingresa la contraseña y verifica que es correcta"
+            : ""
+          }
         /> 
 
         <Button title="SIGN UP" callback={handlerSignUp}/>
