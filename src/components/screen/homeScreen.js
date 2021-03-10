@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react' 
-import {StyleSheet, Text, View,ScrollView} from 'react-native'
+import {StyleSheet, Text, View,FlatList} from 'react-native'
 import {firebase} from '../../Firebase'
 import Button from '../button/button'
 import fetchAnimeList from '../../api'
@@ -25,30 +25,6 @@ const homeScreen =()=>{
         }
     }
     
-    
-    const showAnimeList = ()=>{
-        if(data!=undefined){
-            const resultado = data.map(anime=>{
-                console.log(anime.image_url)
-                // <CardV
-                //     url={anime.image_url}
-                //     name={anime.title}
-                //     id={anime.mal_id}
-                //     punt={anime.score}
-                //     date={anime.start_date}
-                //  />
-            })
-            return(
-                resultado
-            )
-        }
-        return(0)
-       
-        
-    };
-
-    
-
     const handleLogOut=()=>{
         firebase.auth().signOut().catch(
           (error)=>{console.log(error)}
@@ -61,10 +37,27 @@ const homeScreen =()=>{
                 <Text>Home</Text>
                 <Button title="logOut" 
                 callback={handleLogOut}/>
-                
-            <ScrollView >
-                {data!=undefined ?showAnimeList():null}
-            </ScrollView>
+                {data!=undefined?(<FlatList
+                            ListEmptyComponent={<Text>No hay Libros disponibles!</Text>}
+                            data={data}
+                            key={({item}) => item.mal_id}
+                            horizontal={false}
+                            renderItem={({item}) => {
+                            return (
+                                <View>
+                                     <CardV
+                                        url={item.image_url}
+                                        name={item.title}
+                                        id={item.mal_id}
+                                        punt={item.score}
+                                        date={item.start_date}
+                                        btn={false}
+                                     />
+                                </View>
+                            )   
+                            }}
+                            keyExtractor={(items,index) => index.toString()}
+                />):(null)}
         </View>
     )
 }

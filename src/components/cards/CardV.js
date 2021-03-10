@@ -5,16 +5,20 @@ import {Image,Button,Icon} from 'react-native-elements'
 
 const{width,height}=Dimensions.get("screen");
 
-const CardV = (url,name,id,punt,date) =>{
+const CardV = ({url,name,id,punt,date,btn}) =>{
     return(
       <View style={styles.cardRow}>
-        <Image style={styles.portada} source={{uri: require(url) }}/>
-        <View >
+        {/* <View style={styles.left}> */}
+          <Image style={styles.portada} source={{uri:url}}/>  
+        {/* </View> */}
+        
+        <View style = {styles.right} >
           <Text style={styles.titulo}>{name}</Text>
           <Text style={styles.fecha}>Start: {date}</Text>
           <Text style={styles.fecha}>Puntuacion: {punt}</Text>
         </View>
-        <Button
+        {btn?
+          (<Button
             icon={
               <Icon
                 name="delete"
@@ -24,7 +28,9 @@ const CardV = (url,name,id,punt,date) =>{
             }
             iconTop
             type="clear"
-          />
+          />):null
+        }
+        
       </View>
       
     )
@@ -36,22 +42,23 @@ const styles = StyleSheet.create({
       marginBotton:5,
       width:60,
       height:60,
-      resizeMode:"contain"
+      resizeMode:"contain",
+      paddingRight:20
     },
     titulo:{
-      fontSize:20,
+      fontSize:15,
       color:"#ffff",
-      alignSelf:"stretch"
+      alignSelf:"center"
     },
     fecha:{
       fontSize:12,
       color:"#ff3f"
     },cardRow:{
-        borderRadius:10,
+        borderRadius:5,
         marginTop:10,
         backgroundColor: '#413F4F',
-        alignItems: 'center',
-        justifyContent:'center',
+        alignItems:"center",
+        justifyContent:"center",
         flexDirection:"row",
         shadowColor: "#000",
         shadowOffset: {
@@ -63,6 +70,18 @@ const styles = StyleSheet.create({
       width:width*0.9,
       height:height*0.1,
       elevation: 13,
+    },
+    left:{
+      flex:1,
+      alignItems:"center",
+      justifyContent:"center",
+      paddingLeft:-width*0.5
+    },
+    right:{
+      flex:1,
+      alignItems:"center",
+      justifyContent:"center",
+      
     }
     
   });

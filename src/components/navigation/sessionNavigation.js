@@ -33,7 +33,9 @@ function TabComp() {
                     iconName = focused ? 'ios-list' : 'ios-list';
                   } else if (route.name === 'ListAnime'){
                     iconName = focused ? 'bookmarks' : 'bookmarks';
-                  } 
+                  } else if(route.name === 'ChangePwd'){
+                    iconName = focused ? 'gear' : 'gear';
+                  }
       
                   // You can return any component that you like here!
                   return <Ionicons name={iconName} size={size} color={color} />;
@@ -49,6 +51,7 @@ function TabComp() {
               <Tab.Screen name="Home" component={homeScreen} />
               <Tab.Screen name="Anime" component={animeScreen} />
               <Tab.Screen name="ListAnime" component = {myListScreen} />
+              <Tab.Screen name="ChangePwd" component={changePwdScreen}/>
             </Tab.Navigator>
   )
 }
@@ -79,7 +82,7 @@ const SessionNavigation= ()=> {
             {user ? (
                 <>
                   <Stack.Screen name="BottonTabs" component={TabComp} initialParams={{user: user}} options={{headerShown:false}}/>
-                  <Stack.Screen name="ChangePwd" component={changePwdScreen}/>
+                  
                 </>
               ) : (
                 <>

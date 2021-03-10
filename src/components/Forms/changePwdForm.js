@@ -1,9 +1,11 @@
+import { validate } from 'email-validator';
 import React, { useState} from 'react';
 import { View, StyleSheet, Text, TextInput, Dimensions } from "react-native"
 import { Input } from 'react-native-elements';
 import { firebase } from "../../Firebase/index";
 import Button from "../button/Button";
 import Logo from "../shared/Logo"
+
 
 const {width} = Dimensions.get("screen");
 
@@ -13,10 +15,10 @@ const changePwdForm = ({navigation}) =>{
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   
-  const [currentError, setCurrentError] = useState("");
-  const [newPasswordError, setNewPasswordError] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [error, setError] = useState("");
+  const [currentError, setCurrentError] = useState(false);
+  const [newPasswordError, setNewPasswordError] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleVerify = (input) => {
     if (input === "current") {
@@ -37,40 +39,33 @@ const changePwdForm = ({navigation}) =>{
     }
   };
 
-  const handlecurrentPwd = (current) =>{
+  const reauthenticatePsw = (current) =>{
     const user = firebase.auth().currentUser;
+    console.log(user);
     const cred = firebase.auth.EmailAuthProvider.credential(user.email,current);
-    
     return user.reauthenticateWithCredential(cred);
   };
 
-  const handlechangePwd = () => {
-    firebase
-    .auth()
+  const changePassword = (currentPassword, newPassword) => { 
+    reauthenticatePsw (currentPassword)
+    .then (() => { 
+      const user = firebase.auth(). currentUser; 
+      user.updatePassword (newPassword). then (() => { 
+        console.log ("¡Contraseña actualizada!"); 
+      }). catch ((error) => {console.log (error);}); 
+    }). catch ((error) => {console.log (error);} ); 
+  }
 
-    handlecurrentPwd(current).then(()=>{
-      const user = firebase.auth().currentUser;
-      const newPaswword = newPassword;
-      user.updatePassword(newPaswword).then((response)=> {
-        console.log("Se logro!!!!!");
-        navigation.navigate("SignIn");
-      })
-      .catch(function(error) {
-        console.log("Muertos !!!!!");
-      });
-    })
-    .catch(()=>{
-      console.log("Un fallo en el current")
-    })
-
-    
-
+  const handlechangePwd = () => {   
+    changePassword(current,newPassword);
   };
 
 
 
     return(
+      
         <View style={styles.container}>
+            {error ? <Alert title={error} type="error" /> : null}
             <Logo/>
             <Text style={styles.title}>Change password</Text>
             <Text style={styles.text}>Current password</Text>

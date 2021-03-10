@@ -10,7 +10,6 @@ const changePwdScreen = ({navigation}) =>{
     return(
         <View style={styles.container}>
             <ChangePwdForm navigation={navigation}/>
-            <Button title="BACK" callback={()=>{navigation.goBack()}}/>
         </View>
     )
 }
