@@ -22,12 +22,12 @@ const changePwdForm = ({navigation}) =>{
 
   const handleVerify = (input) => {
     if (input === "current") {
-      // Verificar el correo electrónico
+      // Verificar la contraseña
       if (!current) setCurrentError(true);
       else if (!validate(current)) setCurrentError(true);
       else setCurrentError(false);
     } else if (input === "newPassword") {
-      // Verificar la contraseña
+      // Verificar la Nuevacontraseña
       if (!newPassword) setNewPasswordError(true);
       else if (newPassword.length < 6) setNewPasswordError(true);
       else setNewPasswordError(false);
@@ -78,7 +78,7 @@ const changePwdForm = ({navigation}) =>{
                   handleVerify("current");
                 }}
                 errorMessage={
-                  currentError ? "Por favor ingresa la ultima contraseña" : ""
+                  currentError ? "Please enter the password" : ""
                 }
             />
             <Text style={styles.text}>New password</Text>
@@ -91,7 +91,7 @@ const changePwdForm = ({navigation}) =>{
                   handleVerify("newPassword");
                 }}
                 errorMessage={
-                  newPasswordError ? "Por favor ingresa la nueva contraseña" : ""
+                  newPasswordError ? "Please enter the new password" : ""
                 }
             />
             <Text style={styles.text}>Confirm password</Text>
@@ -104,7 +104,7 @@ const changePwdForm = ({navigation}) =>{
                   handleVerify("confirmPassword");
                 }}
                 errorMessage={
-                  confirmPasswordError ? "Por favor ingresa bien la contraseña" : ""
+                  confirmPasswordError ? "Please check if it is the same password" : ""
                 }
             />
             <Button title="SAVE"  callback={handlechangePwd}/>
