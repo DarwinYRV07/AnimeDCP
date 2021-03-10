@@ -25,18 +25,12 @@ const homeScreen =()=>{
         }
     }
     
-    const handleLogOut=()=>{
-        firebase.auth().signOut().catch(
-          (error)=>{console.log(error)}
-        );
-        console.log("adios");
-    }
+    
     
     return(
         <View style={styles.container}>
                 <Text>Home</Text>
-                <Button title="logOut" 
-                callback={handleLogOut}/>
+                
                 {data!=undefined?(<FlatList
                             ListEmptyComponent={<Text>No hay Libros disponibles!</Text>}
                             data={data}

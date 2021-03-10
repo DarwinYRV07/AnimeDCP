@@ -13,7 +13,7 @@ const signInForm =({navigation})=>{
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState("");
 
 
      // Verificar si se ingreso los datos del email y el password
@@ -27,6 +27,32 @@ const signInForm =({navigation})=>{
       else setPasswordError(false);
     }
   };
+
+  const handleLogInWithGoogle=()=>{
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+  }
 
   const handleLogOut=()=>{
     firebase.auth().signOut().catch(
@@ -102,7 +128,7 @@ const signInForm =({navigation})=>{
                 onBlur={() => {handleVerify("password");}}errorMessage={passwordError ? "Please enter your password" : null}
             />
             <Button title="Login"  callback={handleSignin} />
-            <SocialIcon onPress={handleLogOut} style={styles.button} title='Sign In' button type='facebook'/>
+            <SocialIcon onPress={handleLogInWithGoogle} style={styles.button} title='Sign In' button type='google'/>
         </View>
     );
 };

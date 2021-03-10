@@ -14,6 +14,7 @@ import animeScreen from '../screen/animeScreen';
 import myListScreen from '../screen/myListScreen';
 import PersistLogin from '../../utils/persistLogin';
 import {firebase} from '../../Firebase'
+import userScreen from '../screen/userScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,6 +34,8 @@ function TabComp() {
                     iconName = focused ? 'ios-list' : 'ios-list';
                   } else if (route.name === 'ListAnime'){
                     iconName = focused ? 'bookmarks' : 'bookmarks';
+                  } else if(route.name === 'User'){
+                    iconName = focused ? 'gear' : 'gear';
                   } else if(route.name === 'ChangePwd'){
                     iconName = focused ? 'gear' : 'gear';
                   }
@@ -51,7 +54,8 @@ function TabComp() {
               <Tab.Screen name="Home" component={homeScreen} />
               <Tab.Screen name="Anime" component={animeScreen} />
               <Tab.Screen name="ListAnime" component = {myListScreen} />
-              <Tab.Screen name="ChangePwd" component={changePwdScreen}/>
+              {/* <Tab.Screen name="ChangePwd" component={changePwdScreen}/> */}
+              <Tab.Screen name="User" component ={userScreen}/>
             </Tab.Navigator>
   )
 }
@@ -81,7 +85,9 @@ const SessionNavigation= ()=> {
           <Stack.Navigator >
             {user ? (
                 <>
+                  
                   <Stack.Screen name="BottonTabs" component={TabComp} initialParams={{user: user}} options={{headerShown:false}}/>
+                  <Stack.Screen name="ChangePwd" component={changePwdScreen} options={{headerShown:false}}/> 
                   
                 </>
               ) : (
@@ -90,6 +96,7 @@ const SessionNavigation= ()=> {
                   <Stack.Screen name="SignIn" component={signInScreen} initialParams={{userCreated:false}} options={{headerShown:false}} />
                   <Stack.Screen name="SignUp" component={signUpScreen}/>
                   <Stack.Screen name="BottonTabs" component={TabComp} initialParams={{user: user}} options={{headerShown:false}}/>
+                  <Stack.Screen name="User" component ={userScreen} options={{headerShown:false}}/>
                 </>
               )
             }
