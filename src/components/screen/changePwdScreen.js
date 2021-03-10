@@ -1,7 +1,6 @@
 import React from "react"
-import { SocialIcon } from "react-native-elements";
-import { View, StyleSheet, Text, TextInput, Dimensions } from "react-native"
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { } from "react-native-elements";
+import { View, StyleSheet, Dimensions } from "react-native"
 import Button from "../button/Button";
 import ChangePwdForm from "../Forms/changePwdForm";
 
