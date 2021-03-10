@@ -22,7 +22,8 @@ const userScreen =({navigation})=>{
     
     return(
         <View style={styles.container}>
-                <Text>Current User:{user.email}</Text>
+                <Text style={styles.text}>Current User:</Text>
+                <Text style={styles.text}>{user.email}</Text>
                 <Button title="logOut" 
                 callback={handleLogOut}/>
                 <Button title="Change Password" callback={()=>{navigation.navigate("ChangePwd")}}/>
@@ -36,7 +37,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#2F353A',
         justifyContent: 'center',
         alignItems:"center"
-      }
+      },
+
+      text:{
+          color:"white",
+          fontSize:20,
+          marginBottom:15,
+      },
 })
 
 export default userScreen;

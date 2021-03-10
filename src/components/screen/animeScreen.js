@@ -1,6 +1,6 @@
 import React from 'react' 
 import TrailerVideo from "../shared/trailerVideo";
-import {Text, Image, withTheme} from "react-native-elements";
+import {Text, Image} from "react-native-elements";
 import {StyleSheet, View, Dimensions} from 'react-native'
 
 const{width,height}=Dimensions.get("screen");

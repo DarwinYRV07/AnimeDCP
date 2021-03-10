@@ -29,7 +29,7 @@ const homeScreen =()=>{
     
     return(
         <View style={styles.container}>
-                <Text>Home</Text>
+                <Text style={styles.text}>Home</Text>
                 
                 {data!=undefined?(<FlatList
                             ListEmptyComponent={<Text>No hay Libros disponibles!</Text>}
@@ -62,7 +62,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#2F353A',
         justifyContent: 'center',
         alignItems:"center"
-      }
+      },
+      text:{
+        color:"white",
+        fontSize:30,
+        marginTop:20,
+        marginBottom:15,
+    },
 })
 
 export default homeScreen;

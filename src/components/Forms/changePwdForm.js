@@ -1,6 +1,6 @@
 import { validate } from 'email-validator';
 import React, { useState} from 'react';
-import { View, StyleSheet, Text, TextInput, Dimensions } from "react-native"
+import { View, StyleSheet, Text, Dimensions } from "react-native"
 import { Input } from 'react-native-elements';
 import { firebase } from "../../Firebase/index";
 import Button from "../button/Button";
@@ -21,11 +21,11 @@ const changePwdForm = ({navigation}) =>{
   const [error, setError] = useState(false);
 
   const handleVerify = (input) => {
-    if (input === "current") {
-      // Verificar la contraseña
-      if (!current) setCurrentError(true);
-      else if (!validate(current)) setCurrentError(true);
-      else setCurrentError(false);
+    if(input === 'current'){
+      if(!current){
+        setCurrentError(true);
+      }else
+        setCurrentError(false);
     } else if (input === "newPassword") {
       // Verificar la Nuevacontraseña
       if (!newPassword) setNewPasswordError(true);
@@ -73,6 +73,7 @@ const changePwdForm = ({navigation}) =>{
                 placeholder="current"
                 value={current}
                 onChangeText={setCurrent}
+                secureTextEntry
                 autoCapitalize="none"
                 onBlur={() => {
                   handleVerify("current");
@@ -81,11 +82,13 @@ const changePwdForm = ({navigation}) =>{
                   currentError ? "Please enter the password" : ""
                 }
             />
+
             <Text style={styles.text}>New password</Text>
             <Input style={styles.input} 
                 placeholder="New Password"
                 value={newPassword}
                 onChangeText={setNewPassword}
+                secureTextEntry
                 autoCapitalize="none"
                 onBlur={() => {
                   handleVerify("newPassword");
@@ -94,11 +97,13 @@ const changePwdForm = ({navigation}) =>{
                   newPasswordError ? "Please enter the new password" : ""
                 }
             />
+
             <Text style={styles.text}>Confirm password</Text>
             <Input style={styles.input} 
                 placeholder="New Password"
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
+                secureTextEntry
                 autoCapitalize="none"
                 onBlur={() => {
                   handleVerify("confirmPassword");
