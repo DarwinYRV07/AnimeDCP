@@ -13,7 +13,7 @@ const signInScreen = ({navigation, route}) =>{
         <View style={styles.container}>
             <Logo/>
             { userCreated ?( <Alert type="success" title= "User Created!! You can now sing in :)!!"/>):null}
-            <SignInForm/>
+            <SignInForm navigation={navigation}/>
             
             <TouchableOpacity onPress={()=>{navigation.navigate("ChangePwd")}}>
                 <Text style={styles.textPwd}>Forgot your password?</Text>
