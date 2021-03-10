@@ -9,7 +9,7 @@ const {width} = Dimensions.get("screen");
 const changePwdScreen = ({navigation}) =>{
     return(
         <View style={styles.container}>
-            <ChangePwdForm/>
+            <ChangePwdForm navigation={navigation}/>
             <Button title="BACK" callback={()=>{navigation.goBack()}}/>
         </View>
     )
