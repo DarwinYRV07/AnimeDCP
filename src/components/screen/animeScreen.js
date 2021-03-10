@@ -1,5 +1,4 @@
-import React from 'react' 
-import TrailerVideo from "../shared/trailerVideo";
+import React from 'react'; 
 import {Text, Image} from "react-native-elements";
 import {StyleSheet, View, Dimensions} from 'react-native'
 
