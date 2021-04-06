@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Input } from "react-native-elements";
 import { StyleSheet, View, Text, Dimensions, Button, FlatList } from 'react-native'
 import {fetchAnimeSearch} from '../../api'
-import CardV from '../cards/cardV'
+import CardV from '../cards/CardV'
 
 const{width,height}=Dimensions.get("screen");
 

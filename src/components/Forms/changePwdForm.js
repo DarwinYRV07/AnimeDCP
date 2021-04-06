@@ -3,7 +3,7 @@ import React, { useState} from 'react';
 import { View, StyleSheet, Text, Dimensions } from "react-native"
 import { Input } from 'react-native-elements';
 import { firebase } from "../../Firebase/index";
-import Button from "../button/Button";
+import Button from "../button/button";
 import Logo from "../shared/Logo"
 
 

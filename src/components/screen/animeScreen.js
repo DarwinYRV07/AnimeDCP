@@ -114,10 +114,10 @@ const styles = StyleSheet.create({
           marginTop:10,
           fontSize:15,
           padding:3,
-          color:"white"
+          color:"#fff"
       },
     text: {
-        color:'white',
+        color:'#fff',
         marginLeft: 15,
         marginTop:10,
         marginBottom:10,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
       },
       ContenedorTituloImg:{
         //backgroundColor:"yellow",
-        color:"white",  
+        color:"#fff",  
         justifyContent:"center",
         alignItems:"center"
         //position:"relative"
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
       ItemBorder:{
           marginTop:6,
           borderWidth:1,
-          borderColor:"black",
+          borderColor:"#000",
           margin:4,
           padding:3,
           borderRadius:7,
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
       ItemDescription:{
           margin:10,
           height:"auto",
-          backgroundColor:"Red",
+          backgroundColor:"#f0f",
           padding:10,
       },
       ItemShow:{
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
           shadowRadius: 10,
           elevation: 3,
           margin:1,
-          backgroundColor:"white",
+          backgroundColor:"#fff",
           width: width * 0.90,
       },
       imagen:{

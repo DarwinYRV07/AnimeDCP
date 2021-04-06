@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import { Input, SocialIcon } from "react-native-elements";
 import { validate } from "email-validator";
 import { firebase } from "../../Firebase/index";
-import Button from "../button/Button";
+import Button from "../button/button";
 import Alert from "../shared/Alert"; 
 import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
 
@@ -107,7 +107,7 @@ const signInForm =({navigation})=>{
 
             {error ? <Alert title={error} type="error" /> : null}
             <Text style={styles.text}>User:</Text>
-            <Input 
+            <TextInput 
                 style={styles.input} 
                 placeholder="Email"    
                 value={email} 
@@ -118,7 +118,7 @@ const signInForm =({navigation})=>{
             />
 
             <Text style={styles.text}>Password:</Text>
-            <Input  
+            <TextInput  
                 style={styles.input} 
                 placeholder={"Password"} 
                 value={password} 

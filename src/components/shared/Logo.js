@@ -7,7 +7,7 @@ const {width,height} = Dimensions.get("screen");
 const Logo = () =>{
     return(
      <View>
-         <Image source={{uri: require("../../assets/animeDCPIcon200.png") }} style={styles.logo} />
+         <Image source={require("../../assets/animeDCPIcon200.png") } style={styles.logo} />
      </View>
     )
 }

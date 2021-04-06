@@ -39,7 +39,7 @@ const CardV = ({url,name,id,punt,date,btn}) =>{
 
 const styles = StyleSheet.create({
     portada:{
-      marginBotton:5,
+      marginBottom:5,
       width:60,
       height:60,
       resizeMode:"contain",

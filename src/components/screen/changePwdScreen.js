@@ -1,7 +1,6 @@
 import React from "react"
 import { } from "react-native-elements";
 import { View, StyleSheet, Dimensions,TouchableOpacity, Text } from "react-native"
-import Button from "../button/Button";
 import ChangePwdForm from "../Forms/changePwdForm";
 
 const {width} = Dimensions.get("screen");

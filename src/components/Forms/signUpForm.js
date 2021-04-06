@@ -3,7 +3,7 @@ import {validate} from 'email-validator'
 import {View, StyleSheet,Text,Dimensions,TextInput} from "react-native"
 import {Input} from 'react-native-elements'
 import Logo from "../shared/Logo"
-import Button from "../button/Button";
+import Button from "../button/button";
 import {firebase} from "../../Firebase"
 import Alert from "../shared/Alert"
 
@@ -80,7 +80,7 @@ const SignUpForm = ({navigation}) =>{
         <Logo/>
         {error ? <Alert type="error" title={error} /> : null}
         <Text style={styles.texto}>Fullname:</Text>
-        <Input 
+        <TextInput 
           style={styles.input} 
           placeholder="User"
           value={fullName}
@@ -93,7 +93,7 @@ const SignUpForm = ({navigation}) =>{
           }
           /> 
         <Text style={styles.texto}>Email:</Text>
-        <Input 
+        <TextInput 
           style={styles.input} 
           placeholder="Email"
           value={email}
@@ -107,7 +107,7 @@ const SignUpForm = ({navigation}) =>{
           }
           />
         <Text style={styles.texto}>Password:</Text>
-        <Input 
+        <TextInput 
           style={styles.input} 
           placeholder="password"
           value={password}
@@ -124,7 +124,7 @@ const SignUpForm = ({navigation}) =>{
           }
         /> 
         <Text style={styles.texto}>Confirm Password:</Text>
-        <Input 
+        <TextInput 
           style={styles.input} 
           placeholder="Confirm Pasword"
           value={confirmPassword}

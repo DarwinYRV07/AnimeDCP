@@ -1,9 +1,5 @@
 import React, {useState,useEffect} from 'react' 
 import {StyleSheet, Text, View,FlatList} from 'react-native'
-import {firebase} from '../../Firebase'
-import Button from '../button/button'
-import fetchAnimeList from '../../api'
-import CardV from '../cards/cardV'
 
 
 
