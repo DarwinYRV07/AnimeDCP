@@ -1,37 +1,100 @@
-import React from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import {Text, Image} from "react-native-elements";
-import {StyleSheet, View, Dimensions} from 'react-native'
+import {StyleSheet, View, Dimensions,FlatList} from 'react-native'
+import Season from "../shared/Season";
+import Gender from "../shared/Gender";
+import Type from "../shared/Type";
+import {fetchAnimeEs, fetchAnimeGenero} from "../../api/index";
+
 
 const{width,height}=Dimensions.get("screen");
 
+/*const genres =(generos)=>{
+    const datageners = generos.map((genero)=>{
+        return genero.name;
+        console.log(genero.name);
+    })
+};*/
 
 const animeScreen =()=>{
+    const [animeid,setAnimeid] = useState([]);
+    const [genero,setGenero] = useState([]);
+    const [error,setError] = useState(false);
+    
+    const handlerstart =()=>{
+        const getAnimesid = async()=>{
+            const newAnimeid = await fetchAnimeEs(8756);
+            if (!newAnimeid.length) setError(true); 
+            setAnimeid(newAnimeid);
+        }
+        const getgeneros = async () => {
+            const newgeneros = await fetchAnimeGenero(8756);
+            if(!newgeneros.length) setError(true);
+            setGenero(newgeneros);
+        };
+        getAnimesid();
+        getgeneros();
+    }
+    
+
+    useEffect(()=>{
+        handlerstart();
+    },[]);
+
+   console.log(animeid);
+
     return(
         <View style={styles.container}>
             {/*<View style={{backgroundColor:"gray", width:width * 100, height: height * 0.25,}}>
                 <Text>hOL</Text>
                 </View>*/}
                 <View style={styles.ContenedorTituloImg}>
-                    <Image source={{uri: require("../../assets/imgPrueba.jpg") }} style={styles.imagen}/>
-                    <Text h5 style={styles.titlestyle}>TITULO</Text>
+                    <Image source={{uri: animeid.image_url }} style={styles.imagen}/>
+                    <Text h5 style={styles.titlestyle}>{animeid.title}</Text>
                 </View>
                     <View style={styles.ItemShow}>
                         <View style={styles.ItemGener}>
-                            <Text style={styles.ItemBorder}>Temporada</Text>
-                            <Text style={styles.ItemBorder} >puntuacion</Text>
-                            <Text style={styles.ItemBorder}>TIpo</Text>
+                            <Text>{animeid.score}</Text>
+                            <Type type={animeid.type} title={animeid.type} />
+                            <Season type="spring" title="Spring"/>
+                            <Text>HOLAAA{animeid.season}</Text>
+                            
+                            
                         </View>
-                        <View style={styles.ItemGener}>
-                            <Text style={styles.ItemBorder}>Genero1</Text>
-                            <Text style={styles.ItemBorder} >Genero1</Text>
-                            <Text style={styles.ItemBorder}>Genero1</Text>
-                            <Text style={styles.ItemBorder}>Genero1</Text>
-                        </View>
+                            <View style={styles.ItemGener}>
+                            {genero!=undefined?(<FlatList
+                            ListEmptyComponent={<Text>No hay animes disponibles!</Text>}
+                            data={genero}
+                            key={({item}) => item}
+                            horizontal={true}
+                            renderItem={({item}) => {
+                            return (
+                                <View>
+                                     <Gender title= {item} type={item}/>
+                                </View>
+                            )   
+                            }}
+                            
+                            />):(null)}
+
+
+                                {/*{genero.map((item)=>{
+                                    return (
+                                    <View>
+                                        <Gender title= {item} type={item}/>
+                                    </View>);
+
+                                })}*/}
+                            </View>
+                        
+                
                         <View style={styles.ItemCap}>
-                            <Text>Total Capitulos</Text>
+                            <Text>Total Capitulos: {animeid.episodes} </Text>
+                            <Text>Duration: {animeid.duration} </Text>
                         </View>
                         <View style={styles.ItemDescription}>
                             <Text>Descripcion</Text>
+                            <Text>{animeid.synopsis}</Text>
                         </View>
                     </View>
             
