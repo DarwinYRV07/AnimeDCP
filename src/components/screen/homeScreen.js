@@ -12,7 +12,7 @@ const homeScreen =()=>{
 
     const [data, setData] = useState([]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         getAnimes();
     }, [])
 
@@ -23,35 +23,13 @@ const homeScreen =()=>{
         if(!animeList.length){
             console.log("error")
         }
-    }
+    }*/
     
     
     
     return(
         <View style={styles.container}>
-                <Text style={styles.text}>Home</Text>
-                
-                {data!=undefined?(<FlatList
-                            ListEmptyComponent={<Text>No hay Libros disponibles!</Text>}
-                            data={data}
-                            key={({item}) => item.mal_id}
-                            horizontal={false}
-                            renderItem={({item}) => {
-                            return (
-                                <View>
-                                     <CardV
-                                        url={item.image_url}
-                                        name={item.title}
-                                        id={item.mal_id}
-                                        punt={item.score}
-                                        date={item.start_date}
-                                        btn={false}
-                                     />
-                                </View>
-                            )   
-                            }}
-                            keyExtractor={(items,index) => index.toString()}
-                />):(null)}
+            
         </View>
     )
 }
