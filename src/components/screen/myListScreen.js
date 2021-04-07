@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react' 
 import { Input } from "react-native-elements";
-import { StyleSheet, View, Text, Dimensions, Button, FlatList } from 'react-native'
+import { StyleSheet, View, Text, Dimensions, Button, FlatList,TextInput } from 'react-native'
 import {fetchAnimeSearch} from '../../api'
 import CardV from '../cards/CardV'
 
@@ -36,13 +36,13 @@ const myListScreen =()=>{
                 Find your favorite anime.
             </Text>
             <View style={styles.searchbar}>
-                <Input
+                <TextInput
                     style={styles.input} 
                     placeholder={"Enter anime name"}
                     value={animename}
                     onChangeText={setAnimeName}
                     onBlur={() => {handleVerify("animename");}}errorMessage={ animeNameError? "Please enter the name": null}>
-                </Input>
+                </TextInput>
                 <Button title="Search" onPress={()=>{
                     setData([]);
                     setSearch(!search);
@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#2F353A',
         alignItems: 'center',
-        justifyContent: 'flex-start' 
+        justifyContent: 'flex-start',
+        marginTop: 25
     },
     searchbar: {
         borderRadius:5,
@@ -96,9 +97,11 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginTop:10,
         marginBottom:10,
-        fontSize:18,
-        textAlign:'left',
-        width: width*0.9
+        fontSize:20,
+        textAlign:'center',
+        width: width*0.9,
+        marginTop: 40,
+        marginBottom: 10
       },
       input:{
         backgroundColor:"#fff",
@@ -107,9 +110,10 @@ const styles = StyleSheet.create({
         paddingLeft:10,
         justifyContent:"center",
         borderRadius:15,
-        width: width*0.4,
+        width: width*0.7,
         height: 40,
-        marginBottom:5
+        marginBottom:5,
+        marginRight: 20
     }
 })
 

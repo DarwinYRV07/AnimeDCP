@@ -50,7 +50,8 @@ const homeScreen =()=>{
                                         id={item.mal_id}
                                         punt={item.score}
                                         date={item.start_date}
-                                        btn={false}
+                                        btn={true}
+                                        touch={true}
                                      />
                                 </View>
                             )   

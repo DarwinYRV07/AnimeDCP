@@ -1,6 +1,7 @@
 import React from "react"
-import {View, StyleSheet,Text,Dimensions} from "react-native"
-import {Image,Button,Icon} from 'react-native-elements'
+import {View, StyleSheet,Text,Dimensions } from "react-native"
+import {Image,Button} from 'react-native-elements'
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 
 const{width,height}=Dimensions.get("screen");
@@ -17,13 +18,14 @@ const CardV = ({url,name,id,punt,date,btn}) =>{
           <Text style={styles.fecha}>Start: {date}</Text>
           <Text style={styles.fecha}>Puntuacion: {punt}</Text>
         </View>
+        
         {btn?
           (<Button
             icon={
               <Icon
                 name="delete"
                 size={20}
-                color="white"
+                color="fff"
               />
             }
             iconTop
