@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React,{useState,useContext} from "react"
 import {validate} from 'email-validator'
 import {View, StyleSheet,Text,Dimensions,TextInput} from "react-native"
 import {Input} from 'react-native-elements'
@@ -6,11 +6,13 @@ import Logo from "../shared/Logo"
 import Button from "../button/button";
 import {firebase} from "../../Firebase"
 import Alert from "../shared/Alert"
+import { Context as AuthContext } from "../../providers/AuthContext";
 
 const { width } = Dimensions.get("screen");
 
 
 const SignUpForm = ({navigation}) =>{
+    const {state,signup} = useContext(AuthContext);
     const [fullName,setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -22,27 +24,56 @@ const SignUpForm = ({navigation}) =>{
     const [confirmPasswordError,setConfirmPasswordError] = useState(false)
     const [error, setError] = useState("");
 
+    useEffect(() => {
+      if (state.errorMessage) clearErrorMessage();
+    }, []);
+  
+    useEffect(() => {
+      if (state.errorMessage) setError(state.errorMessage);
+    }, [state.errorMessage]);
+  
+    useEffect(() => {
+      if (state.registered) navigation.navigate("BottonTabs");
+    }, [state]);
 
-  const handleVerify = (input) =>{
-    if(input === 'fullname'){
-      if(!fullName){
-        setFullNameError(true);
-      }else
-        setFullNameError(false);
-    }else if(input ==='email'){
-        if(!email) setEmailError(true)
-        else if(!validate(email)) setEmailError(true)
-        else setEmailError(false)
-    }else if(input ==='password'){
-        if(!password)setPasswordError(true)
-        else if(password.length<6)setPasswordError(true)
-        else setPasswordError(false)
-    }else if(input ==='confirmPassword'){
-        if(!confirmPasswordError) setConfirmPasswordError(true)
-        else if(confirmPasswordError !== password) setConfirmPasswordError(true)
-        else setConfirmPasswordError(false);
+
+    const handleVerify = (input) =>{
+      console.log("found")
+      if(input === 'fullname'){
+        if(!fullName){
+          setFullNameError(true);
+        }else
+          setFullNameError(false);
+      }else if(input ==='email'){
+          if(!email) setEmailError(true)
+          else if(!validate(email)) setEmailError(true)
+          else setEmailError(false)
+      }else if(input ==='password'){
+          if(!password)setPasswordError(true)
+          else if(password.length<6)setPasswordError(true)
+          else setPasswordError(false)
+      }else if(input ==='confirmPassword'){
+          // if(!confirmPasswordError) setConfirmPasswordError(true)
+          // else if(confirmPasswordError !== password) setConfirmPasswordError(true)
+          // else setConfirmPasswordError(false);
+          console.log(fullName)
+          console.log(password)
+          console.log(email)
+      }else if (input === "signup"){
+        // if(
+        //   !fullNameError &&
+        //   !emailError &&
+        //   !password &&
+        //   !confirmPasswordError &&
+        //   fullName &&
+        //   email &&
+        //   confirmPassword 
+        // ){
+          signup(fullName,email,password)
+          console.log("Logueado")
+        //}
+      }
     }
-  }
   
   const handlerSignUp = async ()=>{
     await firebase
@@ -141,7 +172,7 @@ const SignUpForm = ({navigation}) =>{
           }
         /> 
 
-        <Button title="SIGN UP" callback={handlerSignUp}/>
+        <Button title="SIGN UP" callback={handleVerify("signup")}/>
         
               
     </View>

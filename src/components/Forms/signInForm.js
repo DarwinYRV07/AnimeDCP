@@ -1,14 +1,20 @@
-import React, { useState} from 'react';
+import React, { useState,useContext} from 'react';
 import { Input, SocialIcon } from "react-native-elements";
 import { validate } from "email-validator";
 import { firebase } from "../../Firebase/index";
 import Button from "../button/button";
 import Alert from "../shared/Alert"; 
 import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
+import { Context as AuthContext } from "../../providers/AuthContext";
+// import {
+  
+// } from 'react-native-google-signin'
+
 
 const { width, height } = Dimensions.get("screen");
 
 const signInForm =({navigation})=>{
+    const { state, signin, clearErrorMessage } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
@@ -28,30 +34,44 @@ const signInForm =({navigation})=>{
     }
   };
 
+
+  const signInWithGoogleAsync = async() =>{
+    //
+
+  }
+
   const handleLogInWithGoogle=()=>{
-    const provider = new firebase.auth.GoogleAuthProvider();
+  
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+      firebase.auth().signInWithRedirect(provider);
 
-    firebase.auth()
-  .signInWithPopup(provider)
-  .then((result) => {
-    
-    var credential = result.credential;
+      firebase.auth()
+    .getRedirectResult(provider)
+    .then((result) => {
+      
+      var credential = result.credential;
 
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      console.log(errorCode)
+      console.log(errorMessage)
+      console.log(email)
+      console.log(credential)
+      // ...
+    });
   }
 
   const handleLogOut=()=>{
@@ -128,7 +148,7 @@ const signInForm =({navigation})=>{
                 onBlur={() => {handleVerify("password");}}errorMessage={passwordError ? "Please enter your password" : null}
             />
             <Button title="Login"  callback={handleSignin} />
-            <SocialIcon onPress={handleLogInWithGoogle} style={styles.button} title='Sign In' button type='google'/>
+            <SocialIcon onPress={()=>{handleLogInWithGoogle()}} style={styles.button} title='Sign In' button type='google'/>
         </View>
     );
 };
