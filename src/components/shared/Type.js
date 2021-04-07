@@ -8,25 +8,28 @@ const Type = ({ type, title }) => {
   let icon = "";
 
   if (type === "TV") {
-    background = "blue";
+    background = "#1708bd";
     icon = "tv";
   } else if (type === "OVA") {
-    background = "red";
+    background = "#ff0000";
     icon = "galactic-republic";
+  }else if (type === "anime") {
+    background = "#ff0000";
+    icon = "tv";
   } else if (type === "Movie") {
-    background = "orange";
+    background = "#c78214";
     icon = "film";
-  } else if (type === "ona") {
-    background = "green";
+  } else if (type === "Ona") {
+    background = "#7a1380";
     icon = "person-booth";
-  }else if (type === "music") {
-    background = "green";
+  }else if (type === "Music") {
+    background = "#008015";
     icon = "music";
   }else if (type === "Special") {
-    background = "green";
+    background = "#b5b82a";
     icon = "star";
   }else{
-      background ="black",
+      background ="#000000",
       icon = "skull"
       title="none"
   }

@@ -1117,7 +1117,7 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
-"@expo/config-plugins@1.0.20", "@expo/config-plugins@~1.0.13":
+"@expo/config-plugins@1.0.20":
   version "1.0.20"
   resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-1.0.20.tgz#b1964daf063d7ce07c3f135aa92ccf1c60cd6e46"
   integrity sha512-BucZQbi7edu8Pin8zFUNsaQeZAj/8ga7Ei3PKivKZKd5F53DdFU6Yb+ZDyQ0UeOGDi0hZlZWdaBzmQqHEg37TQ==
@@ -3274,6 +3274,11 @@ email-validator@^2.0.4:
   resolved "https://registry.yarnpkg.com/email-validator/-/email-validator-2.0.4.tgz#b8dfaa5d0dae28f1b03c95881d904d4e40bfe7ed"
   integrity sha512-gYCwo7kh5S3IDyZPLZf6hSS0MnZT8QmJFqYvbqlDZSbwdZlY6QZWxJ4i/6UhITOJ4XzyI647Bm2MXKCLqnJ4nQ==
 
+eme-encryption-scheme-polyfill@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/eme-encryption-scheme-polyfill/-/eme-encryption-scheme-polyfill-2.0.2.tgz#6d3edb6d95951883a499f2d6dafbd84a5574f8c3"
+  integrity sha512-tZXuxVUCV1GmlQBGGVVNAt6lXBUxjDFqIAPAhz4F5Z/TvCi/coojxcZGEO5k+KMt/dWRFmXaK5pxKCMehue/oA==
+
 emoji-regex@^7.0.1:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-7.0.3.tgz#933a04052860c85e83c122479c4748a8e4c72156"
@@ -3476,15 +3481,6 @@ expo-asset@~8.2.1:
     md5-file "^3.2.3"
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
-
-expo-av@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-9.0.0.tgz#76b5dbb006bfddf5b6ce43151d8f3a9eb66c7fa5"
-  integrity sha512-VAMt/iPNeG33G1ycf2zhlZ+I7Ymuh3FYk9XL85jMrGOn6prW4C1tRp5YczZqgunLd5dzeBhunHCTlZn7WODP6g==
-  dependencies:
-    "@expo/config-plugins" "~1.0.13"
-    lodash "^4.17.15"
-    nullthrows "^1.1.0"
 
 expo-constants@~9.3.3:
   version "9.3.5"
@@ -4759,6 +4755,11 @@ jws@^4.0.0:
     jwa "^2.0.0"
     safe-buffer "^5.0.1"
 
+keymirror@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
+  integrity sha1-kYiJ6hP40KQufFVyUO7nE63JXDU=
+
 kind-of@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-1.1.0.tgz#140a3d2d41a36d2efcfa9377b62c24f8495a5c44"
@@ -6020,6 +6021,15 @@ react-native-vector-icons@^8.1.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
+react-native-video@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-5.1.1.tgz#89a7989efeb8d404611c06154d1da227a745d7d8"
+  integrity sha512-zee8gRUrjPWRoZSEBiMebClqu1iAuCQNLjzqpmXFrRWEoJj7azM3BPqLQWJgsnfLiYUYGySeApC/G60THM5+tw==
+  dependencies:
+    keymirror "^0.1.1"
+    prop-types "^15.7.2"
+    shaka-player "^2.5.9"
+
 react-native-web@~0.13.12:
   version "0.13.18"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.13.18.tgz#964f058a16521a3b9a31b091415edfef5b6ef305"
@@ -6401,6 +6411,13 @@ setprototypeof@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
   integrity sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
+
+shaka-player@^2.5.9:
+  version "2.5.21"
+  resolved "https://registry.yarnpkg.com/shaka-player/-/shaka-player-2.5.21.tgz#37969672e445cabcb4a0ac0dbbe2349df966ae4c"
+  integrity sha512-7LCadr8ohzMaiagWTzV3HzdSBlpswFUWBet2J4WtNr3Z1C3jzKhdjAgNjPPWwypdaAfM2lN+3ez9LKp9wRyH0w==
+  dependencies:
+    eme-encryption-scheme-polyfill "^2.0.1"
 
 shebang-command@^1.2.0:
   version "1.2.0"

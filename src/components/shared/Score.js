@@ -7,18 +7,18 @@ const Season = ({ type, title }) => {
   let background = "";
   let icon = "";
 
-  if (type === "summer") {
-    background = "#ffdf00";
-    icon = "sun";
-  } else if (type === "spring") {
-    background = "#00ff00";
-    icon = "seedling";
-  } else if (type === "fall") {
-    background = "#f59622";
-    icon = "canadian-maple-leaf";
-  } else if (type === "winter") {
-    background = "#20e9ff";
-    icon = "snowflake";
+  if (type <= 10 && type >= 9) {
+    background = "#008015";
+    icon = "grin-stars";
+  } else if (type <= 8 && type >= 7) {
+    background = "#1708bd";
+    icon = "smile-beam";
+  } else if (type <=  6 && type >=5) {
+    background = "#000000";
+    icon = "meh";
+  } else if (type <= 4 ) {
+    background = "#ff0000";
+    icon = "frown-open";
   }else{
     background ="#000000",
     icon = "skull"
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 
   icon: {
     marginTop:3,
-    marginRight:6,
+    marginRight:3,
     fontSize:20,
   },
 

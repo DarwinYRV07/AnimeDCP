@@ -44,9 +44,20 @@ export const fetchAnimeGenero = async (animeId) =>{
     const generos = [];
     const genres = data.genres.map((gen)=>{generos.push(gen.name)});
     //console.log(data.genres[0].name);
-    console.log(generos);
+    //console.log(generos);
 
     return generos;
 };
+
+export const ferchAnimeRelacionado = async(animeId) =>{
+    const endpoint = `https://api.jikan.moe/v3/anime/${animeId}`;
+    const response = await fetch(endpoint);
+    const data =  await response.json();
+    //const Relacionado = [];
+    const Sequel = data.related.Sequel;//.map((seq)=>{Relacionado.push(seq.mal_id,seq.name,seq.url)});
+    //console.log(data.genres[0].name);
+    console.log(Sequel);
+    return Sequel;
+}
 
     ///const fetch = require("node-fetch");

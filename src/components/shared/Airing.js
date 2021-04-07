@@ -2,23 +2,19 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-const Season = ({ type, title }) => {
+const Airing = ({ type, title }) => {
   
   let background = "";
   let icon = "";
 
-  if (type === "summer") {
-    background = "#ffdf00";
-    icon = "sun";
-  } else if (type === "spring") {
-    background = "#00ff00";
-    icon = "seedling";
-  } else if (type === "fall") {
-    background = "#f59622";
-    icon = "canadian-maple-leaf";
-  } else if (type === "winter") {
-    background = "#20e9ff";
-    icon = "snowflake";
+  if (type === true) {
+    background = "#008015n";
+    icon = "play";
+    title="Continue"
+  } else if (type === false) {
+    background = "#ff0000";
+    icon = "stop";
+    title = "Finish";
   }else{
     background ="#000000",
     icon = "skull"
@@ -44,7 +40,7 @@ const styles = StyleSheet.create({
 
   icon: {
     marginTop:3,
-    marginRight:6,
+    marginRight:3,
     fontSize:20,
   },
 
@@ -54,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Season;
+export default Airing;
