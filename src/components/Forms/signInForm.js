@@ -35,11 +35,6 @@ const signInForm =({navigation})=>{
   };
 
 
-  const signInWithGoogleAsync = async() =>{
-    //
-
-  }
-
   const handleLogInWithGoogle=()=>{
   
       const provider = new firebase.auth.GoogleAuthProvider();

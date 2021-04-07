@@ -1,4 +1,4 @@
-import React,{useState,useContext} from "react"
+import React,{useState,useEffect,useContext} from "react"
 import {validate} from 'email-validator'
 import {View, StyleSheet,Text,Dimensions,TextInput} from "react-native"
 import {Input} from 'react-native-elements'
@@ -13,6 +13,7 @@ const { width } = Dimensions.get("screen");
 
 const SignUpForm = ({navigation}) =>{
     const {state,signup} = useContext(AuthContext);
+
     const [fullName,setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -37,43 +38,43 @@ const SignUpForm = ({navigation}) =>{
     }, [state]);
 
 
-    const handleVerify = (input) =>{
-      console.log("found")
-      if(input === 'fullname'){
-        if(!fullName){
-          setFullNameError(true);
-        }else
-          setFullNameError(false);
-      }else if(input ==='email'){
-          if(!email) setEmailError(true)
-          else if(!validate(email)) setEmailError(true)
-          else setEmailError(false)
-      }else if(input ==='password'){
-          if(!password)setPasswordError(true)
-          else if(password.length<6)setPasswordError(true)
-          else setPasswordError(false)
-      }else if(input ==='confirmPassword'){
-          // if(!confirmPasswordError) setConfirmPasswordError(true)
-          // else if(confirmPasswordError !== password) setConfirmPasswordError(true)
-          // else setConfirmPasswordError(false);
-          console.log(fullName)
-          console.log(password)
-          console.log(email)
-      }else if (input === "signup"){
-        // if(
-        //   !fullNameError &&
-        //   !emailError &&
-        //   !password &&
-        //   !confirmPasswordError &&
-        //   fullName &&
-        //   email &&
-        //   confirmPassword 
-        // ){
-          signup(fullName,email,password)
-          console.log("Logueado")
-        //}
-      }
+  const handleVerify = (input) =>{
+    console.log("found")
+    if(input === 'fullname'){
+      if(!fullName){
+        setFullNameError(true);
+      }else
+        setFullNameError(false);
+    }else if(input ==='email'){
+        if(!email) setEmailError(true)
+        else if(!validate(email)) setEmailError(true)
+        else setEmailError(false)
+    }else if(input ==='password'){
+        if(!password)setPasswordError(true)
+        else if(password.length<6)setPasswordError(true)
+        else setPasswordError(false)
+    }else if(input ==='confirmPassword'){
+        // if(!confirmPasswordError) setConfirmPasswordError(true)
+        // else if(confirmPasswordError !== password) setConfirmPasswordError(true)
+        // else setConfirmPasswordError(false);
+        console.log(fullName)
+        console.log(password)
+        console.log(email)
+    }else if (input === "signup"){
+      // if(
+      //   !fullNameError &&
+      //   !emailError &&
+      //   !password &&
+      //   !confirmPasswordError &&
+      //   fullName &&
+      //   email &&
+      //   confirmPassword 
+      // ){
+        signup(fullName,email,password)
+        console.log("Logueado")
+      //}
     }
+  }
   
   const handlerSignUp = async ()=>{
     await firebase
@@ -172,7 +173,7 @@ const SignUpForm = ({navigation}) =>{
           }
         /> 
 
-        <Button title="SIGN UP" callback={handleVerify("signup")}/>
+        <Button title="SIGN UP" callback={()=>{handleVerify("signup")}}/>
         
               
     </View>
