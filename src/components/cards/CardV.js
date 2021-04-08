@@ -6,9 +6,9 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 
 const{width,height}=Dimensions.get("screen");
 
-const CardV = ({url,name,id,punt,date,btn}) =>{
+const CardV = ({url,name,id,punt,date,callback}) =>{
     return(
-      <TouchableOpacity>
+      <TouchableOpacity onPress={callback}>
         <View style={styles.cardRow}>
           {/* <View style={styles.left}> */}
             <Image style={styles.portada} source={{uri:url}}/>  
@@ -19,20 +19,6 @@ const CardV = ({url,name,id,punt,date,btn}) =>{
             <Text style={styles.fecha}>Start: {date}</Text>
             <Text style={styles.fecha}>Puntuacion: {punt}</Text>
           </View>
-          
-          {btn?
-            (<Button
-              icon={
-                <Icon
-                  name="delete"
-                  size={20}
-                  color="fff"
-                />
-              }
-              iconTop
-              type="clear"
-            />):null
-          }
           
         </View>
       </TouchableOpacity>
@@ -52,7 +38,6 @@ const styles = StyleSheet.create({
     },
     titulo:{
       fontSize:15,
-      fontFamily:"Arial",
       fontWeight: "bold",
       textAlign: "center",
       color:"#344A53",
@@ -60,7 +45,6 @@ const styles = StyleSheet.create({
     },
     fecha:{
       fontSize:12,
-      fontFamily:"Arial",
       color:"#344A53"
     },cardRow:{
         borderRadius:20,
