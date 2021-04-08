@@ -2,7 +2,7 @@ import React, {useState,useEffect, useContext} from 'react';
 import { StyleSheet} from 'react-native';
 import {Button, ThemeProvider} from 'react-native-elements';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
+import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from "@react-navigation/stack"
 import signInScreen from '../screen/signInScreen';
 import signUpScreen from '../screen/signUpScreen';
@@ -16,6 +16,7 @@ import {Context as AuthContext} from "../../providers/AuthContext";
 
 import userScreen from '../screen/userScreen';
 import * as SplashScreen from "expo-splash-screen"
+import searchScreen from '../screen/searchScreen';
 
 
 const Stack = createStackNavigator();
@@ -35,10 +36,10 @@ function TabComp({navigation}) {
                       : 'home';
                   } else if (route.name === 'Anime') {
                     iconName = focused ? 'ios-list' : 'ios-list';
-                  } else if (route.name === 'ListAnime'){
-                    iconName = focused ? 'bookmarks' : 'bookmarks';
+                  } else if (route.name === 'Search'){
+                    iconName = focused ? 'search' : 'search';
                   } else if(route.name === 'User'){
-                    iconName = focused ? 'gear' : 'gear';
+                    iconName = focused ? 'cog' : 'cog';
                   }
       
                   // You can return any component that you like here!
@@ -54,7 +55,7 @@ function TabComp({navigation}) {
             >
               <Tab.Screen name="Home" component={homeScreen}  />
               <Tab.Screen name="Anime" component={animeScreen} />
-              <Tab.Screen name="ListAnime" component = {myListScreen} />
+              <Tab.Screen name="Search" component = {searchScreen} />
               <Stack.Screen name="User" component ={userScreen} />
               
             </Tab.Navigator>
@@ -100,7 +101,7 @@ const SessionNavigation= ()=> {
   return (
     <ThemeProvider>
       <SafeAreaProvider>
-        <NavigationContainer>
+        <NavigationContainer theme={DarkTheme}>
             {!state.Loading && (
               <>
               {state.loggedIn ? (
@@ -109,15 +110,12 @@ const SessionNavigation= ()=> {
                     <Stack.Screen name="BottonTabs" component={TabComp}  options={{headerShown:false}}/>
                     <Stack.Screen name="ChangePwd" component={changePwdScreen} options={{headerShown:false}}/>
                     </Stack.Navigator>
-                    
-                  
                 ) : (
                   
                   <Stack.Navigator >
                     <Stack.Screen name="SignIn" component={signInScreen} initialParams={{userCreated:false}} options={{headerShown:false}} />
                     <Stack.Screen name="SignUp" component={signUpScreen} options={{headerShown:false}}/>
                     </Stack.Navigator>
-                  
                 )}
               </>
               )}
