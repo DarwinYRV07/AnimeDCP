@@ -5,7 +5,6 @@ import Score from "../shared/Score";
 import Gender from "../shared/Gender";
 import Type from "../shared/Type";
 import Airing from "../shared/Airing";
-import Caratula from "../shared/Caratula";
 import {fetchAnimeEs, fetchAnimeGenero } from "../../api/index";
 //import Video from "react-native-video";
 
@@ -30,17 +29,17 @@ const animeScreen =(navigate)=>{
     
     const handlerstart =()=>{
         const getAnimesInfo = async()=>{
-            const newAnimeInfo = await fetchAnimeEs(7785);
+            const newAnimeInfo = await fetchAnimeEs(879);
             if (!newAnimeInfo) setError(true); 
             setAnimeInfo(newAnimeInfo);
         }
         const getgeneros = async () => {
-            const newgeneros = await fetchAnimeGenero(7785);
+            const newgeneros = await fetchAnimeGenero(879);
             if(!newgeneros) setError(true);
             setGenero(newgeneros);
         };
         /*const getrelacionado = async () => {
-            const newrelacionados = await ferchAnimeRelacionado(7785);
+            const newrelacionados = await ferchAnimeRelacionado(879);
             if(!newrelacionados) setError(true);
             setRelacionado(newrelacionados);
 
@@ -58,19 +57,24 @@ const animeScreen =(navigate)=>{
    //console.log(animeInfo.related.Sequel);
    console.log(animeInfo.image_url);
    const caratu = animeInfo.image_url;
-   console.log("AAAAAA"+caratu);
+   console.log("AAAAAA "+ caratu);
    //console.log(relacionado[0].mal_id);
 
     return(
         <ScrollView>
             <View style={styles.container}>
-                <View style={{marginBottom:30,marginTop:20}}>
+                <View style={{marginBottom:30,marginTop:20,position:"relative",}}>
                     {/*<View style={{backgroundColor:"gray", width:width * 100, height: height * 0.25,}}>
                     <Text>hOL</Text>
                     </View>*/}
                     <View style={styles.ContenedorTituloImg}>
                         
-                        <Image source={{uri:caratu}} style={styles.imagen} />
+                       {/* <View style={{marginBottom:170}}>
+                            <View style={{position:"absolute"}}>
+                                <Image source={{uri:caratu}} style={styles.imagen}/>
+                            </View>
+                        </View>*/}
+                        <Image source={{uri:caratu}} style={styles.imagen}/>
                         <Text h5 style={styles.titlestyle}>{animeInfo.title}</Text>
                     </View>
 
@@ -111,35 +115,7 @@ const animeScreen =(navigate)=>{
                         </View>
                     </View>
 
-                    <View style={styles.ItemShow}>
-                        <Text style={styles.text}>Trailer!</Text>
-                        <View style={styles.ItemTrailer}>
-                            {/*<Video 
-                                source={{uri:animeInfo.trailer_url}}
-                                style={{position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                bottom: 0,
-                                right: 0,
-                            }}
-                            />*/}
-                            
-                        {/* {relacionado!=undefined?(<FlatList
-                                ListEmptyComponent={<Text>No ahi continuacion del Anime!! </Text>}
-                                data={relacionado}
-                                key={({item}) => item.mal_id}
-                                horizontal={true}
-                                renderItem={({item}) => {
-                                return (
-                                    <View>
-                                        <Text>{item.name}</Text>
-                                        <Type type={item.type} title={item.type}/>  
-                                    </View>
-                                )   
-                                }}   
-                            />):(null)}*/}
-                        </View>
-                    </View>
+                    
                 </View>
             </View>
         </ScrollView>
@@ -151,10 +127,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#2F353A',
         alignItems: 'center',
-        justifyContent: 'flex-start', 
-        height: height * 0.100,
-
+        justifyContent: 'flex-start',
       },
+
       titlestyle:{
           textAlign:"center",
           marginTop:10,
@@ -222,12 +197,10 @@ const styles = StyleSheet.create({
           padding:10,
       },
       imagen:{
-        width:120,
-        height:150,
+        width:0.40 * width,
+        height:0.30 * height,
         marginTop:20,
-        //marginTop:-30,
         borderRadius:15,
-        //position:"absolute"
     },
 
 })
