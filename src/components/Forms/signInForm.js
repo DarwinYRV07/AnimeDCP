@@ -6,9 +6,6 @@ import Button from "../button/button";
 import Alert from "../shared/Alert"; 
 import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
 import { Context as AuthContext } from "../../providers/AuthContext";
-// import {
-  
-// } from 'react-native-google-signin'
 
 
 const { width, height } = Dimensions.get("screen");
@@ -45,22 +42,16 @@ const signInForm =({navigation})=>{
     .getRedirectResult(provider)
     .then((result) => {
       
-      var credential = result.credential;
+      const credential = result.credential;
+      const token = credential.accessToken;
+      const user = result.user;
 
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = credential.accessToken;
-      // The signed-in user info.
-      var user = result.user;
-      // ...
     }).catch((error) => {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.email;
+      const credential = error.credential;
       console.log(errorCode)
       console.log(errorMessage)
       console.log(email)
@@ -69,32 +60,14 @@ const signInForm =({navigation})=>{
     });
   }
 
-  const handleLogOut=()=>{
-    firebase.auth().signOut().catch(
-      (error)=>{console.log(error)}
-    );
-    console.log("adios");
-  }
-
   const handleSignin = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         console.log("logueo")
-        // Obtener el Unique Identifier generado para cada usuario
-        // Firebase -> Authentication
         const uid = response.user.uid;
-        // console.log(response.user.email);
-        // console.log(response.user.uid);
-        
-
-        // Obtener la colección desde Firebase
         const usersRef = firebase.firestore().collection("users");
-        //console.log(firebase.firestore().collection("users"));
-
-        // Verificar que el usuario existe en Firebase authentication
-        // y también está almacenado en la colección de usuarios.
         usersRef
           .doc(uid)
           .get()
@@ -128,8 +101,7 @@ const signInForm =({navigation})=>{
                 value={email} 
                 onChangeText={setEmail}
                 autoCapitalize="none"
-                onBlur={() => {handleVerify("email");}}errorMessage={ emailError? "Please enter your email account": null}
-                  
+                onBlur={() => {handleVerify("email");}}errorMessage={ emailError? "Please enter your email account": null} 
             />
 
             <Text style={styles.text}>Password:</Text>

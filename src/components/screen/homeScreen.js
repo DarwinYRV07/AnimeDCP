@@ -1,12 +1,14 @@
 import React, {useState,useEffect} from 'react' 
-import {StyleSheet, Text, View,FlatList,TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, View,FlatList,ImageBackground} from 'react-native'
 import {firebase} from '../../Firebase'
 import Button from "../button/button"
 import {fetchAnimeList} from '../../api'
 import CardV from '../../components/cards/CardV'
+import { Dimensions } from 'react-native'
 
 
 
+const {width, height} = Dimensions.get("screen");
 
 
 const homeScreen =()=>{
@@ -34,9 +36,10 @@ const homeScreen =()=>{
     
     return(
         <View style={styles.container}>
-                <View style={styles.headerLeft}><Text style={styles.text}>Home</Text></View>    
+            <ImageBackground source={require("../../../assets/background.jpg")} style={styles.image}> 
+                <View style={styles.header}><Text style={styles.text}>Home</Text></View>    
                 
-                {data!=undefined?(<FlatList
+                {data!=undefined?(<FlatList 
                             ListEmptyComponent={<Text>No hay animes disponibles!</Text>}
                             data={data}
                             key={({item}) => item.mal_id}
@@ -57,7 +60,8 @@ const homeScreen =()=>{
                             }}
                             
                 />):(null)}
-  
+            </ImageBackground>
+    
         </View>
     )
 }
@@ -65,30 +69,40 @@ const homeScreen =()=>{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2F353A',
         justifyContent: 'center',
         alignItems:"center"
       },
+      image:{
+        flex: 1,
+        resizeMode:"cover",
+        justifyContent: "center",
+        width:width*1,
+        alignItems:"center"
+      },
       text:{
-        color:"white",
+        color:"#BFC9CE",
         fontSize:30,
-        marginTop:20,
+        marginTop:10,
         marginBottom:15,
+        position:"relative"
     },
     header:{
+        marginTop:45,
+        marginBottom:15,
+        position:"relative",
+        borderRadius:5,
+        backgroundColor: '#2F353A',
+        alignItems:"center",
+        justifyContent:"center",
         flexDirection:"row",
+        shadowColor: "#000",
+        width:width*0.95,
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        }
     },
-    headerText:{
-        fontSize:20,
-        color:"#fff",    
-        
-    },
-    headerLeft:{
-        
-    },
-    headerRight:{
-        textAlign:"right"
-    }
+
 })
 
 export default homeScreen;

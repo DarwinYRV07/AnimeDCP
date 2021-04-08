@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions,TouchableOpacity } from 'react-native';
-
+import { StyleSheet, Text, View, Dimensions,TouchableOpacity,ImageBackground } from 'react-native';
 import Logo from "../shared/Logo";
 import Alert from "../shared/Alert"; 
 import SignInForm from "../Forms/signInForm";
@@ -11,6 +10,7 @@ const signInScreen = ({navigation, route}) =>{
     const { userCreated } = route.params;
     return(
         <View style={styles.container}>
+        <ImageBackground source={require("../../../assets/background.png")} style={styles.image}> 
             <Logo/>
             { userCreated ?( <Alert type="success" title= "User Created!! You can now sing in :)!!"/>):null}
             <SignInForm navigation={navigation}/>
@@ -22,7 +22,7 @@ const signInScreen = ({navigation, route}) =>{
             <TouchableOpacity onPress={()=>{navigation.navigate("SignUp")}}>
                 <Text style={styles.textForget} >Don't have account? Sign Up</Text>
             </TouchableOpacity>      
-              
+            </ImageBackground>      
             
         </View>
     );
@@ -33,6 +33,13 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#2F353A',
       justifyContent: 'center',
+      alignItems:"center"
+    },
+    image:{
+      flex: 1,
+      resizeMode:"cover",
+      justifyContent: "center",
+      width:width*1,
       alignItems:"center"
     },
     logo:{
