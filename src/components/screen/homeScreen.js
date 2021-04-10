@@ -5,13 +5,14 @@ import Button from "../button/button"
 import {fetchAnimeList} from '../../api'
 import CardV from '../../components/cards/CardV'
 import { Dimensions } from 'react-native'
+import animeScreen from './animeScreen'
 
 
 
 const {width, height} = Dimensions.get("screen");
 
 
-const homeScreen =()=>{
+const homeScreen =({navigation})=>{
 
     const [data, setData] = useState([]);
 
@@ -30,6 +31,10 @@ const homeScreen =()=>{
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const viewAnime = (id) =>{
+        navigation.navigate("Anime", {idAnime:id})
     }
     
     
@@ -50,10 +55,10 @@ const homeScreen =()=>{
                                      <CardV
                                         url={item.image_url}
                                         name={item.title}
-                                        id={item.mal_id}
+                                        //id={item.mal_id}
                                         punt={item.score}
                                         date={item.start_date}
-                                        btn={false}
+                                        callback={()=>{viewAnime(item.mal_id)}}
                                      />
                                 </View>
                             )   

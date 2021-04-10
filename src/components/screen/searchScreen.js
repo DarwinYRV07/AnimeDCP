@@ -6,7 +6,7 @@ import CardV from '../cards/CardV'
 
 const{width,height}=Dimensions.get("screen");
 
-const searchScreen =()=>{
+const searchScreen =({navigation})=>{
     const [animename, setAnimeName] = useState("");
     const [animeNameError, setAnimeNameError] = useState(false);
     const [data, setData] = useState([]);
@@ -29,6 +29,10 @@ const searchScreen =()=>{
           else setAnimeNameError(false);
         }
     };
+
+    const viewAnime = (id) =>{
+        navigation.navigate("Anime", {idAnime:id})
+    }
 
     return(
         <View style={styles.container}>
@@ -61,10 +65,10 @@ const searchScreen =()=>{
                                      <CardV
                                         url={item.image_url}
                                         name={item.title}
-                                        id={item.mal_id}
+                                        //id={item.mal_id}
                                         punt={item.score}
                                         date={item.start_date}
-                                        btn={false}
+                                        callback={()=>{viewAnime(item.mal_id)}}
                                      />
                                 </View>
                             )   
