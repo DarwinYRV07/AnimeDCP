@@ -9,7 +9,6 @@ import {fetchAnimeEs, fetchAnimeGenero } from "../../api/index";
 //import Video from "react-native-video";
 
 
-
 const{width,height}=Dimensions.get("screen");
 
 /*const genres =(generos)=>{
@@ -19,22 +18,28 @@ const{width,height}=Dimensions.get("screen");
     })
 };*/
 
-const animeScreen =(navigate)=>{
+const animeScreen =({navigation, route})=>{
+    const {idAnime} = route.params;
     //const [id] ;
     const [animeId,setAnimeId] = useState("");
     const [animeInfo,setAnimeInfo] = useState([]);
     const [genero,setGenero] = useState([]);
     const [relacionado, setRelacionado] = useState([]);
     const [error,setError] = useState(false);
+
+    useEffect(() => {
+        handlerstart();
+       
+    }, [idAnime])
     
     const handlerstart =()=>{
         const getAnimesInfo = async()=>{
-            const newAnimeInfo = await fetchAnimeEs(879);
+            const newAnimeInfo = await fetchAnimeEs(idAnime);
             if (!newAnimeInfo) setError(true); 
             setAnimeInfo(newAnimeInfo);
         }
         const getgeneros = async () => {
-            const newgeneros = await fetchAnimeGenero(879);
+            const newgeneros = await fetchAnimeGenero(idAnime);
             if(!newgeneros) setError(true);
             setGenero(newgeneros);
         };
@@ -75,6 +80,7 @@ const animeScreen =(navigate)=>{
                             </View>
                         </View>*/}
                         <Image source={{uri:caratu}} style={styles.imagen}/>
+
                         <Text h5 style={styles.titlestyle}>{animeInfo.title}</Text>
                     </View>
 
@@ -128,6 +134,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#2F353A',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        height:height*1
       },
 
       titlestyle:{
