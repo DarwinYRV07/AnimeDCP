@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react' 
-import {StyleSheet, Text, View,FlatList,ImageBackground} from 'react-native'
+import {StyleSheet, Text, View,FlatList,ImageBackground,StatusBar} from 'react-native'
 import {firebase} from '../../Firebase'
 import Button from "../button/button"
 import {fetchAnimeList} from '../../api'
@@ -41,13 +41,19 @@ const homeScreen =({navigation})=>{
     
     return(
         <View style={styles.container}>
+              <StatusBar
+                translucent
+                animated={true}
+                backgroundColor={"transparent"}
+                barStyle={"default"}  
+                />
             <ImageBackground source={require("../../../assets/background.jpg")} style={styles.image}> 
                 <View style={styles.header}><Text style={styles.text}>Home</Text></View>    
                 
                 {data!=undefined?(<FlatList 
                             ListEmptyComponent={<Text>No hay animes disponibles!</Text>}
                             data={data}
-                            key={({item}) => item.mal_id}
+                            key={({item})=>{item.mal_id}}
                             horizontal={false}
                             renderItem={({item}) => {
                             return (
@@ -55,15 +61,16 @@ const homeScreen =({navigation})=>{
                                      <CardV
                                         url={item.image_url}
                                         name={item.title}
-                                        //id={item.mal_id}
+                                        id={item.mal_id}
                                         punt={item.score}
                                         date={item.start_date}
                                         callback={()=>{viewAnime(item.mal_id)}}
                                      />
                                 </View>
-                            )   
+                            )  
+                             
                             }}
-                            
+                            keyExtractor={(item, index) => index.toString()}
                 />):(null)}
             </ImageBackground>
     

@@ -71,40 +71,10 @@ const SignUpForm = ({navigation}) =>{
       //   confirmPassword 
       // ){
         signup(fullName,email,password)
-        console.log("Logueado")
       //}
     }
   }
   
-  const handlerSignUp = async ()=>{
-    await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email,password)
-      .then(
-        (Response)=>{
-          console.log(Response.user);
-          const uid =  Response.user.uid;
-          const data = {
-            id:uid,
-            email,
-            fullName,
-          }
-
-          const usersRef = firebase.firestore().collection("users");
-          console.log(usersRef);
-          usersRef
-          .doc(uid)
-          .set(data)
-          .then(() => {
-            
-          })
-          .catch((error) => {
-            console.log(error);
-            setError(error.message);
-          });
-      })
-      .catch((error)=>console.log(error));
-  }
 
   return(
     <View style={styles.container}>

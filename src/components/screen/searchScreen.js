@@ -73,6 +73,7 @@ const searchScreen =({navigation})=>{
                                 </View>
                             )   
                             }}
+                            keyExtractor={(item, index) => index.toString()}
                             
                 />):(null)}
             </View>

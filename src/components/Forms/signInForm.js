@@ -1,4 +1,4 @@
-import React, { useState,useContext} from 'react';
+import React, { useState,useEffect,useContext} from 'react';
 import { Input, SocialIcon } from "react-native-elements";
 import { validate } from "email-validator";
 import { firebase } from "../../Firebase/index";
@@ -6,6 +6,7 @@ import Button from "../button/button";
 import Alert from "../shared/Alert"; 
 import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';
 import { Context as AuthContext } from "../../providers/AuthContext";
+
 
 
 const { width, height } = Dimensions.get("screen");
@@ -18,6 +19,13 @@ const signInForm =({navigation})=>{
     const [passwordError, setPasswordError] = useState(false);
     const [error, setError] = useState("");
 
+    useEffect(() => {
+      if (state.errorMessage) clearErrorMessage();
+    }, []);
+  
+    useEffect(() => {
+      if (state.errorMessage) setError(state.errorMessage);
+    }, [state.errorMessage]);
 
      // Verificar si se ingreso los datos del email y el password
   const handleVerify = (input) => {
@@ -31,63 +39,12 @@ const signInForm =({navigation})=>{
     }
   };
 
-
-  const handleLogInWithGoogle=()=>{
-  
-      const provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-      firebase.auth().signInWithRedirect(provider);
-
-      firebase.auth()
-    .getRedirectResult(provider)
-    .then((result) => {
-      
-      const credential = result.credential;
-      const token = credential.accessToken;
-      const user = result.user;
-
-    }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.email;
-      const credential = error.credential;
-      console.log(errorCode)
-      console.log(errorMessage)
-      console.log(email)
-      console.log(credential)
-      // ...
-    });
+  const signInAsync=()=>{
+      console.log("PENDIENTE SIGNIN")
   }
 
   const handleSignin = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((response) => {
-        console.log("logueo")
-        const uid = response.user.uid;
-        const usersRef = firebase.firestore().collection("users");
-        usersRef
-          .doc(uid)
-          .get()
-          .then((firestoreDocument) => {
-            console.log("Entro aqui");
-            if (!firestoreDocument.exists) {
-              setError("User does not exist in the database!");
-              return;
-            }
-
-            // Obtener la información del usuario y enviarla a la pantalla Home
-            const user = firestoreDocument.data();
-            console.log("Simon");
-            
-              navigation.navigate("BottonTabs", {user})
-          });
-      })
-      .catch((error) => {
-        setError(error.code);
-      });
+     signin(email, password);
   };
 
     return(
@@ -115,7 +72,7 @@ const signInForm =({navigation})=>{
                 onBlur={() => {handleVerify("password");}}errorMessage={passwordError ? "Please enter your password" : null}
             />
             <Button title="Login"  callback={handleSignin} />
-            <SocialIcon onPress={()=>{handleLogInWithGoogle()}} style={styles.button} title='Sign In' button type='google'/>
+            <SocialIcon onPress={()=>{signInAsync()}} style={styles.button} title='Sign In' button type='google'/>
         </View>
     );
 };

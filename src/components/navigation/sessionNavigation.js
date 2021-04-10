@@ -1,7 +1,6 @@
-import React, {useState,useEffect, useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 import { StyleSheet} from 'react-native';
-import {Button, ThemeProvider} from 'react-native-elements';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {ThemeProvider} from 'react-native-elements';
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from "@react-navigation/stack"
 import signInScreen from '../screen/signInScreen';
@@ -71,38 +70,17 @@ const SessionNavigation= ()=> {
   const { state, persistLogin } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log(state.loading);
     persistLogin();
-    console.log(state.loading)
   }, []);
-  // Prevenir que se oculte la pantalla de splash
+
   SplashScreen.preventAutoHideAsync();
 
-  // Ocultar la pantalla de splash al verificar que existe un token de inicio
   if (!state.loading){
-    console.log(state.loading)
     SplashScreen.hideAsync();
   } 
 
-  // const [user, setUser] = useState();
-  // const [init,setInit] = useState(true);
-
-  // function onAuthStateChanged(user) {
-  //   setUser(user);
-  //   console.log(user);
-  //   if (init) setInit(false);
-  // }
-  // // Verificar si ya existen credenciales de autenticación
-  // useEffect(() => {
-  //   const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-  //   console.log(subscriber);
-  //   return subscriber; // unsubscribe on unmount
-  // }, []);
-
-  
   return (
     <ThemeProvider>
-      <SafeAreaProvider>
         <NavigationContainer theme={DarkTheme}>
             {!state.Loading && (
               <>
@@ -114,7 +92,6 @@ const SessionNavigation= ()=> {
                     <Stack.Screen name="Anime" component={animeScreen} options={{headerShown:false}}/>
                     </Stack.Navigator>
                 ) : (
-                  
                   <Stack.Navigator >
                     <Stack.Screen name="SignIn" component={signInScreen} initialParams={{userCreated:false}} options={{headerShown:false}} />
                     <Stack.Screen name="SignUp" component={signUpScreen} options={{headerShown:false}}/>
@@ -123,7 +100,6 @@ const SessionNavigation= ()=> {
               </>
               )}
          </NavigationContainer>
-      </SafeAreaProvider>
     </ThemeProvider>
   );
 }

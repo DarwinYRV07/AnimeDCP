@@ -49,6 +49,7 @@ const signin = (dispatch) => (email, password) => {
         .doc(uid)
         .get()
         .then((firestoreDocument) => {
+          console.log(firestoreDocument.data())
           if (!firestoreDocument.exists) {
             dispatch({
               type: "errorMessage",
@@ -58,7 +59,6 @@ const signin = (dispatch) => (email, password) => {
             // Llamar el reducer y enviarle los valores del usuario al estado
             dispatch({ type: "errorMessage", payload: "" });
             dispatch({ type: "signin", payload: firestoreDocument.data() });
-            console.log("Logueado");
           }
         });
     })
@@ -80,18 +80,16 @@ const signout = (dispatch) => () => {
     });
 };
 
-// Verifica si existe el token de firebase para iniciar sesión sin credenciales
 const persistLogin = (dispatch) => () => {
   const userRef = firebase.firestore().collection("users");
 
-  // Si el usuario ya se ha autenticado previamente, retornar
-  // la información del usuario, caso contrario,retonar un objeto vacío.
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       userRef
         .doc(user.uid)
         .get()
         .then((document) => {
+          console.log(document.data())
           dispatch({
             type: "persistLogin",
             payload: { user: document.data(), loggedIn: true },

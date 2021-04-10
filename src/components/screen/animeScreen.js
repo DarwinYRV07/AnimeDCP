@@ -1,11 +1,26 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState,useContext } from 'react'; 
 import {Text, Image} from "react-native-elements";
-import {StyleSheet, View, Dimensions,FlatList, ScrollView} from 'react-native'
+import {
+    StyleSheet, 
+    View, 
+    Dimensions,
+    FlatList, 
+    ScrollView,
+    Modal,
+    TextInput,
+    Pressable,
+    TouchableOpacity
+} from 'react-native'
+import {FAB} from "react-native-paper"
 import Score from "../shared/Score";
 import Gender from "../shared/Gender";
 import Type from "../shared/Type";
 import Airing from "../shared/Airing";
 import {fetchAnimeEs, fetchAnimeGenero } from "../../api/index";
+import {Context as ListAnimeContext} from '../../providers/listAnimeContext'
+import {Context as AuthContext} from '../../providers/AuthContext'
+import { set } from 'react-native-reanimated';
+import { Touchable } from 'react-native';
 //import Video from "react-native-video";
 
 
@@ -20,17 +35,29 @@ const{width,height}=Dimensions.get("screen");
 
 const animeScreen =({navigation, route})=>{
     const {idAnime} = route.params;
-    //const [id] ;
+
+    const {createList,state,getLists} = useContext(ListAnimeContext)
+    const {state:authstate} = useContext(AuthContext)
+
     const [animeId,setAnimeId] = useState("");
     const [animeInfo,setAnimeInfo] = useState([]);
     const [genero,setGenero] = useState([]);
     const [relacionado, setRelacionado] = useState([]);
     const [error,setError] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [data,setData] = useState([]);
+
 
     useEffect(() => {
         handlerstart();
+        getLists(authstate.user.id);
        
     }, [idAnime])
+
+    useEffect(() => {
+        console.log(state)
+        setData(state.list)
+    }, [state])
     
     const handlerstart =()=>{
         const getAnimesInfo = async()=>{
@@ -60,14 +87,56 @@ const animeScreen =({navigation, route})=>{
     },[]);
 
    //console.log(animeInfo.related.Sequel);
-   console.log(animeInfo.image_url);
    const caratu = animeInfo.image_url;
-   console.log("AAAAAA "+ caratu);
    //console.log(relacionado[0].mal_id);
 
     return(
-        <ScrollView>
+        
             <View style={styles.container}>
+            <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View  transparent={true} style={styles.containermdl}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Add to List</Text>
+                        {data!=undefined?(<FlatList style={styles.flat}
+                            ListEmptyComponent={<Text>No tienes listas para guardar animes!</Text>}
+                            data={data}
+                            key={({item})=>{item.id}}
+                            horizontal={false}
+                            renderItem={({item}) => {
+                            return (
+                                <View style={styles.listas}>
+                                    <TouchableOpacity > 
+                                     <Text style={styles.textLista}>{(item.name.toUpperCase())}</Text>
+                                     </TouchableOpacity>
+                                </View>
+                            )  
+                             
+                            }}
+                            keyExtractor={(item, index) => index.toString()}
+                        />):(null)}
+  
+                        <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible(!modalVisible)}
+                        >
+                        <Text style={styles.textStyle}>Cancelar</Text>
+                        </Pressable>
+
+
+                        
+                    </View>
+                    </View>
+                </Modal>
+
+
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{marginBottom:30,marginTop:20,position:"relative",}}>
                     {/*<View style={{backgroundColor:"gray", width:width * 100, height: height * 0.25,}}>
                     <Text>hOL</Text>
@@ -123,8 +192,16 @@ const animeScreen =({navigation, route})=>{
 
                     
                 </View>
+                </ScrollView>
+                <FAB
+                    icon="plus"
+                    style={styles.fab}
+                    onPress={() => {
+                        setModalVisible(!modalVisible);
+                    }}
+                />
             </View>
-        </ScrollView>
+        
     )
 }
 
@@ -133,10 +210,16 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#2F353A',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        height:height*1
-      },
+        //justifyContent: 'flex-start',
 
+      },containermdl:{
+        flex: 1,
+        // backgroundColor: '#2F353A',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:width*0.8,
+        height:height*0.7
+      },
       titlestyle:{
           textAlign:"center",
           marginTop:10,
@@ -208,7 +291,90 @@ const styles = StyleSheet.create({
         height:0.30 * height,
         marginTop:20,
         borderRadius:15,
-    },
+    },    
+    containermdl:{
+        flex: 1,
+        // backgroundColor: '#2F353A',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      text: {
+          color:'#22DEFA',
+          marginLeft: 15,
+          marginTop:10,
+          marginBottom:10,
+          fontSize:20,
+          textAlign:'center',
+          width: width*0.9,
+          marginTop: 40,
+          marginBottom: 10
+      },
+      modalView: {
+          backgroundColor: "#2F353A",
+          borderRadius: 20,
+          height:height*0.6,
+          padding: 35,
+          alignItems: "center",
+          justifyContent:"center",
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 4,
+          elevation: 4
+        },
+        button: {
+          borderRadius: 20,
+          padding: 10,
+          elevation: 2
+        },
+        buttonClose: {
+          backgroundColor: "#2196F3",
+        },
+        textStyle: {
+          color: "white",
+          fontWeight: "bold",
+          textAlign: "center"
+        },
+        modalText: {
+          color:'#22DEFA',
+          marginBottom: 15,
+          textAlign: "center",
+          fontSize:15
+        },
+        fab: {
+          position: "absolute",
+          margin: 20,
+          right: 0,
+          bottom: 15,
+        },
+        input:{
+            backgroundColor:"#fff",
+            color:"#000",
+            textAlign:"left",
+            paddingLeft:10,
+            justifyContent:"center",
+            borderRadius:15,
+            width: width*0.5,
+            height: 40,
+            marginBottom:10
+        },
+        listas:{
+          flex:1,
+          backgroundColor:"#BFC9CE",
+          width:width*0.8,
+          height:50,
+          borderRadius:20,
+          margin:8,
+          alignItems:'center',
+          justifyContent:'center',
+        },
+        textLista:{
+          color:"#2F353A",
+          fontSize:20
+        }
 
 })
 
