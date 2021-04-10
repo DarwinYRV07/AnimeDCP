@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     },
     header:{
         marginTop:45,
-        marginBottom:15,
+        marginBottom:0,
         position:"relative",
         borderRadius:5,
         backgroundColor: '#2F353A',
