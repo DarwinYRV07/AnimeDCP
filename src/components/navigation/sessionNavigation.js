@@ -38,6 +38,8 @@ function TabComp({navigation}) {
                     iconName = focused ? 'ios-list' : 'ios-list';
                   } else if (route.name === 'Search'){
                     iconName = focused ? 'search' : 'search';
+                  }else if (route.name === 'MyList'){
+                    iconName = focused ? 'bookmark' : 'bookmark';
                   } else if(route.name === 'User'){
                     iconName = focused ? 'cog' : 'cog';
                   }
@@ -54,8 +56,8 @@ function TabComp({navigation}) {
               }}
             >
               <Tab.Screen name="Home" component={homeScreen}  />
-              <Tab.Screen name="Anime" component={animeScreen} />
               <Tab.Screen name="Search" component = {searchScreen} />
+              <Tab.Screen name="MyList" component = {myListScreen} />
               <Stack.Screen name="User" component ={userScreen} />
               
             </Tab.Navigator>
@@ -109,6 +111,7 @@ const SessionNavigation= ()=> {
                 <Stack.Navigator >
                     <Stack.Screen name="BottonTabs" component={TabComp}  options={{headerShown:false}}/>
                     <Stack.Screen name="ChangePwd" component={changePwdScreen} options={{headerShown:false}}/>
+                    <Stack.Screen name="Anime" component={animeScreen} options={{headerShown:false}}/>
                     </Stack.Navigator>
                 ) : (
                   
