@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#2F353A',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginTop: 25
     },
     searchbar: {
         borderRadius:5,
