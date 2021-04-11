@@ -1,5 +1,5 @@
 import React from "react"
-import {View, StyleSheet,Text,Dimensions,TextInput,TouchableOpacity} from "react-native"
+import {View, StyleSheet,Text,Dimensions,ScrollView,TouchableOpacity} from "react-native"
 import SignUpForm from "../Forms/signUpForm";
 
 
@@ -9,12 +9,14 @@ const { width } = Dimensions.get("screen");
 
 const signUpScreen = ({navigation}) =>{
   return(
-    <View style={styles.container}>
-        <SignUpForm navigation={navigation}/>
-        <TouchableOpacity onPress={()=>{navigation.goBack()}}>
-                <Text>You have account? Sign In</Text>
-            </TouchableOpacity>        
-    </View>
+    <ScrollView>
+        <View style={styles.container}>
+          <SignUpForm navigation={navigation}/>
+          <TouchableOpacity onPress={()=>{navigation.goBack()}}>
+                  <Text style={styles.textUp}>You have account?  Sign In</Text>
+          </TouchableOpacity>        
+        </View>
+    </ScrollView>
   );
 }
 
@@ -63,7 +65,15 @@ const styles = StyleSheet.create({
     fontSize:28,
     color:"#fff"
     
-  }
+  },
+  textUp:{
+    color: "white",
+    fontSize:15,
+    textAlign:"right",
+    width:width*0.8,
+    marginTop:5,
+    marginBottom:18,
+},
 });
 
 

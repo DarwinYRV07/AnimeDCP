@@ -12,7 +12,7 @@ const { width } = Dimensions.get("screen");
 
 
 const SignUpForm = ({navigation}) =>{
-    const {state,signup} = useContext(AuthContext);
+    const {state,signup,clearErrorMessage} = useContext(AuthContext);
 
     const [fullName,setFullName] = useState("");
     const [email, setEmail] = useState("");
@@ -78,74 +78,73 @@ const SignUpForm = ({navigation}) =>{
 
   return(
     <View style={styles.container}>
-        
+      <View style={{marginTop:38,justifyContent:"center",alignItems:"center"}}>
         <Logo/>
-        {error ? <Alert type="error" title={error} /> : null}
-        <Text style={styles.texto}>Fullname:</Text>
-        <TextInput 
-          style={styles.input} 
-          placeholder="User"
-          value={fullName}
-          onChangeText = {setFullName}
-          onBlur={() => {
-            handleVerify("fullname");
-          }}
-          errorMessage={
-            fullNameError ? "Por favor ingresa tu nombre completo" : ""
-          }
+          {error ? <Alert type="error" title={error} /> : null}
+          <Text style={styles.texto}>Fullname:</Text>
+          <TextInput 
+            style={styles.input} 
+            placeholder="User"
+            value={fullName}
+            onChangeText = {setFullName}
+            onBlur={() => {
+              handleVerify("fullname");
+            }}
+            errorMessage={
+              fullNameError ? "Por favor ingresa tu nombre completo" : ""
+            }
+            /> 
+          <Text style={styles.texto}>Email:</Text>
+          <TextInput 
+            style={styles.input} 
+            placeholder="Email"
+            value={email}
+            onChangeText = {setEmail}
+            onBlur={() => {
+              handleVerify("email");
+            }}
+            autoCapitalize="none"
+            errorMessage={
+            emailError ? "Por favor ingresa una dirección de correo válida" : ""
+            }
+            />
+          <Text style={styles.texto}>Password:</Text>
+          <TextInput 
+            style={styles.input} 
+            placeholder="password"
+            value={password}
+            onChangeText = {setPassword}
+            secureTextEntry
+            autoCapitalize="none"
+            onBlur={() => {
+              handleVerify("password");
+            }}
+            errorMessage={
+            passwordError
+              ? "Por favor ingresa una contraseña de mínimo 6 caracteres"
+              : ""
+            }
           /> 
-        <Text style={styles.texto}>Email:</Text>
-        <TextInput 
-          style={styles.input} 
-          placeholder="Email"
-          value={email}
-          onChangeText = {setEmail}
-          onBlur={() => {
-            handleVerify("email");
-          }}
-          autoCapitalize="none"
-          errorMessage={
-          emailError ? "Por favor ingresa una dirección de correo válida" : ""
-          }
-          />
-        <Text style={styles.texto}>Password:</Text>
-        <TextInput 
-          style={styles.input} 
-          placeholder="password"
-          value={password}
-          onChangeText = {setPassword}
-          secureTextEntry
-          autoCapitalize="none"
-          onBlur={() => {
-            handleVerify("password");
-          }}
-          errorMessage={
-          passwordError
-            ? "Por favor ingresa una contraseña de mínimo 6 caracteres"
-            : ""
-          }
-        /> 
-        <Text style={styles.texto}>Confirm Password:</Text>
-        <TextInput 
-          style={styles.input} 
-          placeholder="Confirm Pasword"
-          value={confirmPassword}
-          onChangeText = {setConfirmPassword}
-          secureTextEntry
-          autoCapitalize="none"
-          onBlur={() => {
-          handleVerify("confirmPassword");
-          }}
-          errorMessage={
-          confirmPasswordError
-            ? "Por favor reingresa la contraseña y verifica que es correcta"
-            : ""
-          }
-        /> 
+          <Text style={styles.texto}>Confirm Password:</Text>
+          <TextInput 
+            style={styles.input} 
+            placeholder="Confirm Pasword"
+            value={confirmPassword}
+            onChangeText = {setConfirmPassword}
+            secureTextEntry
+            autoCapitalize="none"
+            onBlur={() => {
+            handleVerify("confirmPassword");
+            }}
+            errorMessage={
+            confirmPasswordError
+              ? "Por favor reingresa la contraseña y verifica que es correcta"
+              : ""
+            }
+          /> 
 
-        <Button title="SIGN UP" callback={()=>{handleVerify("signup")}}/>
-        
-              
+          <Button title="SIGN UP" callback={()=>{handleVerify("signup")}}/>
+      </View>        
     </View>
   );
 }
