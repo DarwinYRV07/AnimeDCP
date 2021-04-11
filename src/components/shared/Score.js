@@ -7,22 +7,22 @@ const Season = ({ type, title }) => {
   let background = "";
   let icon = "";
 
-  if (type <= 10 && type >= 9) {
+  if (type > 8 ) {
     background = "#008015";
     icon = "grin-stars";
-  } else if (type <= 8 && type >= 7) {
+  } else if (type > 7 ) {
     background = "#1708bd";
     icon = "smile-beam";
-  } else if (type <=  6 && type >=5) {
+  } else if (type >  6 && type > 5 ) {
     background = "#000000";
     icon = "meh";
-  } else if (type <= 4 ) {
+  } else if (type > 4 && type > 0) {
     background = "#ff0000";
     icon = "frown-open";
   }else{
     background ="#000000",
     icon = "skull"
-    title="none"
+    
 }
 
   return (

@@ -137,7 +137,7 @@ const animeScreen =({navigation, route})=>{
 
 
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{marginBottom:30,marginTop:20,position:"relative",}}>
+                <View style={{marginBottom:30,marginTop:20,position:"relative",justifyContent:"center",alignItems:"center"}}>
                     {/*<View style={{backgroundColor:"gray", width:width * 100, height: height * 0.25,}}>
                     <Text>hOL</Text>
                     </View>*/}
