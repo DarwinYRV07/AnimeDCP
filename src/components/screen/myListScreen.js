@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react' 
-import { StyleSheet, View, Text, Dimensions,TextInput,Modal,Pressable,FlatList } from 'react-native'
+import { StyleSheet, View, Text, Dimensions,TextInput,Modal,Pressable,FlatList,TouchableOpacity } from 'react-native'
 import {FAB} from "react-native-paper"
 import {Context as ListAnimeContext} from '../../providers/listAnimeContext'
 import {Context as AuthContext} from '../../providers/AuthContext'
+import CardSimple from '../cards/CardSimple'
+import { ListItem } from 'react-native-elements'
+
 
 const{width,height}=Dimensions.get("screen");
 
@@ -12,19 +15,19 @@ const myListScreen =()=>{
     
     const [modalVisible, setModalVisible] = useState(false);
     const [listName,setListName] =useState("")
-    const [data,setData] = useState(state.list);
+    const [data,setData] = useState([]);
     const [recharge,setRecharge] = useState(true);
     useEffect(() => {
       getLists(authstate.user.id);
     }, [])
 
     useEffect(() => {
-      if(state.list){
+      console.log(Array.isArray(state.list))
+      if(Array.isArray(state.list)){
         setData(state.list)
+        console.log(data);
       } 
-
-      console.log(data);
-  }, [state])
+    }, [state])
     
     const handlerCreate=()=>{
       if(listName){
@@ -89,9 +92,13 @@ const myListScreen =()=>{
                             horizontal={false}
                             renderItem={({item}) => {
                             return (
-                                <View style={styles.listas}>
-                                     <Text style={styles.textLista}>{(item.name.toUpperCase())}</Text>
-                                </View>
+                                  <CardSimple
+                                  name = {item.name}
+                                  callbacktitulo ={()=>{console.log(item.id)}}
+                                  editar ={()=>{console.log(item.id)}}
+                                  eliminar={()=>{console.log(item.id)}}
+
+                                  />
                             )  
                              
                             }}
