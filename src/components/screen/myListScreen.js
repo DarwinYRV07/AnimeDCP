@@ -12,14 +12,18 @@ const myListScreen =()=>{
     
     const [modalVisible, setModalVisible] = useState(false);
     const [listName,setListName] =useState("")
-    const [data,setData] = useState([]);
+    const [data,setData] = useState(state.list);
     const [recharge,setRecharge] = useState(true);
     useEffect(() => {
       getLists(authstate.user.id);
     }, [])
 
     useEffect(() => {
-      setData(state.list)
+      if(state.list){
+        setData(state.list)
+      } 
+
+      console.log(data);
   }, [state])
     
     const handlerCreate=()=>{
@@ -78,7 +82,7 @@ const myListScreen =()=>{
                     </View>
                 </Modal>
 
-                {data!=undefined?(<FlatList 
+                {data?(<FlatList 
                             ListEmptyComponent={<Text>No hay animes disponibles!</Text>}
                             data={data}
                             key={({item})=>{item.id}}
@@ -93,8 +97,6 @@ const myListScreen =()=>{
                             }}
                             keyExtractor={(item, index) => index.toString()}
                 />):(null)}
-
-
                 <FAB
                     icon="plus"
                     style={styles.fab}
