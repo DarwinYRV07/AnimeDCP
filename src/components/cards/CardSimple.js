@@ -9,7 +9,7 @@ const{width,height}=Dimensions.get("screen");
 const CardSimple = ({name, callbacktitulo ,editar ,eliminar }) =>{
     return(
         <View style={styles.container}>
-            <TouchableOpacity style={styles.bloqueTitle} onPress={()=>{callbacktitulo}}>
+            <TouchableOpacity style={styles.bloqueTitle} onPress={callbacktitulo}>
                 <View >
                     <Text style={styles.titulo}>{name}</Text>
                 </View>
@@ -25,7 +25,7 @@ const CardSimple = ({name, callbacktitulo ,editar ,eliminar }) =>{
                     }
                     type="clear"
                     buttonStyle={styles.buttons}
-                    onPress={()=>{editar}}
+                    onPress={editar}
                 />
 
                 <Button
@@ -38,7 +38,7 @@ const CardSimple = ({name, callbacktitulo ,editar ,eliminar }) =>{
                     }
                     type="clear"
                     buttonStyle={styles.buttons}
-                    onPress={()=>{eliminar}}
+                    onPress={eliminar}
                 />
             </View>
         </View>
