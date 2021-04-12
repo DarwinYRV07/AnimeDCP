@@ -9,11 +9,19 @@ import CardSimple from '../cards/CardSimple'
 const{width,height}=Dimensions.get("screen");
 
 const myListScreen =({navigation})=>{
-    const {createList,state,getLists,delList} = useContext(ListAnimeContext)
+    const {
+      createList,
+      state,
+      getLists,
+      delList,
+      updList    
+    } = useContext(ListAnimeContext)
     const {state:authstate} = useContext(AuthContext)
     
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible2, setModalVisible2] = useState(false);
     const [listName,setListName] =useState("")
+    const [idList,setIdList] = useState("");
     const [data,setData] = useState([]);
     const [recharge,setRecharge] = useState(true);
     useEffect(() => {
@@ -29,11 +37,8 @@ const myListScreen =({navigation})=>{
     
     useEffect(() => {
       const unsubscribe = navigation.addListener('focus', () => {
-        //console.log("esta en el foco");
         getLists(authstate.user.id)
       });
-  
-      // Return the function to unsubscribe from the event so it gets removed on unmount
       return unsubscribe;
    }, [navigation])
 
@@ -56,6 +61,12 @@ const myListScreen =({navigation})=>{
 
     const handlerDelList=(id,idlist)=>{
       delList(id,idlist);
+    }
+
+    const updateList =()=>{
+      updList(idList,listName)
+      setListName("")
+      setModalVisible2(!modalVisible2)
     }
 
 
@@ -99,9 +110,46 @@ const myListScreen =({navigation})=>{
                     </View>
                     </View>
                 </Modal>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible2}
+                    onRequestClose={() => {
+                    setModalVisible(!modalVisible2);
+                    }}
+                >
+                    <View  transparent={true} style={styles.containermdl}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>UpdateList List</Text>
+                        <TextInput 
+                            style={styles.input} 
+                            placeholder="List name"    
+                            value={listName} 
+                            onChangeText={setListName}
+                            autoCapitalize="none"
+              
+                        />
+                        <Pressable
+                        style={[styles.button, styles.buttonAdd]}
+                        onPress={() => updateList()}
+                        >
+                        <Text style={styles.textStyle}>UPDATE</Text>
+                        </Pressable>
+
+                        <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible2(!modalVisible2)}
+                        >
+                        <Text style={styles.textStyle}>CANCEL</Text>
+                        </Pressable>
+                        
+                    </View>
+                    </View>
+                </Modal>
+
 
                 {data?(<FlatList 
-                            ListEmptyComponent={<Text>No hay animes disponibles!</Text>}
+                            ListEmptyComponent={<Text style={{color:"#fff"}}>No has registrado listas!</Text>}
                             data={data}
                             key={({item})=>{item.id}}
                             horizontal={false}
@@ -110,7 +158,11 @@ const myListScreen =({navigation})=>{
                                   <CardSimple
                                   name = {item.name}
                                   callbacktitulo ={()=>{handlerGolist(item.id)}}
-                                  editar ={()=>{console.log(item.id)}}
+                                  editar ={()=>{
+                                    setModalVisible2(!modalVisible2);
+                                    setIdList(item.id);
+                                    setListName(item.name)
+                                  }}
                                   eliminar={()=>{handlerDelList(item.id,item.id)}}
 
                                   />
@@ -124,6 +176,7 @@ const myListScreen =({navigation})=>{
                     style={styles.fab}
                     onPress={() => {
                         setModalVisible(!modalVisible);
+  
                     }}
                 />
         </View>
