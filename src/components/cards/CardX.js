@@ -1,6 +1,6 @@
 import React from "react"
 import {View, StyleSheet,Text,Dimensions, TouchableOpacity } from "react-native"
-import {Button} from 'react-native-elements'
+import {Image,Button} from 'react-native-elements'
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 
