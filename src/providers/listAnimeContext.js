@@ -35,12 +35,13 @@ const animesRef = firebase.firestore().collection("animes")
 const animelistRef =firebase.firestore().collection("listas");
 
 const createList = (dispatch)=>(name,author)=>{
+    const Identdoc = name+author;
     const data = {
         name,
         userid:author
     };
 
-    animelistRef.add(data).then((data)=>{
+    animelistRef.doc(Identdoc).set(data).then((data)=>{
         dispatch({type:"errorMessage",payload:"List added"})
         
     }).catch((error)=>{
@@ -67,17 +68,19 @@ const getLists = (dispatch)=>(userId)=>{
 const addAnime = (dispatch)=>(title,url,score,idlist,aid,status)=>{
 
     // const existe = Animes.map( function(item){ console.log(item) } )
-
+    const docIdent = idlist.toString()+aid.toString();
     const data = {
         title,
         url,
         score,
         idlist,
         aid,
-        status
+        status,
+        docIdent
     }
+    
 
-    animesRef.add(data).then((data)=>{
+    animesRef.doc(docIdent).set(data).then((data)=>{
         dispatch({type:"errorMessage",payload:"Anime added"})
         
     }).catch((error)=>{
@@ -118,19 +121,9 @@ const delList =(dispatch)=>(idlist)=>{
 }
 
 const delAnime =(dispatch)=>(id)=>{
-    animesRef.where("id","==",id).orderBy("aid","desc").get()
-    .then(querySnapshot => {
-      querySnapshot.forEach((doc) => {
-        doc.ref.delete().then(() => {
-          console.log("Documento eliminado con éxito!");
-        }).catch(function(error) {
-          console.error("Error eliminando documento: ", error);
-        });
-      });
-    })
-    .catch(function(error) {
-      console.log("Error Obteniendo Documentos: ", error);
-    });
+    // animesRef.doc(id).update({
+    //         delete()
+    // })
 }
 
 
@@ -139,6 +132,7 @@ const delAnime =(dispatch)=>(id)=>{
 export const {Provider,Context}= createDataContext(
     listReducer,
     {
+        delList,
         delAnime,
         getAnimeList,
         createList,
