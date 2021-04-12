@@ -4,12 +4,11 @@ import {FAB} from "react-native-paper"
 import {Context as ListAnimeContext} from '../../providers/listAnimeContext'
 import {Context as AuthContext} from '../../providers/AuthContext'
 import CardSimple from '../cards/CardSimple'
-import { ListItem } from 'react-native-elements'
 
 
 const{width,height}=Dimensions.get("screen");
 
-const myListScreen =()=>{
+const myListScreen =({navigation})=>{
     const {createList,state,getLists} = useContext(ListAnimeContext)
     const {state:authstate} = useContext(AuthContext)
     
@@ -22,13 +21,22 @@ const myListScreen =()=>{
     }, [])
 
     useEffect(() => {
-      console.log(Array.isArray(state.list))
+      //console.log(Array.isArray(state.list))
       if(Array.isArray(state.list)){
         setData(state.list)
-        console.log(data);
       } 
     }, [state])
     
+    useEffect(() => {
+      const unsubscribe = navigation.addListener('focus', () => {
+        //console.log("esta en el foco");
+        getLists(authstate.user.id)
+      });
+  
+      // Return the function to unsubscribe from the event so it gets removed on unmount
+      return unsubscribe;
+   }, [navigation])
+
     const handlerCreate=()=>{
       if(listName){
         console.log("creando")
@@ -41,6 +49,9 @@ const myListScreen =()=>{
         console.log("error")
       }
 
+    }
+    const handlerGolist=(id)=>{
+      navigation.navigate("animeList",{idList:id});
     }
 
 
@@ -69,16 +80,16 @@ const myListScreen =()=>{
               
                         />
                         <Pressable
-                        style={[styles.button, styles.buttonClose]}
+                        style={[styles.button, styles.buttonAdd]}
                         onPress={() => handlerCreate()}
                         >
-                        <Text style={styles.textStyle}>Hide Modal</Text>
+                        <Text style={styles.textStyle}>SAVE</Text>
                         </Pressable>
                         <Pressable
                         style={[styles.button, styles.buttonClose]}
                         onPress={() => setModalVisible(!modalVisible)}
                         >
-                        <Text style={styles.textStyle}>Cancel</Text>
+                        <Text style={styles.textStyle}>CANCEL</Text>
                         </Pressable>
                         
                     </View>
@@ -94,7 +105,7 @@ const myListScreen =()=>{
                             return (
                                   <CardSimple
                                   name = {item.name}
-                                  callbacktitulo ={()=>{console.log(item.id)}}
+                                  callbacktitulo ={()=>{handlerGolist(item.id)}}
                                   editar ={()=>{console.log(item.id)}}
                                   eliminar={()=>{console.log(item.id)}}
 
@@ -161,8 +172,14 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 2
       },
+      buttonAdd: {
+        backgroundColor: "#22DEFA",
+        width:width*0.4,
+        marginBottom:5
+      },
       buttonClose: {
-        backgroundColor: "#2196F3",
+        backgroundColor: "#8C3235",
+        width:width*0.4
       },
       textStyle: {
         color: "white",
@@ -180,6 +197,7 @@ const styles = StyleSheet.create({
         margin: 20,
         right: 0,
         bottom: 15,
+        backgroundColor:"#22DEFA"
       },
       input:{
           backgroundColor:"#fff",

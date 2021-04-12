@@ -1,37 +1,35 @@
-import React, {useState,useEffect} from 'react' 
+import React, {useState,useEffect,useContext} from 'react' 
 import {StyleSheet, Text, View,FlatList,ImageBackground,StatusBar} from 'react-native'
-import {firebase} from '../../Firebase'
-import Button from "../button/button"
 import {fetchAnimeList} from '../../api'
 import CardV from '../../components/cards/CardV'
 import { Dimensions } from 'react-native'
-import animeScreen from './animeScreen'
-
-
+import {Context as ListAnimeContext} from '../../providers/listAnimeContext'
+import {Context as AuthContext} from '../../providers/AuthContext'
+import CardX from '../cards/CardX'
 
 const {width, height} = Dimensions.get("screen");
 
-
-const homeScreen =({navigation})=>{
-
+const animeList =({navigation,route})=>{
+    const {idList} = route.params;
+    const {state,getAnimeList} = useContext(ListAnimeContext)
+    const {state:authstate} = useContext(AuthContext)
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        getAnimes();
-    }, [])
+        getAnimeList(idList);
+    }, [idList])
 
-    
-    const getAnimes = async ()=>{
-        try {
-            const animeList = await fetchAnimeList();
-            setData(animeList);
-            if(!animeList.length){
-                console.log("error")
-            }
-        } catch (error) {
-            console.log(error)
+    useEffect(() => {
+        if(Array.isArray(state.animes)){
+            setData(state.animes);
         }
-    }
+        //cconsole.log(state.animes)
+        
+    }, [state])
+
+    useEffect(() => {
+        console.log(data) 
+    }, [state])
 
     const viewAnime = (id) =>{
         navigation.navigate("Anime", {idAnime:id})
@@ -57,17 +55,12 @@ const homeScreen =({navigation})=>{
                             horizontal={false}
                             renderItem={({item}) => {
                             return (
-                                <View>
-                                     <CardV
-                                        url={item.image_url}
-                                        name={item.title}
-                                        id={item.mal_id}
-                                        punt={item.score}
-                                        date={item.start_date}
-                                        callback={()=>{viewAnime(item.mal_id)}}
-                                        //callback={()=>{console.log("Imprime")}}
-                                     />
-                                </View>
+                                <CardX
+                                    url ={item.url}
+                                    name ={item.title}
+                                    //callback ={}
+                                    //eliminar ={}
+                                />
                             )  
                              
                             }}
@@ -118,4 +111,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default homeScreen;
+export default animeList;

@@ -36,7 +36,7 @@ const{width,height}=Dimensions.get("screen");
 const animeScreen =({navigation, route})=>{
     const {idAnime} = route.params;
 
-    const {createList,state,getLists} = useContext(ListAnimeContext)
+    const {createList,state,getLists,addAnime} = useContext(ListAnimeContext)
     const {state:authstate} = useContext(AuthContext)
 
     const [animeId,setAnimeId] = useState("");
@@ -54,8 +54,8 @@ const animeScreen =({navigation, route})=>{
        
     }, [idAnime])
 
+
     useEffect(() => {
-        console.log(state)
         setData(state.list)
     }, [state])
     
@@ -81,9 +81,22 @@ const animeScreen =({navigation, route})=>{
         //getrelacionado();
     }
     
+    const handlerAddAnime =(idList)=>{
+        addAnime(
+            animeInfo.title,
+            animeInfo.image_url,
+            animeInfo.score,
+            idList,
+            idAnime,
+            animeInfo.airing
+        );
+        setModalVisible(!modalVisible);
+    }
 
+    //QUITAR Y PROBAR SI ES NECESARIO YA QUE HAY OTRO HANDLER ARRIBA
     useEffect(()=>{
         handlerstart();
+        console.log(animeInfo);
     },[]);
 
    //console.log(animeInfo.related.Sequel);
@@ -111,11 +124,11 @@ const animeScreen =({navigation, route})=>{
                             horizontal={false}
                             renderItem={({item}) => {
                             return (
+                                <TouchableOpacity onPress={()=>{handlerAddAnime(item.id)}} > 
                                 <View style={styles.listas}>
-                                    <TouchableOpacity > 
-                                     <Text style={styles.textLista}>{(item.name.toUpperCase())}</Text>
-                                     </TouchableOpacity>
+                                     <Text style={styles.textLista}>{item.name}</Text>        
                                 </View>
+                                </TouchableOpacity>
                             )  
                              
                             }}
@@ -128,6 +141,7 @@ const animeScreen =({navigation, route})=>{
                         >
                         <Text style={styles.textStyle}>Cancelar</Text>
                         </Pressable>
+                        
 
 
                         
@@ -328,10 +342,12 @@ const styles = StyleSheet.create({
         button: {
           borderRadius: 20,
           padding: 10,
-          elevation: 2
+          elevation: 2,
+          marginTop:10
         },
-        buttonClose: {
-          backgroundColor: "#2196F3",
+          buttonClose: {
+            backgroundColor: "#8C3235",
+            width:width*0.4
         },
         textStyle: {
           color: "white",
@@ -349,6 +365,7 @@ const styles = StyleSheet.create({
           margin: 20,
           right: 0,
           bottom: 15,
+          backgroundColor:"#22DEFA"
         },
         input:{
             backgroundColor:"#fff",

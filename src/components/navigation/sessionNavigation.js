@@ -16,6 +16,7 @@ import {Context as AuthContext} from "../../providers/AuthContext";
 import userScreen from '../screen/userScreen';
 import * as SplashScreen from "expo-splash-screen"
 import searchScreen from '../screen/searchScreen';
+import animeList from '../screen/animeList';
 
 
 const Stack = createStackNavigator();
@@ -90,6 +91,7 @@ const SessionNavigation= ()=> {
                     <Stack.Screen name="BottonTabs" component={TabComp}  options={{headerShown:false}}/>
                     <Stack.Screen name="ChangePwd" component={changePwdScreen} options={{headerShown:false}}/>
                     <Stack.Screen name="Anime" component={animeScreen} options={{headerShown:false}}/>
+                    <Stack.Screen name="animeList" component={animeList} options={{headerShown:true}}/>
                     </Stack.Navigator>
                 ) : (
                   <Stack.Navigator >
