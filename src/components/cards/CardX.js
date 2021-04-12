@@ -57,14 +57,17 @@ const styles = StyleSheet.create({
         width:60,
         height:60,
         resizeMode:"contain",
-        paddingRight:20
+        paddingRight:20,
+        marginLeft: 0,
+        marginRight:25
     },
     titulo:{
-      fontSize:17,
+      fontSize:15,
       fontWeight: "bold",
       color:"#344A53",
       alignSelf:"center",
-      textAlign:"left"
+      textAlign:"center",
+      width:width*0.45
     },
 
     buttons:{
@@ -74,14 +77,13 @@ const styles = StyleSheet.create({
         padding:11,
     },
     bloqueTitle:{
-        width:width * 0.55,
+        width:width * 0.7,
         alignItems:"center",
         justifyContent:"center",
     },
     bloqueButton:{
-        width:width * 0.30,
-        flexDirection:"row",
-        //marginLeft:1,
+        width:width * 0.14,
+        marginRight:0,
     },
 
   });
