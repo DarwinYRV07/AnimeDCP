@@ -16,6 +16,9 @@ const listReducer =(state,action)=>{
         case "delList":
             return{...state,list:[...list,action.payload]}
         break;
+        case "updList":
+            return{...state,list:[...list,action.payload]}
+        break;
         case "delAnime":
             return{...state,list:[...list,action.payload]}
         break;
@@ -129,21 +132,29 @@ const delList =(dispatch)=>(Identdoc,idlist)=>{
     
     animelistRef.doc(Identdoc).delete().then(()=>{
         vaciarLista(idlist);
-        dispatch({type:"errorMessage",payload:"Anime Deleted"})
+        dispatch({type:"errorMessage",payload:"List Deleted"})
     }).catch((error)=>{
         dispatch({type:"errorMessage",payload:error.message})
     })
-
-    //vaciarLista(idlist);
-
 }
 
+const updList=(dispatch)=>(idlist,name)=>{
+    animelistRef.doc(idlist).update({
+        name:name
+    })
+    .then(() => {
+        dispatch({type:"errorMessage",payload:"Anime Deleted"})
+    }).catch((error)=>{
 
+    })
+    
+}
 
 
 export const {Provider,Context}= createDataContext(
     listReducer,
     {
+        updList,
         delList,
         delAnime,
         getAnimeList,
