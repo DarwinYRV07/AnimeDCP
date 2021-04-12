@@ -114,13 +114,28 @@ const delAnime =(dispatch)=>(Identdoc)=>{
     })
 }
 
-const delList =(dispatch)=>(Identdoc)=>{
+const vaciarLista =(idlist)=>{
+    animesRef.where("idlist","==",idlist).orderBy("aid","desc").onSnapshot((querySnapshot)=>{
+        querySnapshot.forEach((doc)=>{
+            const list = doc.data();
+            list.id = doc.id;
+            console.log(list.id)
+            animesRef.doc(list.id).delete().then(console.log("borrado"))
+        });
+    })
+}
 
+const delList =(dispatch)=>(Identdoc,idlist)=>{
+    
     animelistRef.doc(Identdoc).delete().then(()=>{
+        vaciarLista(idlist);
         dispatch({type:"errorMessage",payload:"Anime Deleted"})
     }).catch((error)=>{
         dispatch({type:"errorMessage",payload:error.message})
     })
+
+    //vaciarLista(idlist);
+
 }
 
 

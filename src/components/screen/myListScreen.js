@@ -54,8 +54,8 @@ const myListScreen =({navigation})=>{
       navigation.navigate("animeList",{idList:id});
     }
 
-    const handlerDelList=(id)=>{
-      delList(id);
+    const handlerDelList=(id,idlist)=>{
+      delList(id,idlist);
     }
 
 
@@ -111,7 +111,7 @@ const myListScreen =({navigation})=>{
                                   name = {item.name}
                                   callbacktitulo ={()=>{handlerGolist(item.id)}}
                                   editar ={()=>{console.log(item.id)}}
-                                  eliminar={()=>{handlerDelList(item.id)}}
+                                  eliminar={()=>{handlerDelList(item.id,item.id)}}
 
                                   />
                             )  
