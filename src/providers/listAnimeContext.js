@@ -104,25 +104,19 @@ const getAnimeList=(dispatch)=>(idlist)=>{
 
 };
 
-const delList =(dispatch)=>(idlist)=>{
-    animelistRef.where("idlist","==",idlist).orderBy("aid","desc").get()
-    .then(querySnapshot => {
-      querySnapshot.forEach((doc) => {
-        doc.ref.delete().then(() => {
-          console.log("Documento eliminado con éxito!");
-        }).catch(function(error) {
-          console.error("Error eliminando documento: ", error);
-        });
-      });
-    })
-    .catch(function(error) {
-      console.log("Error Obteniendo Documentos: ", error);
-    });
-}
 
 const delAnime =(dispatch)=>(Identdoc)=>{
 
     animesRef.doc(Identdoc).delete().then(()=>{
+        dispatch({type:"errorMessage",payload:"Anime Deleted"})
+    }).catch((error)=>{
+        dispatch({type:"errorMessage",payload:error.message})
+    })
+}
+
+const delList =(dispatch)=>(Identdoc)=>{
+
+    animelistRef.doc(Identdoc).delete().then(()=>{
         dispatch({type:"errorMessage",payload:"Anime Deleted"})
     }).catch((error)=>{
         dispatch({type:"errorMessage",payload:error.message})

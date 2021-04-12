@@ -9,7 +9,7 @@ import CardSimple from '../cards/CardSimple'
 const{width,height}=Dimensions.get("screen");
 
 const myListScreen =({navigation})=>{
-    const {createList,state,getLists} = useContext(ListAnimeContext)
+    const {createList,state,getLists,delList} = useContext(ListAnimeContext)
     const {state:authstate} = useContext(AuthContext)
     
     const [modalVisible, setModalVisible] = useState(false);
@@ -52,6 +52,10 @@ const myListScreen =({navigation})=>{
     }
     const handlerGolist=(id)=>{
       navigation.navigate("animeList",{idList:id});
+    }
+
+    const handlerDelList=(id)=>{
+      delList(id);
     }
 
 
@@ -107,7 +111,7 @@ const myListScreen =({navigation})=>{
                                   name = {item.name}
                                   callbacktitulo ={()=>{handlerGolist(item.id)}}
                                   editar ={()=>{console.log(item.id)}}
-                                  eliminar={()=>{console.log(item.id)}}
+                                  eliminar={()=>{handlerDelList(item.id)}}
 
                                   />
                             )  
