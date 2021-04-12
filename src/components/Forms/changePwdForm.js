@@ -1,6 +1,6 @@
 import { validate } from 'email-validator';
 import React, { useState} from 'react';
-import { View, StyleSheet, Text, Dimensions } from "react-native"
+import { View, StyleSheet, Text, Dimensions, TextInput } from "react-native"
 import { Input } from 'react-native-elements';
 import { firebase } from "../../Firebase/index";
 import Button from "../button/button";
@@ -69,7 +69,7 @@ const changePwdForm = ({navigation}) =>{
             <Logo/>
             <Text style={styles.title}>Change password</Text>
             <Text style={styles.text}>Current password</Text>
-            <Input style={styles.input} 
+            <TextInput style={styles.input} 
                 placeholder="current"
                 value={current}
                 onChangeText={setCurrent}
@@ -84,7 +84,7 @@ const changePwdForm = ({navigation}) =>{
             />
 
             <Text style={styles.text}>New password</Text>
-            <Input style={styles.input} 
+            <TextInput style={styles.input} 
                 placeholder="New Password"
                 value={newPassword}
                 onChangeText={setNewPassword}
@@ -99,7 +99,7 @@ const changePwdForm = ({navigation}) =>{
             />
 
             <Text style={styles.text}>Confirm password</Text>
-            <Input style={styles.input} 
+            <TextInput style={styles.input} 
                 placeholder="New Password"
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}

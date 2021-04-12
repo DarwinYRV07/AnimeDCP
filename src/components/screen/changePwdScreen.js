@@ -1,6 +1,6 @@
 import React from "react"
 import { } from "react-native-elements";
-import { View, StyleSheet, Dimensions,TouchableOpacity, Text } from "react-native"
+import { View, StyleSheet, Dimensions,TouchableOpacity, Text, ScrollView } from "react-native"
 import ChangePwdForm from "../Forms/changePwdForm";
 
 const {width} = Dimensions.get("screen");
@@ -8,12 +8,12 @@ const {width} = Dimensions.get("screen");
 const changePwdScreen = ({navigation}) =>{
     return(
         <View style={styles.container}>
+          <ScrollView>
             <ChangePwdForm navigation={navigation}/>
-            <TouchableOpacity onPress={()=>{navigation.goBack();
-            }} >
-               <Text>Cancel,go back</Text>
+            <TouchableOpacity onPress={()=>{navigation.goBack();}} >
+              <Text style={{textAlign:"center"}}>Cancel,go back</Text>
             </TouchableOpacity>
-            
+          </ScrollView>
         </View>
     )
 }
