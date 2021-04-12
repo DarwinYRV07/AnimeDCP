@@ -120,10 +120,13 @@ const delList =(dispatch)=>(idlist)=>{
     });
 }
 
-const delAnime =(dispatch)=>(id)=>{
-    // animesRef.doc(id).update({
-    //         delete()
-    // })
+const delAnime =(dispatch)=>(Identdoc)=>{
+
+    animesRef.doc(Identdoc).delete().then(()=>{
+        dispatch({type:"errorMessage",payload:"Anime Deleted"})
+    }).catch((error)=>{
+        dispatch({type:"errorMessage",payload:error.message})
+    })
 }
 
 

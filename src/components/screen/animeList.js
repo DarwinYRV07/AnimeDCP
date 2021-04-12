@@ -11,7 +11,7 @@ const {width, height} = Dimensions.get("screen");
 
 const animeList =({navigation,route})=>{
     const {idList} = route.params;
-    const {state,getAnimeList} = useContext(ListAnimeContext)
+    const {state,getAnimeList,delAnime} = useContext(ListAnimeContext)
     const {state:authstate} = useContext(AuthContext)
     const [data, setData] = useState([]);
 
@@ -34,7 +34,11 @@ const animeList =({navigation,route})=>{
     const viewAnime = (id) =>{
         navigation.navigate("Anime", {idAnime:id})
     }
-    
+    //ELIMINAR ANIME
+    const handlerDelAnime=(docIdent)=>{
+        delAnime(docIdent);
+        getAnimeList(idList);
+    }
     
     
     return(
@@ -51,7 +55,7 @@ const animeList =({navigation,route})=>{
                 {data!=undefined?(<FlatList 
                             ListEmptyComponent={<Text>No hay animes disponibles!</Text>}
                             data={data}
-                            key={({item})=>{item.mal_id}}
+                            key={({item})=>{item.docIdent}}
                             horizontal={false}
                             renderItem={({item}) => {
                             return (
@@ -59,7 +63,7 @@ const animeList =({navigation,route})=>{
                                     url ={item.url}
                                     name ={item.title}
                                     //callback ={}
-                                    //eliminar ={}
+                                    eliminar ={()=>{handlerDelAnime(item.docIdent)}}
                                 />
                             )  
                              
