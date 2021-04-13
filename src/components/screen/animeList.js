@@ -79,7 +79,7 @@ const animeList =({navigation,route})=>{
                                 <CardX
                                     url ={item.url}
                                     name ={item.title}
-                                    //callback ={}
+                                    callback ={()=>{navigation.navigate("Anime",{idAnime:item.aid})}}
                                     eliminar ={()=>{handlerDelAnime(item.docIdent)}}
                                 />
                             )  
