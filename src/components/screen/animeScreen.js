@@ -19,8 +19,6 @@ import Airing from "../shared/Airing";
 import {fetchAnimeEs, fetchAnimeGenero } from "../../api/index";
 import {Context as ListAnimeContext} from '../../providers/listAnimeContext'
 import {Context as AuthContext} from '../../providers/AuthContext'
-import { set } from 'react-native-reanimated';
-import { Touchable } from 'react-native';
 //import Video from "react-native-video";
 
 
@@ -118,7 +116,7 @@ const animeScreen =({navigation, route})=>{
                     <View style={styles.modalView}>
                         <Text style={styles.modalText}>Add to List</Text>
                         {data!=undefined?(<FlatList style={styles.flat}
-                            ListEmptyComponent={<Text>No tienes listas para guardar animes!</Text>}
+                            ListEmptyComponent={<Text style={{color:"#fff"}}>No tienes listas para guardar animes!</Text>}
                             data={data}
                             key={({item})=>{item.id}}
                             horizontal={false}
@@ -199,7 +197,7 @@ const animeScreen =({navigation, route})=>{
                     </View>
                     <View style={styles.ItemShow}>
                         <View style={styles.ItemDescription}>
-                            <Text>Descripcion</Text>
+                            <Text>Description:</Text>
                             <Text>{animeInfo.synopsis}</Text>
                         </View>
                     </View>

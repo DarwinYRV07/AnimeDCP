@@ -5,6 +5,7 @@ import { Avatar, ListItem } from 'react-native-elements'
 import Icon from "react-native-vector-icons/FontAwesome5";
 import {Divider} from 'react-native-paper'
 import {firebase} from '../../Firebase'
+import {Context as AuthContext} from '../../providers/AuthContext'
 import Button from '../button/button'
 import theme from "../../Theme";
 
@@ -15,6 +16,8 @@ const {width,height} = Dimensions.get("screen");
 const userScreen =({navigation})=>{
  
     const user = firebase.auth().currentUser;
+    const {state} = useContext(AuthContext);
+    const usuario = state.user.fullname;
     const [colorHeader,setColorHeader] = useState("#3e3e3e")
 
 
@@ -49,16 +52,16 @@ const userScreen =({navigation})=>{
                 size='xlarge'
                 source={ require('../../../assets/animeDCPIcon.png') }
                 />
-            <ListItem containerStyle={styles.listItem} style={{marginTop:20}}>
+            <ListItem containerStyle={styles.listItem} style={{marginTop:40}}>
                 <ListItem.Content style={styles.listContent}>
                 <ListItem.Title style={styles.titulo}>{"Current User"}</ListItem.Title>
-                <ListItem.Subtitle style={styles.subtitulo}>{"Pruebas"}</ListItem.Subtitle>
+                <ListItem.Subtitle style={styles.subtitulo}>{usuario}</ListItem.Subtitle>
                 </ListItem.Content>
             </ListItem>
             <Divider style={styles.divider}/>
             <ListItem containerStyle={styles.listItem}>
                 <ListItem.Content style={styles.listContent}>
-                <ListItem.Title style={styles.titulo}>{"Correo"}</ListItem.Title>
+                <ListItem.Title style={styles.titulo}>{"E-mail"}</ListItem.Title>
                 <ListItem.Subtitle style={styles.subtitulo}>{user.email}</ListItem.Subtitle>
                 </ListItem.Content>
             </ListItem>
@@ -71,7 +74,7 @@ const userScreen =({navigation})=>{
                         <Text style={styles.titulo}>Change Password</Text>
                       </Text>
                       <Text style={{marginLeft:width*0.40}}>
-                        {<Icon style={{fontSize:20,}} name={'sync-alt'}/>}
+                        {<Icon style={{fontSize:20, color:"#FFF"}} name={'sync-alt'}/>}
                       </Text>
                     </View>
                 </TouchableOpacity>
@@ -86,12 +89,13 @@ const userScreen =({navigation})=>{
                         <Text style={styles.titulo}>LogOut</Text>
                       </Text>
                       <Text style={{marginLeft:width*0.64}}>
-                        {<Icon style={{fontSize:23}} name={'sign-out-alt'}/>}
+                        {<Icon style={{fontSize:23, color:"#FFF"}} name={'sign-out-alt'}/>}
                       </Text>
                     </View>
                 </TouchableOpacity>
                 </ListItem.Content>
             </ListItem>
+            <Divider style={styles.divider}/>
                 {/* <View style={styles.header}>
                     <Text backgroundColor={colorHeader}>SETTINGS</Text>
                 </View> */}
@@ -108,17 +112,19 @@ const styles = StyleSheet.create({
       },
       listItem:{
         width:width*1,
-        backgroundColor: '#BFC9CE',
+        backgroundColor: '#2F353A',
         height:height*0.09
       },
       listContent:{
       },
       titulo:{
         fontSize:20,
-        flexDirection:"row"
+        flexDirection:"row",
+        color:"#FFF"
       },
       subtitulo:{
-        fontSize:15
+        fontSize:15,
+        color:"#FFF"
       },
       text:{
           color:"white",
@@ -129,8 +135,9 @@ const styles = StyleSheet.create({
         fontSize:15,
       },
       divider:{
-        width:width*0.9,
+        width:width*1,
         height:2,
+        backgroundColor:"#444D51"
       },
       textHeader:{
         color:"#BFC9CE",

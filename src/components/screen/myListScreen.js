@@ -55,8 +55,8 @@ const myListScreen =({navigation})=>{
       }
 
     }
-    const handlerGolist=(id)=>{
-      navigation.navigate("animeList",{idList:id});
+    const handlerGolist=(id,name)=>{
+      navigation.navigate("animeList",{idList:id,name:name});
     }
 
     const handlerDelList=(id,idlist)=>{
@@ -72,9 +72,7 @@ const myListScreen =({navigation})=>{
 
     return(
         <View style={styles.container}>
-                <Text style={styles.text}>
-                    My list screen
-                </Text>
+                <View style={styles.header}><Text style={styles.text}>MY LISTS</Text></View>    
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -157,7 +155,7 @@ const myListScreen =({navigation})=>{
                             return (
                                   <CardSimple
                                   name = {item.name}
-                                  callbacktitulo ={()=>{handlerGolist(item.id)}}
+                                  callbacktitulo ={()=>{handlerGolist(item.id,item.name)}}
                                   editar ={()=>{
                                     setModalVisible2(!modalVisible2);
                                     setIdList(item.id);
@@ -199,17 +197,13 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    text: {
-        color:'#22DEFA',
-        marginLeft: 15,
-        marginTop:10,
-        marginBottom:10,
-        fontSize:20,
-        textAlign:'center',
-        width: width*0.9,
-        marginTop: 40,
-        marginBottom: 10
-    },
+    text:{
+      color:"#BFC9CE",
+      fontSize:30,
+      marginTop:10,
+      marginBottom:15,
+      position:"relative"
+  },
     modalView: {
         backgroundColor: "#2F353A",
         borderRadius: 20,
@@ -280,7 +274,23 @@ const styles = StyleSheet.create({
       textLista:{
         color:"#2F353A",
         fontSize:20
-      }
+      },
+      header:{
+        marginTop:45,
+        marginBottom:0,
+        position:"relative",
+        borderRadius:5,
+        backgroundColor: '#2F353A',
+        alignItems:"center",
+        justifyContent:"center",
+        flexDirection:"row",
+        shadowColor: "#000",
+        width:width*0.95,
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        }
+    },
 })
 
 export default myListScreen;

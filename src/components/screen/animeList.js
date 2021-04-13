@@ -1,16 +1,15 @@
 import React, {useState,useEffect,useContext} from 'react' 
-import {StyleSheet, Text, View,FlatList,ImageBackground,StatusBar} from 'react-native'
-import {fetchAnimeList} from '../../api'
-import CardV from '../../components/cards/CardV'
-import { Dimensions } from 'react-native'
+import {StyleSheet, Text, View,FlatList,ImageBackground,StatusBar,Dimensions} from 'react-native'
 import {Context as ListAnimeContext} from '../../providers/listAnimeContext'
 import {Context as AuthContext} from '../../providers/AuthContext'
 import CardX from '../cards/CardX'
+import {Image,Button} from 'react-native-elements'
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 const {width, height} = Dimensions.get("screen");
 
 const animeList =({navigation,route})=>{
-    const {idList} = route.params;
+    const {idList,name} = route.params;
     const {state,getAnimeList,delAnime} = useContext(ListAnimeContext)
     const {state:authstate} = useContext(AuthContext)
     const [data, setData] = useState([]);
@@ -49,11 +48,25 @@ const animeList =({navigation,route})=>{
                 backgroundColor={"transparent"}
                 barStyle={"default"}  
                 />
-            <ImageBackground source={require("../../../assets/background.jpg")} style={styles.image}> 
-                <View style={styles.header}><Text style={styles.text}>Home</Text></View>    
+            <ImageBackground source={require("../../../assets/background.jpg")} style={styles.image}>
+                <View style={styles.header}>
+                    <Button
+                        icon={
+                            <Icon
+                            name="arrow-left"
+                            size={20}
+                            color="#BFC9CE"
+                            />
+                        }
+                        type="clear"
+                        buttonStyle={styles.buttons}
+                        onPress={()=>{navigation.goBack()}}/////ARREGLAR
+                    />
+                    <Text style={styles.text}>{name}</Text>
+                </View>    
                 
                 {data!=undefined?(<FlatList 
-                            ListEmptyComponent={<Text>No hay animes disponibles!</Text>}
+                            ListEmptyComponent={<Text style={{color:"#fff"}}>No hay animes disponibles!</Text>}
                             data={data}
                             key={({item})=>{item.docIdent}}
                             horizontal={false}
