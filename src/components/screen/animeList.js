@@ -50,19 +50,23 @@ const animeList =({navigation,route})=>{
                 />
             <ImageBackground source={require("../../../assets/background.jpg")} style={styles.image}>
                 <View style={styles.header}>
-                    <Button
-                        icon={
-                            <Icon
-                            name="arrow-left"
-                            size={20}
-                            color="#BFC9CE"
-                            />
-                        }
-                        type="clear"
-                        buttonStyle={styles.buttons}
-                        onPress={()=>{navigation.goBack()}}/////ARREGLAR
-                    />
-                    <Text style={styles.text}>{name}</Text>
+                    <Text style={{marginRight:width*0.24}}>
+                        <Button
+                            icon={
+                                <Icon
+                                name="arrow-left"
+                                size={20}
+                                color="#BFC9CE"
+                                />
+                            }
+                            type="clear"
+                            buttonStyle={styles.buttons}
+                            onPress={()=>{navigation.goBack()}}/////ARREGLAR
+                        />
+                    </Text>
+                    <Text style={{textAlign:"center"}}>
+                        <Text style={styles.text}>{name}</Text>
+                    </Text>
                 </View>    
                 
                 {data!=undefined?(<FlatList 
@@ -112,11 +116,11 @@ const styles = StyleSheet.create({
     header:{
         marginTop:45,
         marginBottom:0,
+        height:70,
         position:"relative",
+        alignItems:"center",
         borderRadius:5,
         backgroundColor: '#2F353A',
-        alignItems:"center",
-        justifyContent:"center",
         flexDirection:"row",
         shadowColor: "#000",
         width:width*0.95,
