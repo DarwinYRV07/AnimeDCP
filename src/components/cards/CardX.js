@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
     },
     bloqueButton:{
-        width:width * 0.14,
+        width:60,
         marginRight:0,
     },
 

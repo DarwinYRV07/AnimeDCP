@@ -70,7 +70,7 @@ const userScreen =({navigation})=>{
                       <Text>
                         <Text style={styles.titulo}>Change Password</Text>
                       </Text>
-                      <Text style={{marginLeft:width*0.47}}>
+                      <Text style={{marginLeft:width*0.40}}>
                         {<Icon style={{fontSize:20,}} name={'sync-alt'}/>}
                       </Text>
                     </View>
@@ -85,7 +85,7 @@ const userScreen =({navigation})=>{
                       <Text>
                         <Text style={styles.titulo}>LogOut</Text>
                       </Text>
-                      <Text style={{marginLeft:width*0.71}}>
+                      <Text style={{marginLeft:width*0.64}}>
                         {<Icon style={{fontSize:23}} name={'sign-out-alt'}/>}
                       </Text>
                     </View>

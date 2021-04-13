@@ -65,6 +65,7 @@ const changePwdForm = ({navigation}) =>{
     return(
       
         <View style={styles.container}>
+          <View style={{marginTop:25,justifyContent:"center",alignItems:"center"}}>
             {error ? <Alert title={error} type="error" /> : null}
             <Logo/>
             <Text style={styles.title}>Change password</Text>
@@ -113,6 +114,7 @@ const changePwdForm = ({navigation}) =>{
                 }
             />
             <Button title="SAVE"  callback={handlechangePwd}/>
+          </View>
         </View>
     )
 }

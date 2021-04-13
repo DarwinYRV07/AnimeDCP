@@ -11,7 +11,7 @@ const changePwdScreen = ({navigation}) =>{
           <ScrollView>
             <ChangePwdForm navigation={navigation}/>
             <TouchableOpacity onPress={()=>{navigation.goBack();}} >
-              <Text style={{textAlign:"center"}}>Cancel,go back</Text>
+              <Text style={{textAlign:"center", marginBottom: 25, color:"#FFF"}}>Cancel,go back</Text>
             </TouchableOpacity>
           </ScrollView>
         </View>
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#2F353A',
       alignItems: 'center',
       justifyContent: 'center',
+      marginTop:25
     },
     text: {
       color:'#22DEFA',
