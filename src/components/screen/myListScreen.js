@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react' 
-import { StyleSheet, View, Text, Dimensions,TextInput,Modal,Pressable,FlatList,TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Dimensions,TextInput,Modal,Pressable,FlatList,ImageBackground } from 'react-native'
 import {FAB} from "react-native-paper"
 import {Context as ListAnimeContext} from '../../providers/listAnimeContext'
 import {Context as AuthContext} from '../../providers/AuthContext'
@@ -72,7 +72,8 @@ const myListScreen =({navigation})=>{
 
     return(
         <View style={styles.container}>
-                <View style={styles.header}><Text style={styles.text}>MY LISTS</Text></View>    
+                <ImageBackground source={require("../../../assets/background3.png")} style={styles.image}> 
+                <View style={styles.header}><Text style={styles.text}>My Lists</Text></View>    
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -177,6 +178,7 @@ const myListScreen =({navigation})=>{
   
                     }}
                 />
+                </ImageBackground>
         </View>
         
     )
@@ -289,8 +291,15 @@ const styles = StyleSheet.create({
         shadowOffset: {
             width: 0,
             height: 4,
-        }
+        },
     },
+    image:{
+      flex: 1,
+      resizeMode:"cover",
+      justifyContent: "center",
+      width:width*1,
+      alignItems:"center"
+    }
 })
 
 export default myListScreen;

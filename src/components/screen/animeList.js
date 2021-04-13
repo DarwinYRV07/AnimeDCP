@@ -48,7 +48,7 @@ const animeList =({navigation,route})=>{
                 backgroundColor={"transparent"}
                 barStyle={"default"}  
                 />
-            <ImageBackground source={require("../../../assets/background.jpg")} style={styles.image}>
+            <ImageBackground source={require("../../../assets/background3.png")} style={styles.image}>
                 <View style={styles.header}>
                     <Text style={{marginRight:width*0.09, marginLeft:width*0.03, padding:15}}>
                         <Button

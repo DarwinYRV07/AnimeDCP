@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react' 
 import { Input } from "react-native-elements";
-import { StyleSheet, View, Text, Dimensions, Button, FlatList,TextInput } from 'react-native'
+import { StyleSheet, View, Text, Dimensions, Button, FlatList,TextInput,ImageBackground } from 'react-native'
 import {fetchAnimeSearch} from '../../api'
 import CardV from '../cards/CardV'
 
@@ -40,6 +40,7 @@ const searchScreen =({navigation})=>{
 
     return(
         <View style={styles.container}>
+        <ImageBackground source={require("../../../assets/background2.png")} style={styles.image}> 
             <Text style={styles.text}>
                 Find your favorite anime.
             </Text>
@@ -57,7 +58,8 @@ const searchScreen =({navigation})=>{
                     console.log(search);
                 }}/>
             </View>
-            <View style={styles.container}>   
+            <View style={styles.container}> 
+                
                 {data!=undefined?(<FlatList
                             ListEmptyComponent={<Text style={{color:"#fff"}}>The requested anime was not found!</Text>}
                             data={data}
@@ -81,6 +83,7 @@ const searchScreen =({navigation})=>{
                             
                 />):(null)}
             </View>
+        </ImageBackground>
         </View>
         
     )
@@ -89,7 +92,6 @@ const searchScreen =({navigation})=>{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2F353A',
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
@@ -122,7 +124,14 @@ const styles = StyleSheet.create({
         height: 40,
         marginBottom:5,
         marginRight: 20
-    }
+    },
+    image:{
+      flex: 1,
+      resizeMode:"cover",
+      justifyContent: "center",
+      width:width*1,
+      alignItems:"center"
+    },
 })
 
 export default searchScreen;
