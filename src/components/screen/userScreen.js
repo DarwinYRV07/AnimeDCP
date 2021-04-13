@@ -18,6 +18,7 @@ const userScreen =({navigation})=>{
     const user = firebase.auth().currentUser;
     const {state} = useContext(AuthContext);
     const usuario = state.user.fullname;
+    const email = state.user.email;
     const [colorHeader,setColorHeader] = useState("#3e3e3e")
 
 
@@ -62,7 +63,7 @@ const userScreen =({navigation})=>{
             <ListItem containerStyle={styles.listItem}>
                 <ListItem.Content style={styles.listContent}>
                 <ListItem.Title style={styles.titulo}>{"E-mail"}</ListItem.Title>
-                <ListItem.Subtitle style={styles.subtitulo}>{user.email}</ListItem.Subtitle>
+                <ListItem.Subtitle style={styles.subtitulo}>{email}</ListItem.Subtitle>
                 </ListItem.Content>
             </ListItem>
             <Divider style={styles.divider}/>

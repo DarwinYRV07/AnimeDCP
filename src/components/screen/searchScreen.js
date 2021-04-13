@@ -25,8 +25,12 @@ const searchScreen =({navigation})=>{
 
     const handleVerify = (input) => {
         if (input === "animename") {
-          if (!animename) setAnimeNameError(true);
-          else setAnimeNameError(false);
+          if (!animename) {
+              setAnimeNameError(true);
+          }
+          else {
+              setAnimeNameError(false);
+          }
         }
     };
 
@@ -45,7 +49,7 @@ const searchScreen =({navigation})=>{
                     placeholder={"Enter anime name"}
                     value={animename}
                     onChangeText={setAnimeName}
-                    onBlur={() => {handleVerify("animename");}}errorMessage={ animeNameError? "Please enter the name": null}>
+                    onBlur={() => {handleVerify("animename");}}errorMessage={ animeNameError? "Please enter the name.": ""}>
                 </TextInput>
                 <Button title="Search" onPress={()=>{
                     setData([]);
@@ -55,7 +59,7 @@ const searchScreen =({navigation})=>{
             </View>
             <View style={styles.container}>   
                 {data!=undefined?(<FlatList
-                            ListEmptyComponent={<Text>No hay animes disponibles!</Text>}
+                            ListEmptyComponent={<Text style={{color:"#fff"}}>The requested anime was not found!</Text>}
                             data={data}
                             key={({item}) => item.mal_id}
                             horizontal={false}
