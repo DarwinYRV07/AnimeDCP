@@ -1,5 +1,5 @@
-import React, { useEffect, useState,useContext } from 'react'; 
-import {Text, Image} from "react-native-elements";
+import React, { useEffect, useState,useContext,useRef } from 'react'; 
+import {Text, Image,Button} from "react-native-elements";
 import {
     StyleSheet, 
     View, 
@@ -7,9 +7,9 @@ import {
     FlatList, 
     ScrollView,
     Modal,
-    TextInput,
     Pressable,
-    TouchableOpacity
+    TouchableOpacity,
+    
 } from 'react-native'
 import {FAB} from "react-native-paper"
 import Score from "../shared/Score";
@@ -19,7 +19,7 @@ import Airing from "../shared/Airing";
 import {fetchAnimeEs, fetchAnimeGenero } from "../../api/index";
 import {Context as ListAnimeContext} from '../../providers/listAnimeContext'
 import {Context as AuthContext} from '../../providers/AuthContext'
-//import Video from "react-native-video";
+import WebView from "react-native-webview"
 
 
 const{width,height}=Dimensions.get("screen");
@@ -32,12 +32,11 @@ const{width,height}=Dimensions.get("screen");
 };*/
 
 const animeScreen =({navigation, route})=>{
-    const {idAnime} = route.params;
+    const {idAnime,fab} = route.params;
 
     const {createList,state,getLists,addAnime} = useContext(ListAnimeContext)
     const {state:authstate} = useContext(AuthContext)
 
-    const [animeId,setAnimeId] = useState("");
     const [animeInfo,setAnimeInfo] = useState([]);
     const [genero,setGenero] = useState([]);
     const [relacionado, setRelacionado] = useState([]);
@@ -45,6 +44,10 @@ const animeScreen =({navigation, route})=>{
     const [modalVisible, setModalVisible] = useState(false);
     const [data,setData] = useState([]);
 
+    //video
+    const video = useRef(null);
+    const [status, setStatus] = useState({});
+    console.log()
 
     useEffect(() => {
         handlerstart();
@@ -94,7 +97,6 @@ const animeScreen =({navigation, route})=>{
     //QUITAR Y PROBAR SI ES NECESARIO YA QUE HAY OTRO HANDLER ARRIBA
     useEffect(()=>{
         handlerstart();
-        console.log(animeInfo);
     },[]);
 
    //console.log(animeInfo.related.Sequel);
@@ -195,6 +197,27 @@ const animeScreen =({navigation, route})=>{
                         </View>
                         
                     </View>
+                    
+                    <View style={styles.ItemShowVideo}>
+                    <Text style={{textAlign:'center',color:"#000"}}>TRAILER</Text>
+                            <WebView
+                                style={ styles.WebViewContainer }
+                                javaScriptEnabled={true}
+                                domStorageEnabled={true}
+                                source={{uri: animeInfo.trailer_url?animeInfo.trailer_url:'https://www.youtube.com/embed/8krW_NGyLjQ'}}
+                            />
+                            
+                        <View style={styles.buttons}>
+                                <Button
+                                type="clear"
+                                title={status.isPlaying ? 'Pause' : 'Play'}
+                                onPress={() =>
+                                    status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+                                }
+                                />
+                        </View>
+
+                    </View>
                     <View style={styles.ItemShow}>
                         <View style={styles.ItemDescription}>
                             <Text>Description:</Text>
@@ -205,13 +228,20 @@ const animeScreen =({navigation, route})=>{
                     
                 </View>
                 </ScrollView>
-                <FAB
+                {!fab?(<FAB
                     icon="plus"
                     style={styles.fab}
                     onPress={() => {
                         setModalVisible(!modalVisible);
                     }}
                 />
+                ):(<FAB
+                    icon="minus"
+                    style={styles.fabDel}
+                    onPress={() => {
+                        setModalVisible();
+                    }}
+                />)}
             </View>
         
     )
@@ -365,6 +395,13 @@ const styles = StyleSheet.create({
           bottom: 15,
           backgroundColor:"#22DEFA"
         },
+        fabDel: {
+            position: "absolute",
+            margin: 20,
+            right: 0,
+            bottom: 15,
+            backgroundColor:"#8C3235"
+        },
         input:{
             backgroundColor:"#fff",
             color:"#000",
@@ -389,6 +426,20 @@ const styles = StyleSheet.create({
         textLista:{
           color:"#2F353A",
           fontSize:20
+        },
+        ItemShowVideo:{
+            marginTop:5,
+            borderRadius:12,
+            shadowColor: '#000',
+            shadowOffset: { width: 2, height: 5 },
+            shadowOpacity: 0.7,
+            shadowRadius: 10,
+            elevation: 3,
+            margin:1,
+            backgroundColor:"#BFC9CE",
+            width: width * 0.90,
+            height: height*0.3,
+            paddingBottom:0
         }
 
 })
