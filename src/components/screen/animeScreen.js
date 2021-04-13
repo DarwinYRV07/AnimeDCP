@@ -218,20 +218,14 @@ const animeScreen =({navigation, route})=>{
                     
                 </View>
                 </ScrollView>
-                {!fab?(<FAB
+                <FAB
                     icon="plus"
                     style={styles.fab}
                     onPress={() => {
                         setModalVisible(!modalVisible);
                     }}
                 />
-                ):(<FAB
-                    icon="minus"
-                    style={styles.fabDel}
-                    onPress={() => {
-                        setModalVisible();
-                    }}
-                />)}
+                
             </View>
         
     )
