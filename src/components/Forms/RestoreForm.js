@@ -1,5 +1,5 @@
-import { validate } from 'email-validator';
 import React, { useState} from 'react';
+import { validate } from 'email-validator';
 import { View, StyleSheet, Text, Dimensions,TextInput } from "react-native"
 import { firebase } from "../../Firebase/index";
 import Button from "../button/button";
@@ -12,6 +12,7 @@ const RestoreForm = ({navigation}) =>{
     const [email,setEmail] = useState("");
     const [error, setError] = useState(false);
     const [emailError, setEmailError] = useState(false);
+    const [messageSucces, setMessageSucces] = useState(false);
 
     const handleVerify = (input)=>{
         if(input === "email"){
@@ -26,15 +27,16 @@ const RestoreForm = ({navigation}) =>{
         const emailAddress = email;
         console.log("Correo: " + emailAddress)
         auth.sendPasswordResetEmail(emailAddress)
-        .then(()=>{navigation.goBack()})
-        .catch((error)=>{console.log(error);})
+        .then(()=>{ setMessageSucces(true) })
+        .catch((error)=>{ setError(true) })
     }
 
     return(
         <View style={styles.container}>
             <View style={{justifyContent:"center",alignItems:"center",height:height * 0.9,}}>
                 <Logo />
-                {error ? <Alert title={error} type="error" /> : null}
+                {messageSucces?(<Alert title={"Check your email to change your password!"} type="success" />)
+                : error ?(<Alert title={"Check your email if it is correct!!"} type="warning" />):null}
                 <Text style={styles.texto}>Your Email:</Text>
                 <TextInput 
                     style={styles.input} 
@@ -46,10 +48,10 @@ const RestoreForm = ({navigation}) =>{
                     }}
                     autoCapitalize="none"
                     errorMessage={
-                    emailError ? "Por favor ingresa tu correo" : ""
+                    emailError ? "Please enter your email" : ""
                     }
                 />
-                <Button title="Confirm" callback={()=>{RestorePassword(email)}}/>
+                {!messageSucces ?<Button title="Confirm" callback={()=>{RestorePassword(email)}}/>: <Button title="Back" callback={()=>{navigation.goBack()}}/>}
             </View>
         </View>
     );

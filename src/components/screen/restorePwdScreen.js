@@ -1,5 +1,4 @@
-import React from "react"
-import { } from "react-native-elements";
+import React from "react";
 import { View, StyleSheet, Dimensions,TouchableOpacity, Text } from "react-native"
 import RestoreForm from "../Forms/RestoreForm";
 import { ScrollView } from "react-native";
@@ -13,7 +12,7 @@ const restorePwdScreen = ({navigation})=>{
             <View style={styles.container}>
                 <RestoreForm navigation={navigation}/>
                 <TouchableOpacity onPress={()=>{navigation.goBack();}} >
-                <Text style={styles.textrestore}>You already remembered</Text>
+                <Text style={styles.textrestore}>I now remember the password</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
