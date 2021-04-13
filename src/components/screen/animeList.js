@@ -50,12 +50,12 @@ const animeList =({navigation,route})=>{
                 />
             <ImageBackground source={require("../../../assets/background.jpg")} style={styles.image}>
                 <View style={styles.header}>
-                    <Text style={{marginRight:width*0.24}}>
+                    <Text style={{marginRight:width*0.09, marginLeft:width*0.03, padding:15}}>
                         <Button
                             icon={
                                 <Icon
                                 name="arrow-left"
-                                size={20}
+                                size={25}
                                 color="#BFC9CE"
                                 />
                             }
@@ -64,7 +64,7 @@ const animeList =({navigation,route})=>{
                             onPress={()=>{navigation.goBack()}}/////ARREGLAR
                         />
                     </Text>
-                    <Text style={{textAlign:"center"}}>
+                    <Text style={{textAlign:"center", width:width*0.5}}>
                         <Text style={styles.text}>{name}</Text>
                     </Text>
                 </View>    
@@ -111,12 +111,12 @@ const styles = StyleSheet.create({
         fontSize:30,
         marginTop:10,
         marginBottom:15,
-        position:"relative"
+        position:"relative",
+        textAlign:"center"
     },
     header:{
         marginTop:45,
         marginBottom:0,
-        height:70,
         position:"relative",
         alignItems:"center",
         borderRadius:5,
