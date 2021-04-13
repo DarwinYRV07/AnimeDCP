@@ -207,16 +207,6 @@ const animeScreen =({navigation, route})=>{
                                 source={{uri: animeInfo.trailer_url?animeInfo.trailer_url:'https://www.youtube.com/embed/8krW_NGyLjQ'}}
                             />
                             
-                        <View style={styles.buttons}>
-                                <Button
-                                type="clear"
-                                title={status.isPlaying ? 'Pause' : 'Play'}
-                                onPress={() =>
-                                    status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-                                }
-                                />
-                        </View>
-
                     </View>
                     <View style={styles.ItemShow}>
                         <View style={styles.ItemDescription}>
