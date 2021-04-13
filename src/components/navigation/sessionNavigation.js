@@ -92,7 +92,7 @@ const SessionNavigation= ()=> {
                     <Stack.Screen name="BottonTabs" component={TabComp}  options={{headerShown:false}}/>
                     <Stack.Screen name="ChangePwd" component={changePwdScreen} options={{headerShown:false}}/>      
                     <Stack.Screen name="Anime" component={animeScreen} options={{headerShown:false}}/>
-                    <Stack.Screen name="animeList" component={animeList} options={{headerShown:true}}/>
+                    <Stack.Screen name="animeList" component={animeList} options={{headerShown:false}}/>
                     </Stack.Navigator>
                 ) : (
                   <Stack.Navigator >

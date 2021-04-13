@@ -19,7 +19,12 @@ const homeScreen =({navigation})=>{
     useEffect(() => {
         getAnimes();
     }, [])
-
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            getAnimes();
+        });
+        return unsubscribe;
+     }, [navigation])
     
     const getAnimes = async ()=>{
         try {
