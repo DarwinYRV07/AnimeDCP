@@ -6,16 +6,14 @@ import SignInForm from "../Forms/signInForm";
 
 const { width } = Dimensions.get("screen");
 
-const signInScreen = ({navigation, route}) =>{
-    const { userCreated } = route.params;
+const signInScreen = ({navigation}) =>{
     return(
         <View style={styles.container}>
         <ImageBackground source={require("../../../assets/background.png")} style={styles.image}> 
             <Logo/>
-            { userCreated ?( <Alert type="success" title= "User Created!! You can now sing in :)!!"/>):null}
             <SignInForm navigation={navigation}/>
             
-            <TouchableOpacity onPress={()=>{navigation.navigate("ChangePwd")}}>
+            <TouchableOpacity onPress={()=>{navigation.navigate("RestorePwd")}}>
                 <Text style={styles.textPwd}>Forgot your password?</Text>
             </TouchableOpacity>
            

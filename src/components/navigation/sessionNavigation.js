@@ -6,6 +6,7 @@ import {createStackNavigator} from "@react-navigation/stack"
 import signInScreen from '../screen/signInScreen';
 import signUpScreen from '../screen/signUpScreen';
 import changePwdScreen from '../screen/changePwdScreen';
+import RestorePwdScreen from "../screen/restorePwdScreen";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'; 
 import homeScreen from '../screen/homeScreen';
@@ -89,14 +90,15 @@ const SessionNavigation= ()=> {
                 
                 <Stack.Navigator >
                     <Stack.Screen name="BottonTabs" component={TabComp}  options={{headerShown:false}}/>
-                    <Stack.Screen name="ChangePwd" component={changePwdScreen} options={{headerShown:false}}/>
+                    <Stack.Screen name="ChangePwd" component={changePwdScreen} options={{headerShown:false}}/>      
                     <Stack.Screen name="Anime" component={animeScreen} options={{headerShown:false}}/>
                     <Stack.Screen name="animeList" component={animeList} options={{headerShown:true}}/>
                     </Stack.Navigator>
                 ) : (
                   <Stack.Navigator >
-                    <Stack.Screen name="SignIn" component={signInScreen} initialParams={{userCreated:false}} options={{headerShown:false}} />
+                    <Stack.Screen name="SignIn" component={signInScreen}  options={{headerShown:false}} />
                     <Stack.Screen name="SignUp" component={signUpScreen} options={{headerShown:false}}/>
+                    <Stack.Screen name="RestorePwd" component={RestorePwdScreen} options={{headerShown:false}}/>
                     </Stack.Navigator>
                 )}
               </>
