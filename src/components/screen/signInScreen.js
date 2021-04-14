@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         textAlign:"center",
         width:width*0.9,
         marginBottom:15,
+        fontWeight:'bold'
     },
     textPwd:{
         color: "white",
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
         textAlign:"right",
         width:width*0.9,
         marginBottom:15,
+        fontWeight:'bold'
     },
     button: {
         alignSelf: "center",
