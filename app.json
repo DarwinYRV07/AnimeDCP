@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/animeDCPIcon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#22DEFA"
       },
       "package": "com.animedcp.animeDCP"
