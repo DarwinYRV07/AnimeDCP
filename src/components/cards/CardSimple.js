@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     bloqueButton:{
         width:width * 0.30,
         flexDirection:"row",
-        //marginLeft:1,
     },
 
   });

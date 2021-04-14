@@ -1,7 +1,6 @@
 import React, { useState,useEffect,useContext} from 'react';
-import { Input, SocialIcon } from "react-native-elements";
+import { SocialIcon } from "react-native-elements";
 import { validate } from "email-validator";
-import { firebase } from "../../Firebase/index";
 import Button from "../button/button";
 import Alert from "../shared/Alert"; 
 import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native';

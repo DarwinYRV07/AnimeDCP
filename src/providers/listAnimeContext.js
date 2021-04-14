@@ -33,7 +33,7 @@ const listReducer =(state,action)=>{
 
     }
 }
-//COLECCIONES
+
 const animesRef = firebase.firestore().collection("animes")
 const animelistRef =firebase.firestore().collection("listas");
 
@@ -149,7 +149,6 @@ const updList=(dispatch)=>(idlist,name)=>{
     })
     
 }
-
 
 export const {Provider,Context}= createDataContext(
     listReducer,

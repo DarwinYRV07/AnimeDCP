@@ -1,7 +1,6 @@
 import React from "react"
 import {View, StyleSheet,Text,Dimensions, TouchableOpacity } from "react-native"
-import {Image,Button} from 'react-native-elements'
-import Icon from "react-native-vector-icons/FontAwesome5";
+import {Image} from 'react-native-elements'
 
 
 const{width,height}=Dimensions.get("screen");
@@ -10,22 +9,17 @@ const CardV = ({url,name,id,punt,date,callback}) =>{
     return(
       <TouchableOpacity onPress={callback}>
         <View style={styles.cardRow}>
-          {/* <View style={styles.left}> */}
-            <Image style={styles.portada} source={{uri:url}}/>  
-          {/* </View> */}
-          
+            <Image style={styles.portada} source={{uri:url}}/>    
           <View style = {styles.right} >
             <Text style={styles.titulo}>{name}</Text>
             <Text style={styles.fecha}>Start: {date}</Text>
             <Text style={styles.fecha}>Puntuacion: {punt}</Text>
           </View>
-          
         </View>
       </TouchableOpacity>
       
     )
 }
-
 
 const styles = StyleSheet.create({
     portada:{

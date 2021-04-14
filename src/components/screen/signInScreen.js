@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions,TouchableOpacity,ImageBackground } from 'react-native';
 import Logo from "../shared/Logo";
-import Alert from "../shared/Alert"; 
 import SignInForm from "../Forms/signInForm";
 
 const { width } = Dimensions.get("screen");

@@ -1,7 +1,5 @@
-import { validate } from 'email-validator';
 import React, { useState} from 'react';
 import { View, StyleSheet, Text, Dimensions, TextInput } from "react-native"
-import { Input } from 'react-native-elements';
 import { firebase } from "../../Firebase/index";
 import Button from "../button/button";
 import Logo from "../shared/Logo"
@@ -27,12 +25,10 @@ const changePwdForm = ({navigation}) =>{
       }else
         setCurrentError(false);
     } else if (input === "newPassword") {
-      // Verificar la Nuevacontraseña
       if (!newPassword) setNewPasswordError(true);
       else if (newPassword.length < 6) setNewPasswordError(true);
       else setNewPasswordError(false);
     } else if (input === "confirmPassword") {
-      // Verificar la confirmación de la contraseña
       if (!confirmPassword) setConfirmPasswordError(true);
       else if (confirmPassword !== newPassword) setConfirmPasswordError(true);
       else setConfirmPasswordError(false);

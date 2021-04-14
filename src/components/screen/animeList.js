@@ -1,9 +1,8 @@
 import React, {useState,useEffect,useContext} from 'react' 
 import {StyleSheet, Text, View,FlatList,ImageBackground,StatusBar,Dimensions} from 'react-native'
 import {Context as ListAnimeContext} from '../../providers/listAnimeContext'
-import {Context as AuthContext} from '../../providers/AuthContext'
 import CardX from '../cards/CardX'
-import {Image,Button} from 'react-native-elements'
+import {Button} from 'react-native-elements'
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 const {width, height} = Dimensions.get("screen");
@@ -11,7 +10,6 @@ const {width, height} = Dimensions.get("screen");
 const animeList =({navigation,route})=>{
     const {idList,name} = route.params;
     const {state,getAnimeList,delAnime} = useContext(ListAnimeContext)
-    const {state:authstate} = useContext(AuthContext)
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -22,7 +20,6 @@ const animeList =({navigation,route})=>{
         if(Array.isArray(state.animes)){
             setData(state.animes);
         }
-        //cconsole.log(state.animes)
         
     }, [state])
 
@@ -33,7 +30,7 @@ const animeList =({navigation,route})=>{
     const viewAnime = (id) =>{
         navigation.navigate("Anime", {idAnime:id})
     }
-    //ELIMINAR ANIME
+
     const handlerDelAnime=(docIdent)=>{
         delAnime(docIdent);
         getAnimeList(idList);
@@ -61,7 +58,7 @@ const animeList =({navigation,route})=>{
                             }
                             type="clear"
                             buttonStyle={styles.buttons}
-                            onPress={()=>{navigation.goBack()}}/////ARREGLAR
+                            onPress={()=>{navigation.goBack()}}
                         />
                     </Text>
                     <Text style={{textAlign:"center", width:width*0.5}}>
@@ -92,7 +89,6 @@ const animeList =({navigation,route})=>{
         </View>
     )
 }
-//SIN TERMINAR LOS ESTILOS PARA UN HEADER COMPONENTE
 const styles = StyleSheet.create({
     container: {
         flex: 1,

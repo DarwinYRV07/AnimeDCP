@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react' 
-import { Input } from "react-native-elements";
 import { StyleSheet, View, Text, Dimensions, Button, FlatList,TextInput,ImageBackground } from 'react-native'
 import {fetchAnimeSearch} from '../../api'
 import CardV from '../cards/CardV'

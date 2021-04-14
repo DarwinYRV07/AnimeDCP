@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext} from 'react' 
+import React,{useState,useContext} from 'react' 
 import { Dimensions} from 'react-native'
 import {StyleSheet, Text, View,ImageBackground,Switch, TouchableOpacity} from 'react-native'
 import { Avatar, ListItem } from 'react-native-elements'
@@ -6,8 +6,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import {Divider} from 'react-native-paper'
 import {firebase} from '../../Firebase'
 import {Context as AuthContext} from '../../providers/AuthContext'
-import Button from '../button/button'
-import theme from "../../Theme";
+
 
 
 
@@ -20,8 +19,6 @@ const userScreen =({navigation})=>{
     const usuario = state.user.fullname;
     const email = state.user.email;
     const [colorHeader,setColorHeader] = useState("#3e3e3e")
-
-
 
     const handleLogOut=()=>{
         firebase.auth().signOut().then((Response)=>{
@@ -42,9 +39,6 @@ const userScreen =({navigation})=>{
                 </View>
         )
     }
-
-
-    
     return(
         <View style={styles.container}>
             <View style={styles.header}><Text style={styles.textHeader}>SETTINGS</Text></View>
@@ -97,9 +91,6 @@ const userScreen =({navigation})=>{
                 </ListItem.Content>
             </ListItem>
             <Divider style={styles.divider}/>
-                {/* <View style={styles.header}>
-                    <Text backgroundColor={colorHeader}>SETTINGS</Text>
-                </View> */}
         </View>
     )
 }

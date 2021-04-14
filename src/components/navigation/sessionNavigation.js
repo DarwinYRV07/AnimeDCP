@@ -1,5 +1,4 @@
 import React, {useEffect, useContext} from 'react';
-import { StyleSheet} from 'react-native';
 import {ThemeProvider} from 'react-native-elements';
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from "@react-navigation/stack"
@@ -13,7 +12,6 @@ import homeScreen from '../screen/homeScreen';
 import animeScreen from '../screen/animeScreen';
 import myListScreen from '../screen/myListScreen';
 import {Context as AuthContext} from "../../providers/AuthContext";
-
 import userScreen from '../screen/userScreen';
 import * as SplashScreen from "expo-splash-screen"
 import searchScreen from '../screen/searchScreen';
@@ -23,7 +21,7 @@ import animeList from '../screen/animeList';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function TabComp({navigation}) {
+function TabComp() {
   return(
     
     <Tab.Navigator
@@ -44,8 +42,6 @@ function TabComp({navigation}) {
                   } else if(route.name === 'User'){
                     iconName = focused ? 'cog' : 'cog';
                   }
-      
-                  // You can return any component that you like here!
                   return <Ionicons name={iconName} size={size} color={color} />;
                 },
               })}
@@ -108,8 +104,5 @@ const SessionNavigation= ()=> {
   );
 }
 
-const styles = StyleSheet.create({
-
-});
 
 export default SessionNavigation;

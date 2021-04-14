@@ -29,7 +29,6 @@ const myListScreen =({navigation})=>{
     }, [])
 
     useEffect(() => {
-      //console.log(Array.isArray(state.list))
       if(Array.isArray(state.list)){
         setData(state.list)
       } 
@@ -189,13 +188,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#2F353A',
         alignItems: 'center',
-        justifyContent: 'center',
-        
-        
+        justifyContent: 'center',    
     },
     containermdl:{
       flex: 1,
-      // backgroundColor: '#2F353A',
       alignItems: 'center',
       justifyContent: 'center',
     },

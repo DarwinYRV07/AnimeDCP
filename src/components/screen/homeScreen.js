@@ -1,13 +1,8 @@
 import React, {useState,useEffect} from 'react' 
 import {StyleSheet, Text, View,FlatList,ImageBackground,StatusBar} from 'react-native'
-import {firebase} from '../../Firebase'
-import Button from "../button/button"
 import {fetchAnimeList} from '../../api'
 import CardV from '../../components/cards/CardV'
 import { Dimensions } from 'react-native'
-import animeScreen from './animeScreen'
-
-
 
 const {width, height} = Dimensions.get("screen");
 
@@ -41,9 +36,7 @@ const homeScreen =({navigation})=>{
     const viewAnime = (id) =>{
         navigation.navigate("Anime", {idAnime:id})
     }
-    
-    
-    
+     
     return(
         <View style={styles.container}>
               <StatusBar
@@ -83,7 +76,6 @@ const homeScreen =({navigation})=>{
         </View>
     )
 }
-//SIN TERMINAR LOS ESTILOS PARA UN HEADER COMPONENTE
 const styles = StyleSheet.create({
     container: {
         flex: 1,

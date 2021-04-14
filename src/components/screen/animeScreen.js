@@ -24,13 +24,6 @@ import WebView from "react-native-webview"
 
 const{width,height}=Dimensions.get("screen");
 
-/*const genres =(generos)=>{
-    const datageners = generos.map((genero)=>{
-        return genero.name;
-        console.log(genero.name);
-    })
-};*/
-
 const animeScreen =({navigation, route})=>{
     const {idAnime,fab} = route.params;
 
@@ -71,15 +64,9 @@ const animeScreen =({navigation, route})=>{
             if(!newgeneros) setError(true);
             setGenero(newgeneros);
         };
-        /*const getrelacionado = async () => {
-            const newrelacionados = await ferchAnimeRelacionado(879);
-            if(!newrelacionados) setError(true);
-            setRelacionado(newrelacionados);
 
-        }*/
         getAnimesInfo();
         getgeneros();
-        //getrelacionado();
     }
     
     const handlerAddAnime =(idList)=>{
@@ -94,14 +81,11 @@ const animeScreen =({navigation, route})=>{
         setModalVisible(!modalVisible);
     }
 
-    //QUITAR Y PROBAR SI ES NECESARIO YA QUE HAY OTRO HANDLER ARRIBA
     useEffect(()=>{
         handlerstart();
     },[]);
 
-   //console.log(animeInfo.related.Sequel);
    const caratu = animeInfo.image_url;
-   //console.log(relacionado[0].mal_id);
 
     return(
         
@@ -141,10 +125,7 @@ const animeScreen =({navigation, route})=>{
                         >
                         <Text style={styles.textStyle}>Cancelar</Text>
                         </Pressable>
-                        
-
-
-                        
+    
                     </View>
                     </View>
                 </Modal>
@@ -152,18 +133,8 @@ const animeScreen =({navigation, route})=>{
 
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{marginBottom:30,marginTop:20,position:"relative",justifyContent:"center",alignItems:"center"}}>
-                    {/*<View style={{backgroundColor:"gray", width:width * 100, height: height * 0.25,}}>
-                    <Text>hOL</Text>
-                    </View>*/}
-                    <View style={styles.ContenedorTituloImg}>
-                        
-                       {/* <View style={{marginBottom:170}}>
-                            <View style={{position:"absolute"}}>
-                                <Image source={{uri:caratu}} style={styles.imagen}/>
-                            </View>
-                        </View>*/}
+                    <View style={styles.ContenedorTituloImg}>    
                         <Image source={{uri:caratu}} style={styles.imagen}/>
-
                         <Text h5 style={styles.titlestyle}>{animeInfo.title}</Text>
                     </View>
 
@@ -236,11 +207,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#2F353A',
         alignItems: 'center',
-        //justifyContent: 'flex-start',
+
 
       },containermdl:{
         flex: 1,
-        // backgroundColor: '#2F353A',
         alignItems: 'center',
         justifyContent: 'center',
         width:width*0.8,
@@ -256,7 +226,6 @@ const styles = StyleSheet.create({
           fontWeight:"bold"
       },
     text: {
-        //color:'#fff',
         marginTop:9,
         fontSize:20,
         textAlign:'center',
@@ -264,13 +233,11 @@ const styles = StyleSheet.create({
       },
       ContenedorTituloImg:{
         marginTop:35,
-        //backgroundColor:"yellow",
         color:"#fff",  
         justifyContent:"center",
         alignItems:"center",
         textAlign:"center"
-        
-        //position:"relative"
+
       },
       ItemGener:{
           justifyContent:"center",
@@ -293,7 +260,6 @@ const styles = StyleSheet.create({
       ItemDescription:{
           margin:10,
           height:"auto",
-          //backgroundColor:"#f0f",
           padding:10,
       },
       ItemShow:{
@@ -320,7 +286,6 @@ const styles = StyleSheet.create({
     },    
     containermdl:{
         flex: 1,
-        // backgroundColor: '#2F353A',
         alignItems: 'center',
         justifyContent: 'center',
       },

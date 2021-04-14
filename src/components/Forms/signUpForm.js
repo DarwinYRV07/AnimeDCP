@@ -1,10 +1,8 @@
 import React,{useState,useEffect,useContext} from "react"
 import {validate} from 'email-validator'
 import {View, StyleSheet,Text,Dimensions,TextInput} from "react-native"
-import {Input} from 'react-native-elements'
 import Logo from "../shared/Logo"
 import Button from "../button/button";
-import {firebase} from "../../Firebase"
 import Alert from "../shared/Alert"
 import { Context as AuthContext } from "../../providers/AuthContext";
 
@@ -54,24 +52,11 @@ const SignUpForm = ({navigation}) =>{
         else if(password.length<6)setPasswordError(true)
         else setPasswordError(false)
     }else if(input ==='confirmPassword'){
-        // if(!confirmPasswordError) setConfirmPasswordError(true)
-        // else if(confirmPasswordError !== password) setConfirmPasswordError(true)
-        // else setConfirmPasswordError(false);
         console.log(fullName)
         console.log(password)
         console.log(email)
     }else if (input === "signup"){
-      // if(
-      //   !fullNameError &&
-      //   !emailError &&
-      //   !password &&
-      //   !confirmPasswordError &&
-      //   fullName &&
-      //   email &&
-      //   confirmPassword 
-      // ){
         signup(fullName,email,password)
-      //}
     }
   }
   

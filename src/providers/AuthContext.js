@@ -1,7 +1,6 @@
 import createDataContext from "./createDataContext";
 import { firebase } from "../Firebase";
 
-// Acciones disponibles para el reducer
 const authReducer = (state, action) => {
   switch (action.type) {
     case "errorMessage":
@@ -29,34 +28,28 @@ const authReducer = (state, action) => {
 };
 
 
-// Permite el inicio de sesión mediante firebase con email y password
 const signin = (dispatch) => (email, password) => {
-  // Hacer la petición al API de firebasee
+
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((response) => {
-      // Obtener el Unique Identifier generado para cada usuario
-      // Firebase -> Authentication
+
       const uid = response.user.uid;
 
-      // Obtener la colección desde Firebase
       const usersRef = firebase.firestore().collection("users");
 
-      // Verificar que el usuario existe en Firebase authentication
-      // y también está almacenado en la colección de usuarios.
+
       usersRef
         .doc(uid)
         .get()
         .then((firestoreDocument) => {
-          console.log(firestoreDocument.data())
           if (!firestoreDocument.exists) {
             dispatch({
               type: "errorMessage",
               payload: "User does not exist in the database!",
             });
           } else {
-            // Llamar el reducer y enviarle los valores del usuario al estado
             dispatch({ type: "errorMessage", payload: "" });
             dispatch({ type: "signin", payload: firestoreDocument.data() });
           }
@@ -67,7 +60,7 @@ const signin = (dispatch) => (email, password) => {
     });
 };
 
-// Cierra la sesión del usuario
+
 const signout = (dispatch) => () => {
   firebase
     .auth()
@@ -89,7 +82,6 @@ const persistLogin = (dispatch) => () => {
         .doc(user.uid)
         .get()
         .then((document) => {
-          console.log(document.data())
           dispatch({
             type: "persistLogin",
             payload: { user: document.data(), loggedIn: true },
@@ -112,21 +104,16 @@ const signup = (dispatch) => (fullname, email, password) => {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((response) => {
-      // Obtener el Unique Identifier generado para cada usuario
-      // Firebase -> Authentication
       const uid = response.user.uid;
-        console.log("Auth Funciona bien")
-      // Construir el objeto que le enviaremos a la collección de "users"
+
       const data = {
         id: uid,
         email,
         fullname,
       };
 
-      // Obtener la colección desde Firebase
       const usersRef = firebase.firestore().collection("users");
 
-      // Almacenar la información del usuario que se registra en Firestore
       usersRef
         .doc(uid)
         .set(data)
@@ -140,14 +127,13 @@ const signup = (dispatch) => (fullname, email, password) => {
           dispatch({ type: "errorMessage", payload: error.message });
         });
     });
-  // dispatch({ type: "errorMessage", payload: error.message });
+
 };
 
 const clearErrorMessage = (dispatch) => () => {
   dispatch({ type: "errorMessage", payload: "" });
 };
 
-// Exportar las funcionalidades requeridas al contexto
 export const { Provider, Context } = createDataContext(
   authReducer,
   {
