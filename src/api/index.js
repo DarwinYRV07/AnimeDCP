@@ -1,6 +1,4 @@
-import React from "react"
-
-const fetchAnimeList = async () =>{
+export const fetchAnimeList = async () =>{
     
     const endpoint = `https://api.jikan.moe/v3/top/anime/1/airing`;
     
@@ -16,23 +14,32 @@ export const fetchAnimeSearch = async (animeName) =>{
         const endpoint = `https://api.jikan.moe/v3/search/anime?q=${animeName}`;
         const response = await fetch(endpoint);
         const data =  await response.json(); 
-        console.log(data);
-    //console.log(data);
+    return data.results;
+};
+
+export const fetchAnimeEs = async (animeId) =>{
+    const endpoint = `https://api.jikan.moe/v3/anime/${animeId}`;
+    const response = await fetch(endpoint);
+    const data =  await response.json();
 
     return data;
 };
 
-export const fetchAnimeSearchId = async (animeId) =>{
+export const fetchAnimeGenero = async (animeId) =>{
     const endpoint = `https://api.jikan.moe/v3/anime/${animeId}`;
     const response = await fetch(endpoint);
     const data =  await response.json();
-  
-    console.log(data);
-//console.log(data);
-
-return data;
+    const generos = [];
+    const genres = data.genres.map((gen)=>{generos.push(gen.name)});
+    return generos;
 };
 
-///const fetch = require("node-fetch");
+export const ferchAnimeRelacionado = async(animeId) =>{
+    const endpoint = `https://api.jikan.moe/v3/anime/${animeId}`;
+    const response = await fetch(endpoint);
+    const data =  await response.json();
 
-export default fetchAnimeList;
+    const Sequel = data.related.Sequel;
+    return Sequel;
+}
+

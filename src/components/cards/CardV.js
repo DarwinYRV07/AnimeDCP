@@ -1,45 +1,30 @@
 import React from "react"
-import {View, StyleSheet,Text,Dimensions} from "react-native"
-import {Image,Button,Icon} from 'react-native-elements'
+import {View, StyleSheet,Text,Dimensions, TouchableOpacity } from "react-native"
+import {Image} from 'react-native-elements'
 
 
 const{width,height}=Dimensions.get("screen");
 
-const CardV = ({url,name,id,punt,date,btn}) =>{
+const CardV = ({url,name,id,punt,date,callback}) =>{
     return(
-      <View style={styles.cardRow}>
-        {/* <View style={styles.left}> */}
-          <Image style={styles.portada} source={{uri:url}}/>  
-        {/* </View> */}
-        
-        <View style = {styles.right} >
-          <Text style={styles.titulo}>{name}</Text>
-          <Text style={styles.fecha}>Start: {date}</Text>
-          <Text style={styles.fecha}>Puntuacion: {punt}</Text>
+      <TouchableOpacity onPress={callback}>
+        <View style={styles.cardRow}>
+            <Image style={styles.portada} source={{uri:url}}/>    
+          <View style = {styles.right} >
+            <Text style={styles.titulo}>{name}</Text>
+            <Text style={styles.fecha}>Start: {date}</Text>
+            <Text style={styles.fecha}>Puntuacion: {punt}</Text>
+          </View>
         </View>
-        {btn?
-          (<Button
-            icon={
-              <Icon
-                name="delete"
-                size={20}
-                color="white"
-              />
-            }
-            iconTop
-            type="clear"
-          />):null
-        }
-        
-      </View>
+      </TouchableOpacity>
       
     )
 }
 
-
 const styles = StyleSheet.create({
     portada:{
-      marginBotton:5,
+      borderRadius:15,
+      marginBottom:5,
       width:60,
       height:60,
       resizeMode:"contain",
@@ -47,16 +32,18 @@ const styles = StyleSheet.create({
     },
     titulo:{
       fontSize:15,
-      color:"#ffff",
+      fontWeight: "bold",
+      textAlign: "center",
+      color:"#344A53",
       alignSelf:"center"
     },
     fecha:{
       fontSize:12,
-      color:"#ff3f"
+      color:"#344A53"
     },cardRow:{
-        borderRadius:5,
+        borderRadius:20,
         marginTop:10,
-        backgroundColor: '#413F4F',
+        backgroundColor: '#BFC9CE',
         alignItems:"center",
         justifyContent:"center",
         flexDirection:"row",

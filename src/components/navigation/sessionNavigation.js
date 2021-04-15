@@ -1,26 +1,29 @@
-import React, {useState,useEffect} from 'react';
-import { StyleSheet} from 'react-native';
+import React, {useEffect, useContext} from 'react';
 import {ThemeProvider} from 'react-native-elements';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
+import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from "@react-navigation/stack"
 import signInScreen from '../screen/signInScreen';
 import signUpScreen from '../screen/signUpScreen';
 import changePwdScreen from '../screen/changePwdScreen';
+import RestorePwdScreen from "../screen/restorePwdScreen";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'; 
 import homeScreen from '../screen/homeScreen';
 import animeScreen from '../screen/animeScreen';
 import myListScreen from '../screen/myListScreen';
-import PersistLogin from '../../utils/persistLogin';
-import {firebase} from '../../Firebase'
+import {Context as AuthContext} from "../../providers/AuthContext";
 import userScreen from '../screen/userScreen';
+import * as SplashScreen from "expo-splash-screen"
+import searchScreen from '../screen/searchScreen';
+import animeList from '../screen/animeList';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function TabComp() {
   return(
+    
     <Tab.Navigator
               screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
@@ -32,15 +35,13 @@ function TabComp() {
                       : 'home';
                   } else if (route.name === 'Anime') {
                     iconName = focused ? 'ios-list' : 'ios-list';
-                  } else if (route.name === 'ListAnime'){
-                    iconName = focused ? 'bookmarks' : 'bookmarks';
+                  } else if (route.name === 'Search'){
+                    iconName = focused ? 'search' : 'search';
+                  }else if (route.name === 'MyList'){
+                    iconName = focused ? 'bookmark' : 'bookmark';
                   } else if(route.name === 'User'){
-                    iconName = focused ? 'gear' : 'gear';
-                  } else if(route.name === 'ChangePwd'){
-                    iconName = focused ? 'gear' : 'gear';
+                    iconName = focused ? 'cog' : 'cog';
                   }
-      
-                  // You can return any component that you like here!
                   return <Ionicons name={iconName} size={size} color={color} />;
                 },
               })}
@@ -51,64 +52,57 @@ function TabComp() {
                 inactiveBackgroundColor:'#2F353A',                
               }}
             >
-              <Tab.Screen name="Home" component={homeScreen} />
-              <Tab.Screen name="Anime" component={animeScreen} />
-              <Tab.Screen name="ListAnime" component = {myListScreen} />
-              {/* <Tab.Screen name="ChangePwd" component={changePwdScreen}/> */}
-              <Tab.Screen name="User" component ={userScreen}/>
+              <Tab.Screen name="Home" component={homeScreen}  />
+              <Tab.Screen name="Search" component = {searchScreen} />
+              <Tab.Screen name="MyList" component = {myListScreen} />
+              <Stack.Screen name="User" component ={userScreen} />
+              
             </Tab.Navigator>
   )
 }
 
 
 const SessionNavigation= ()=> {
-  const [user, setUser] = useState();
-  const [init,setInit] = useState(true);
 
-  function onAuthStateChanged(user) {
-    setUser(user);
-    console.log(user);
-    if (init) setInit(false);
-  }
-  // Verificar si ya existen credenciales de autenticación
+
+  const { state, persistLogin } = useContext(AuthContext);
+
   useEffect(() => {
-    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-    console.log(subscriber);
-    return subscriber; // unsubscribe on unmount
+    persistLogin();
   }, []);
 
-  
+  SplashScreen.preventAutoHideAsync();
+
+  if (!state.loading){
+    SplashScreen.hideAsync();
+  } 
+
   return (
     <ThemeProvider>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <Stack.Navigator >
-            {user ? (
-                <>
-                  
-                  <Stack.Screen name="BottonTabs" component={TabComp} initialParams={{user: user}} options={{headerShown:false}}/>
-                  <Stack.Screen name="ChangePwd" component={changePwdScreen} options={{headerShown:false}}/> 
-                  
-                </>
-              ) : (
-                <>
-                  
-                  <Stack.Screen name="SignIn" component={signInScreen} initialParams={{userCreated:false}} options={{headerShown:false}} />
-                  <Stack.Screen name="SignUp" component={signUpScreen}/>
-                  <Stack.Screen name="BottonTabs" component={TabComp} initialParams={{user: user}} options={{headerShown:false}}/>
-                  <Stack.Screen name="User" component ={userScreen} options={{headerShown:false}}/>
-                </>
-              )
-            }
-          </Stack.Navigator>
+        <NavigationContainer theme={DarkTheme}>
+            {!state.Loading && (
+              <>
+              {state.loggedIn ? (
+                
+                <Stack.Navigator >
+                    <Stack.Screen name="BottonTabs" component={TabComp}  options={{headerShown:false}}/>
+                    <Stack.Screen name="ChangePwd" component={changePwdScreen} options={{headerShown:false}}/>      
+                    <Stack.Screen name="Anime" component={animeScreen} options={{headerShown:false}}/>
+                    <Stack.Screen name="animeList" component={animeList} options={{headerShown:false}}/>
+                    </Stack.Navigator>
+                ) : (
+                  <Stack.Navigator >
+                    <Stack.Screen name="SignIn" component={signInScreen}  options={{headerShown:false}} />
+                    <Stack.Screen name="SignUp" component={signUpScreen} options={{headerShown:false}}/>
+                    <Stack.Screen name="RestorePwd" component={RestorePwdScreen} options={{headerShown:false}}/>
+                    </Stack.Navigator>
+                )}
+              </>
+              )}
          </NavigationContainer>
-      </SafeAreaProvider>
     </ThemeProvider>
   );
 }
 
-const styles = StyleSheet.create({
-
-});
 
 export default SessionNavigation;

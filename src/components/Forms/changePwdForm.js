@@ -1,9 +1,7 @@
-import { validate } from 'email-validator';
 import React, { useState} from 'react';
-import { View, StyleSheet, Text, Dimensions } from "react-native"
-import { Input } from 'react-native-elements';
+import { View, StyleSheet, Text, Dimensions, TextInput } from "react-native"
 import { firebase } from "../../Firebase/index";
-import Button from "../button/Button";
+import Button from "../button/button";
 import Logo from "../shared/Logo"
 
 
@@ -27,12 +25,10 @@ const changePwdForm = ({navigation}) =>{
       }else
         setCurrentError(false);
     } else if (input === "newPassword") {
-      // Verificar la Nuevacontraseña
       if (!newPassword) setNewPasswordError(true);
       else if (newPassword.length < 6) setNewPasswordError(true);
       else setNewPasswordError(false);
     } else if (input === "confirmPassword") {
-      // Verificar la confirmación de la contraseña
       if (!confirmPassword) setConfirmPasswordError(true);
       else if (confirmPassword !== newPassword) setConfirmPasswordError(true);
       else setConfirmPasswordError(false);
@@ -65,11 +61,12 @@ const changePwdForm = ({navigation}) =>{
     return(
       
         <View style={styles.container}>
+          <View style={{marginTop:25,justifyContent:"center",alignItems:"center"}}>
             {error ? <Alert title={error} type="error" /> : null}
             <Logo/>
             <Text style={styles.title}>Change password</Text>
             <Text style={styles.text}>Current password</Text>
-            <Input style={styles.input} 
+            <TextInput style={styles.input} 
                 placeholder="current"
                 value={current}
                 onChangeText={setCurrent}
@@ -84,7 +81,7 @@ const changePwdForm = ({navigation}) =>{
             />
 
             <Text style={styles.text}>New password</Text>
-            <Input style={styles.input} 
+            <TextInput style={styles.input} 
                 placeholder="New Password"
                 value={newPassword}
                 onChangeText={setNewPassword}
@@ -99,7 +96,7 @@ const changePwdForm = ({navigation}) =>{
             />
 
             <Text style={styles.text}>Confirm password</Text>
-            <Input style={styles.input} 
+            <TextInput style={styles.input} 
                 placeholder="New Password"
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
@@ -113,6 +110,7 @@ const changePwdForm = ({navigation}) =>{
                 }
             />
             <Button title="SAVE"  callback={handlechangePwd}/>
+          </View>
         </View>
     )
 }
